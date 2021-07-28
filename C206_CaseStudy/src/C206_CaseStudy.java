@@ -44,7 +44,7 @@ public class C206_CaseStudy {
 					System.out.println("hello");
 				}
 				else {
-					System.out.println("invalid option");
+					System.out.println("Invalid option entered!");
 				}
 				
 			}
