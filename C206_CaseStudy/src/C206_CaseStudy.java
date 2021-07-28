@@ -31,7 +31,7 @@ public class C206_CaseStudy {
 			else if (option == 3) {
 				C206_CaseStudy.setHeader("ITEM SERVICES");
 				optionTypeMenu();
-				System.out.println("hello");
+				
 				
 				int itemOption = Helper.readInt("Enter option to select service type > ");
 				
@@ -40,9 +40,13 @@ public class C206_CaseStudy {
 					C206_CaseStudy.addItem(itemList, item1);
 
 				}
-				else if (itemOption == 2) {
-					System.out.println("hello");
-				}
+		        else if (itemOption == 2) {
+		          C206_CaseStudy.viewAllItem(itemList);
+		        }
+		        else if(itemOption == 3) {
+		          C206_CaseStudy.deleteItem(itemList);
+
+		        }
 				else {
 					System.out.println("Invalid option entered!");
 				}
@@ -108,6 +112,44 @@ public class C206_CaseStudy {
 		itemList.add(item1);
 		System.out.println("Item added");
 	}
+	public static String retrieveAllItem(ArrayList<Item> itemList) {
+	    String output = "";
+	    for(int i = 0; i < itemList.size(); i++) {
+	      output += String.format("%-80s \n", itemList.get(i).toString());
+	    }
+	    return output;
+	  }
+	  public static void viewAllItem(ArrayList<Item> itemList) {
+	    C206_CaseStudy.setHeader("ITEM LIST");
+	    String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", "BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
+	    output += retrieveAllItem(itemList);
+	    System.out.println(output);
+	  }
+
+	  public static boolean doDeleteItem(ArrayList<Item> itemList, String deleteName) {
+	    boolean isFound = false;
+	    for(int i = 0; i < itemList.size(); i++) {
+	      String itemName = itemList.get(i).getItemName();
+	      if(itemName.equalsIgnoreCase(deleteName)) {
+	        itemList.remove(i);
+	        isFound = true;
+	        
+	      }
+	    }
+	    return isFound;
+	  }
+
+	  public static void deleteItem(ArrayList<Item> itemList) {
+	    C206_CaseStudy.viewAllItem(itemList);
+	    String deleteItem = Helper.readString("Enter the item name to delete > ");
+	    boolean isFound = doDeleteItem(itemList, deleteItem);
+	      if(isFound == true ) {
+	        System.out.println("Item deleted");
+	      }
+	      else {
+	        System.out.println("Item not deleted");
+	      }
+	    }
 	
 	
 
