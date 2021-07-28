@@ -5,6 +5,7 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		String x = "Hello";
 		System.out.println(x);
+		
 	}
 
 }
