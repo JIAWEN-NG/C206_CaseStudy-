@@ -21,11 +21,11 @@ public class Item {
 	private String itemName;
 	private String description; 
 	private double minBid;
-	private Date startDate;
-	private Date endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private double increment;
 	
-	public Item(String itemName, String description, double minBid, Date startDate, Date endDate,
+	public Item(String itemName, String description, double minBid, LocalDate startDate, LocalDate endDate,
 			double increment) {
 		this.itemName = itemName;
 		this.description = description;
@@ -61,19 +61,19 @@ public class Item {
 	}
 
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -86,8 +86,8 @@ public class Item {
 		this.increment = increment;
 	}
 	public String toString() {
-		String itemInfo = String.format("%-10s %-30s %-10f %-10s %-10s %-10f", 
-				itemName, description,minBid,startDate,endDate,increment);
+		String itemInfo = String.format("%-10s %-20s %-10.2f %-15s %-15s %-10.2f", 
+				itemName, description, minBid, startDate, endDate, increment);
 		
 		return itemInfo;
 	}
