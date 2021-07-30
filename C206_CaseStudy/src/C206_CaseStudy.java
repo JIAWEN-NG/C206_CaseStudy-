@@ -148,6 +148,7 @@ public class C206_CaseStudy {
 	      }
 	      else {
 	        System.out.println("Item not deleted");
+	        // test
 	      }
 	    }
 	
