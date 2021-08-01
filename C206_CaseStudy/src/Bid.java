@@ -76,4 +76,4 @@ public class Bid {
 		return itemInfo;
 	}
 	
-}//class
+}//clas
