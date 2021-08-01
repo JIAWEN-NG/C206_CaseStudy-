@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class C206_CaseStudy {
@@ -23,8 +25,9 @@ public class C206_CaseStudy {
 		itemList.add(new Item("CAT", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
 				LocalDate.parse("01/01/2010", formatter2), 5.00));
 		bidsList.add(new Bid(11, "DOG", "qqq@gmail.com", "aaa@gmail.com", 50.00));
-		bidsList.add(new Bid(12, "DOG", "kkq@gmail.com", "ooa@gmail.com", 60.00));
-		
+		bidsList.add(new Bid(12, "CAT", "kkq@gmail.com", "ooa@gmail.com", 60.00));
+		bidsList.add(new Bid(13, "ToT", "kkq@gmail.com", "ooa@gmail.com", 30.00));
+
 		int option = 0;
 
 		while (option != OPTION_QUIT ) {
@@ -73,8 +76,7 @@ public class C206_CaseStudy {
 					C206_CaseStudy.addBid(bidsList, bids1);	
 				}
 				else if (bidsOption == 2) {
-				
-					C206_CaseStudy.viewAllBids(bidsList, bids2);
+					C206_CaseStudy.viewAllBids(bidsList);
 
 				}
 				else if (bidsOption == 3) {
@@ -96,6 +98,8 @@ public class C206_CaseStudy {
 		}
 
 	}//main 
+
+	
 	public static void menu() {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. Account Services");
@@ -163,21 +167,6 @@ public class C206_CaseStudy {
 			if(itemName.equalsIgnoreCase(deleteName)) {
 				itemList.remove(i);
 				isFound = true;
-
-<<<<<<< HEAD
-	  public static void deleteItem(ArrayList<Item> itemList) {
-	    C206_CaseStudy.viewAllItem(itemList);
-	    String deleteItem = Helper.readString("Enter the item name to delete > ");
-	    boolean isFound = doDeleteItem(itemList, deleteItem);
-	      if(isFound == true ) {
-	        System.out.println("Item deleted");
-	      }
-	      else {
-	        System.out.println("Item not deleted");
-	        // test
-	      }
-	    }
-=======
 			}
 		}
 		return isFound;
@@ -212,32 +201,31 @@ public class C206_CaseStudy {
 		Bid bids1 = new Bid(ID, name, buyerEmail, sellerEmail, price);
 		return bids1;
 	}
-	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {
+
+	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
 		bidsList.add(bids1);
 		System.out.println("Bids Added");
 	}
->>>>>>> branch 'master' of https://github.com/20011454-Siet-Chu-En/C206_CaseStudy-.git
-	
-	public static Bid retrieveHighestBids(ArrayList<Bid> bidsList, Bid bids1) {
-		String output = "";
-		for(int i = 0; i < bidsList.size(); i++) {
-			double highestBids = bids1.getPrice();
-			if(highestBids > bidsList.get(i).getPrice()) {
-				bidsList.get(i).setPrice(bidsList.get(i).getPrice());
-				output += String.format("%-80s \n", bidsList.get(i).toString());
+
+	public static void highestBids(ArrayList<Bid> bidsList) {
+		Collections.sort(bidsList,new Comparator<Bid>() {
+			public int compare(Bid b1, Bid b2) {
+
+				return Double.compare(b2.getPrice(), b1.getPrice());
 			}
-		}
-		return output;
+		});
 	}
-	public static void viewAllBids(ArrayList<Bid> bidsList, Bid bids1) {
+
+	public static void viewAllBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.setHeader("BIDS LIST");
-		Bid bids2 = new Bid(bids1.getId(), bids1.getName(), bids1.getBuyerEmail(), bids1.getSellerEmail(), bids1.getPrice());
-		String output = String.format("%-10s %-20s %-10s %-15s %-10s\n", "ID", "NAME", "BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
-		output += retrieveHighestBids(bidsList, bids2);
+		String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", "BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
+
+		highestBids(bidsList);
+		for (int i = 0; i < bidsList.size(); i++) {
+			output += String.format("%-54s \n", bidsList.get(i).toString());
+		}
+
 		System.out.println(output);
 	}
 
-
-
-
-}//class hello
+}//class

@@ -19,7 +19,7 @@ public class Bid {
 	private String sellerEmail;
 	private String buyerEmail;
 	private double price;
-	
+
 	public Bid(int id, String name, String sellerEmail, String buyerEmail, double price) {
 		this.id = id;
 		this.name = name;
@@ -61,7 +61,7 @@ public class Bid {
 		this.buyerEmail = buyerEmail;
 	}
 
-	
+
 	public double getPrice() {
 		return price;
 	}
@@ -69,11 +69,17 @@ public class Bid {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+
 	public String toString() {
-		String itemInfo = String.format("%-10s %-20s %-15s %-15s %-10.2f", 
+		String itemInfo = String.format("%-10s %-10s %-15s %-20s %-10.2f", 
 				id, name, sellerEmail, buyerEmail, price);
-		
+
 		return itemInfo;
 	}
+
 	
+
+
+
 }//clas
