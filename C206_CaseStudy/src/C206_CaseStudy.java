@@ -163,21 +163,6 @@ public class C206_CaseStudy {
 			if(itemName.equalsIgnoreCase(deleteName)) {
 				itemList.remove(i);
 				isFound = true;
-
-<<<<<<< HEAD
-	  public static void deleteItem(ArrayList<Item> itemList) {
-	    C206_CaseStudy.viewAllItem(itemList);
-	    String deleteItem = Helper.readString("Enter the item name to delete > ");
-	    boolean isFound = doDeleteItem(itemList, deleteItem);
-	      if(isFound == true ) {
-	        System.out.println("Item deleted");
-	      }
-	      else {
-	        System.out.println("Item not deleted");
-	        // test
-	      }
-	    }
-=======
 			}
 		}
 		return isFound;
@@ -216,7 +201,6 @@ public class C206_CaseStudy {
 		bidsList.add(bids1);
 		System.out.println("Bids Added");
 	}
->>>>>>> branch 'master' of https://github.com/20011454-Siet-Chu-En/C206_CaseStudy-.git
 	
 	public static Bid retrieveHighestBids(ArrayList<Bid> bidsList, Bid bids1) {
 		String output = "";
