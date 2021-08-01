@@ -15,4 +15,12 @@
  */
 public class Buyer extends Account {
 
+	public Buyer(String name, String role, String email, int password) {
+		super(name, role, email, password);
+	}
+	public String toString(){
+		String output = super.toString();
+		return output;
+	}
+
 }

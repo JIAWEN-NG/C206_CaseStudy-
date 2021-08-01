@@ -14,5 +14,26 @@
  *
  */
 public class Seller extends Account {
+	
+	private boolean notification;
+
+
+	public Seller(String name, String role, String email, int password, boolean notification) {
+		super(name, role, email, password);
+		this.notification = true;
+	}
+	
+	public boolean getNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
+	}
+
+	public String toString(){
+		String output = super.toString();
+		return output;
+	}
 
 }
