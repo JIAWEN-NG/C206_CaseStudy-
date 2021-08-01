@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
+
 
 public class C206_CaseStudy {
 
@@ -211,7 +211,7 @@ public class C206_CaseStudy {
 		Collections.sort(bidsList,new Comparator<Bid>() {
 			public int compare(Bid b1, Bid b2) {
 
-				return Double.compare(b2.getPrice(), b1.getPrice());
+				return Double.compare(b2.getPrice(), b1.getPrice());	
 			}
 		});
 	}
