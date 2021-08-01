@@ -10,6 +10,7 @@ public class C206_CaseStudy {
 	/**
 	 * 
 	 */
+
 	private static final int OPTION_QUIT = 6;
 
 	public static void main(String[] args) {
@@ -17,6 +18,10 @@ public class C206_CaseStudy {
 
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		ArrayList<Bid> bidsList = new ArrayList<Bid>();
+		ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
+		ArrayList<Seller> sellerList = new ArrayList<Seller>();
+
+		
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -71,8 +76,8 @@ public class C206_CaseStudy {
 
 				int bidsOption = Helper.readInt("Enter option to select service type > ");
 				if(bidsOption == 1) {
-					C206_CaseStudy.viewAllItem(itemList);
-					Bid bids1 = inputBid();
+					C206_CaseStudy.viewAllBids(bidsList);
+					Bid bids1 = inputBid(bidsList, itemList);
 					C206_CaseStudy.addBid(bidsList, bids1);	
 				}
 				else if (bidsOption == 2) {
@@ -99,7 +104,7 @@ public class C206_CaseStudy {
 
 	}//main 
 
-	
+
 	public static void menu() {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. Account Services");
@@ -190,24 +195,48 @@ public class C206_CaseStudy {
 		}
 
 	}
+	public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
+		boolean isValid = false;
 
-	public static Bid inputBid() {
+		for (int x = 0; x < itemList.size(); x++) {
+			for (int i = 0; i < bidsList.size(); i++) {
+				if (price > bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
+					isValid = true;
+				}
+			}
+		}
+		return isValid;
+	}
+
+	public static Bid inputBid(ArrayList<Bid> bidsList,ArrayList<Item> itemList) {
 		int ID = Helper.readInt("Enter Bids ID > ");
 		String name = Helper.readString("Enter Item Name > ");
 		String buyerEmail = Helper.readString("Enter Buyer email > ");
-		String sellerEmail = Helper.readString("Enter seller email >");
+		String sellerEmail = Helper.readString("Enter seller email > ");
 		double price = Helper.readDouble("Enter Bids price >$");
-
-		Bid bids1 = new Bid(ID, name, buyerEmail, sellerEmail, price);
-		return bids1;
+		boolean isValid = isValidBid(bidsList,price,itemList);
+		
+		if (isValid == true) {
+			Bid bids1 = new Bid(ID, name, buyerEmail, sellerEmail,price);
+			return bids1;
+		}
+		else {
+			return null;
+		}
+	
 	}
 
 	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
-		bidsList.add(bids1);
-		System.out.println("Bids Added");
+		if (bids1 == null ) {
+			System.out.println("Invalid bid");
+		}
+		else {
+			bidsList.add(bids1);
+			System.out.println("Bids Added");
+		}
 	}
 
-	public static void highestBids(ArrayList<Bid> bidsList) {
+	public static void sortBids(ArrayList<Bid> bidsList) {
 		Collections.sort(bidsList,new Comparator<Bid>() {
 			public int compare(Bid b1, Bid b2) {
 
@@ -219,8 +248,7 @@ public class C206_CaseStudy {
 	public static void viewAllBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.setHeader("BIDS LIST");
 		String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", "BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
-
-		highestBids(bidsList);
+		
 		for (int i = 0; i < bidsList.size(); i++) {
 			output += String.format("%-54s \n", bidsList.get(i).toString());
 		}

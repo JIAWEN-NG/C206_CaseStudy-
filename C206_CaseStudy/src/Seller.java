@@ -18,7 +18,7 @@ public class Seller extends Account {
 	private boolean notification;
 
 
-	public Seller(String name, String role, String email, int password, boolean notification) {
+	public Seller(String name, String role, String email, int password) {
 		super(name, role, email, password);
 		this.notification = true;
 	}
