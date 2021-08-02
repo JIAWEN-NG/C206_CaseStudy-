@@ -315,7 +315,6 @@ public class C206_CaseStudy {
 
 	}
 	public static void addItem(ArrayList<Item> itemList, Item item1) {
-
 		itemList.add(item1);
 		System.out.println("Item added");
 	}
@@ -418,7 +417,7 @@ public class C206_CaseStudy {
 
 		String output = "";
 		for (int i = 0; i < bidsList.size(); i++) {
-			output = String.format("%-54s \n", bidsList.get(i).toString());
+			output += String.format("%-69s \n", bidsList.get(i).toString());
 		}
 		return output;
 	}
