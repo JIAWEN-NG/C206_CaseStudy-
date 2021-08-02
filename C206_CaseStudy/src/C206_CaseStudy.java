@@ -47,7 +47,7 @@ public class C206_CaseStudy {
 			else if (option == 2) {
 				C206_CaseStudy.setHeader("CATEGORY SERVICES");
 				optionTypeMenu();
-				
+
 				int categoryOption = Helper.readInt("Enter option to select service type > ");
 
 				if (categoryOption == 1) {
@@ -205,7 +205,7 @@ public class C206_CaseStudy {
 		}
 
 	}
-	
+
 	//Item
 	public static Item inputItem() {
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -315,7 +315,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void sortBids(ArrayList<Bid> bidsList) {
+	public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
 		Collections.sort(bidsList,new Comparator<Bid>() {
 			public int compare(Bid b1, Bid b2) {
 
@@ -324,16 +324,22 @@ public class C206_CaseStudy {
 		});
 	}
 
+	public static String retrieveAllBids(ArrayList<Bid> bidsList) {
+
+		String output = "";
+		for (int i = 0; i < bidsList.size(); i++) {
+			output = String.format("%-54s \n", bidsList.get(i).toString());
+		}
+		return output;
+	}
 	public static void viewAllBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.setHeader("BIDS LIST");
-		String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", "BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
-
-		for (int i = 0; i < bidsList.size(); i++) {
-			output += String.format("%-54s \n", bidsList.get(i).toString());
-		}
-
+		String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", 
+				"BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
+		output += retrieveAllBids(bidsList);
 		System.out.println(output);
 	}
+
 	public static boolean doDeleteBids(ArrayList<Bid> bidsList, int deleteID) {
 		boolean isFound = false;
 		for(int i = 0; i < bidsList.size(); i++) {
