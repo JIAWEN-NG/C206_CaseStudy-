@@ -39,7 +39,6 @@ public class C206_CaseStudyTest {
 
 	//Issue 3
 
-
 	//Issue 4
 	@Test
 	public void addBidTest() {
@@ -62,19 +61,20 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
 
 		//test if the list of bids retrieved is empty - boundary
-		String allBids= C206_CaseStudy.retrieveAllBids(bidsList);
+		String allBids = C206_CaseStudy.retrieveAllBids(bidsList);
 		String testOutput = "";
 		assertEquals("Check that ViewAllBids list", testOutput, allBids);
 
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
-		C206_CaseStudy.addBid(bidsList,b1);
-		C206_CaseStudy.addBid(bidsList,b2);
-		assertEquals("Test that Bids arraylist size is 2", 2, bidsList.size());
+		C206_CaseStudy.addBid(bidsList, b1);
+		C206_CaseStudy.addBid(bidsList, b2);
+		assertEquals("Test that Bids arraylist size is 2?", 2, bidsList.size());
 
 		//test if the expected output string same as the list of bid retrieved 	
-		allBids= C206_CaseStudy.retrieveAllBids(bidsList);
-		testOutput = String.format("%-10d %-10s %-15s %-20s %-10.2f \n",10, "Orange", "test@gamil.com", "test2@gmail.com", 5.00);
-		testOutput += String.format("%-10d %-10s %-15s %-20s %-10.2f \n",11, "Pear", "fruit@gmail.com", "fruity@gmail.com", 2.00);
+		allBids = C206_CaseStudy.retrieveAllBids(bidsList);
+		
+		testOutput = String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 1, "Dog", "happy@gmail.com", "sam@gmail.com", 50.00);
+		testOutput += String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 2, "Cat", "kkq@gmail.com", "sammy@gmail.com", 60.00);
 
 		assertEquals("Test that ViewAllBids list", testOutput, allBids);
 
@@ -97,9 +97,8 @@ public class C206_CaseStudyTest {
 		//Given an list of 1 bids, after removing 1 item, the size of the list is 0 - normal
 		//The item just delete is remove and second item is same as the first item of the list
 		assertEquals("Check that Bids arraylist size is 0", 0, bidsList.size());
-		
 	}
-
+	
 	//Issue 5
 
 	@Before
