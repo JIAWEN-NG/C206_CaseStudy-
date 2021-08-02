@@ -215,12 +215,12 @@ public class C206_CaseStudy {
 
 	public static void addBuyer(ArrayList<Account> accList, Buyer userB) {
 		accList.add(userB);
-		System.out.println("User added !");
+		System.out.println("User Account added !");
 	}
 
 	public static void addSeller(ArrayList<Account> accList, Seller userS) {
 		accList.add(userS);
-		System.out.println("User added !");
+		System.out.println("User Account added !");
 	}
 	public static String retrieveAllUser(ArrayList<Account> accList) {
 		
@@ -257,14 +257,14 @@ public class C206_CaseStudy {
 		if(isFound == true ) {
 			char toDelete = Helper.readChar("Are you sure you want to delete this user account? (Y/N) > ");
 			if (toDelete == 'Y' | toDelete == 'y') {
-				System.out.println("Account deleted");
+				System.out.println("User Account deleted");
 			}
 
 			else {
-				System.out.println("Account not deleted!");
+				System.out.println("User Account not deleted!");
 			}
 		}else {
-			System.out.println("Account not found!");
+			System.out.println("User Account not found!");
 		}
 
 	}
