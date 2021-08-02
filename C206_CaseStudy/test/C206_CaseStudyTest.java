@@ -38,7 +38,21 @@ public class C206_CaseStudyTest {
 	//Issue 2
 
 	//Issue 3
+	public void addItem() {
+		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
+		
+		C206_CaseStudy.addItem(itemList, item1);
+		assertFalse();
 
+	}
+	
+	public void viewAllItem() {
+		C206_CaseStudy.viewAllItem(itemList);
+	}
+	
+	public void deleteItem() {
+		C206_CaseStudy.deleteItem(itemList);
+	}
 
 	//Issue 4
 	@Test
