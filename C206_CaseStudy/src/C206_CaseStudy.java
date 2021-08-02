@@ -350,7 +350,7 @@ public class C206_CaseStudy {
 			}
 		}
 		return isFound;
-	}
+	}//
 
 	public static void deleteBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.viewAllBids(bidsList);
