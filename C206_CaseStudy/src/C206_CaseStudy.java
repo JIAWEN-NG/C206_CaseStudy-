@@ -16,8 +16,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
-		ArrayList<Seller> sellerList = new ArrayList<Seller>();
+		
 		ArrayList<Account> accList = new ArrayList<Account>();
 		ArrayList<Category> categoryList = new ArrayList<Category>();
 		ArrayList<Item> itemList = new ArrayList<Item>();
