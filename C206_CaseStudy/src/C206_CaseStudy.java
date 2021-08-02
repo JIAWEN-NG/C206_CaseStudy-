@@ -18,6 +18,7 @@ public class C206_CaseStudy {
 
 		ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
 		ArrayList<Seller> sellerList = new ArrayList<Seller>();
+		ArrayList<Account> accList = new ArrayList<Account>();
 		ArrayList<Category> categoryList = new ArrayList<Category>();
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		ArrayList<Bid> bidsList = new ArrayList<Bid>();
@@ -42,7 +43,41 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
+				C206_CaseStudy.setHeader("ACCOUNT SERVICES");
+				optionTypeMenu();
 
+				int accOption = Helper.readInt("Enter option to select service type > ");
+
+				if (accOption == 1) {
+
+					userTypeMenu();
+					int accType = Helper.readInt("Enter user type > ");
+
+					if (accType == 1) {
+						Buyer b1 = inputBuyer();
+						C206_CaseStudy.addBuyer(accList,b1);
+					}
+					else if (accType == 2) {
+						Seller s1 = inputSeller();
+						C206_CaseStudy.addSeller(accList,s1);
+					}
+					else {
+						System.out.println("Invalid option");
+					}
+
+
+				}
+				else if (accOption == 2) {
+					C206_CaseStudy.viewAllAccount(accList);
+				}
+				else if(accOption == 3) {
+					C206_CaseStudy.deleteCategory(categoryList);
+
+				}
+				else {
+					System.out.println("Invalid option entered!");
+
+				}
 			}
 			else if (option == 2) {
 				C206_CaseStudy.setHeader("CATEGORY SERVICES");
@@ -124,7 +159,7 @@ public class C206_CaseStudy {
 			}
 		}
 
-	}//main 
+	}//main
 
 
 	public static void menu() {
@@ -150,6 +185,61 @@ public class C206_CaseStudy {
 		System.out.println("2. VIEW ALL");
 		System.out.println("3. DELETE");
 	}
+	//User 
+	public static void userTypeMenu() {
+		C206_CaseStudy.setHeader("USER TYPE");
+		System.out.println("1. Buyer");
+		System.out.println("2. Seller");
+
+	}
+	public static Buyer inputBuyer() {
+		String name = Helper.readString("Enter name > ");
+		String role = Helper.readString("Enter role > ");
+		String email = Helper.readString("Enter email > ");
+		int password = Helper.readInt("Enter password > ");
+
+		Buyer userB = new Buyer(name,role,email,password);
+		return userB;
+	}
+	public static Seller inputSeller() {
+		String name = Helper.readString("Enter name > ");
+		String role = Helper.readString("Enter role > ");
+		String email = Helper.readString("Enter email > ");
+		int password = Helper.readInt("Enter password > ");
+
+		Seller userS = new Seller(name,role,email,password);
+		return userS;
+	}
+
+
+
+	public static void addBuyer(ArrayList<Account> accList, Buyer userB) {
+		accList.add(userB);
+		System.out.println("User added !");
+	}
+
+	public static void addSeller(ArrayList<Account> accList, Seller userS) {
+		accList.add(userS);
+		System.out.println("User added !");
+	}
+	public static String retrieveAllUser(ArrayList<Account> accList) {
+		
+		String output = "";
+		for (int i = 0; i < accList.size(); i++) {
+			output += String.format("%-48s \n", accList.get(i).toString());
+		}
+		
+		return output;
+		
+	}
+	public static void viewAllAccount(ArrayList<Account> accList) {
+		C206_CaseStudy.setHeader("ACCOUNT LIST");
+		String output = String.format("%-10s %-10s %-15s %-10s \n", "NAME","ROLE","EMAIL","PASSWORD");
+		output += retrieveAllUser(accList);
+		System.out.println(output);
+	}
+
+
 	//Category
 	public static Category inputCategory() {
 		String name = Helper.readString("Enter category name > ");

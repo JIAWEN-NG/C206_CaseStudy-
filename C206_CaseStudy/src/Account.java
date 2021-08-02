@@ -37,7 +37,8 @@ public class Account {
 		this.name = name;
 	}
 
-	public String getRole() {
+	public String 
+	getRole() {
 		return role;
 	}
 
@@ -63,7 +64,7 @@ public class Account {
 		this.password = password;
 	}
 	public String toString() {
-		String userInfo = String.format("%-10s %-10s %-20s %-20s %-10d", 
+		String userInfo = String.format("%-10s %-10s %-15s %-10d", 
 				name, role,email,password);
 		
 		return userInfo;
