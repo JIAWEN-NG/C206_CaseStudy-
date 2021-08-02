@@ -16,12 +16,11 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		ArrayList<Item> itemList = new ArrayList<Item>();
-		ArrayList<Bid> bidsList = new ArrayList<Bid>();
 		ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
 		ArrayList<Seller> sellerList = new ArrayList<Seller>();
-
-		
+		ArrayList<Category> categoryList = new ArrayList<Category>();
+		ArrayList<Item> itemList = new ArrayList<Item>();
+		ArrayList<Bid> bidsList = new ArrayList<Bid>();
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -32,6 +31,8 @@ public class C206_CaseStudy {
 		bidsList.add(new Bid(11, "DOG", "qqq@gmail.com", "aaa@gmail.com", 50.00));
 		bidsList.add(new Bid(12, "CAT", "kkq@gmail.com", "ooa@gmail.com", 60.00));
 		bidsList.add(new Bid(13, "ToT", "kkq@gmail.com", "ooa@gmail.com", 30.00));
+		categoryList.add(new Category("PETS"));
+		categoryList.add(new Category("STATIONARY"));
 
 		int option = 0;
 
@@ -44,6 +45,26 @@ public class C206_CaseStudy {
 
 			}
 			else if (option == 2) {
+				C206_CaseStudy.setHeader("CATEGORY SERVICES");
+				optionTypeMenu();
+				
+				int categoryOption = Helper.readInt("Enter option to select service type > ");
+
+				if (categoryOption == 1) {
+					Category category1 = inputCategory();
+					C206_CaseStudy.addCategory(categoryList, category1);
+
+				}
+				else if (categoryOption == 2) {
+					C206_CaseStudy.viewAllCategory(categoryList);
+				}
+				else if(categoryOption == 3) {
+					C206_CaseStudy.deleteCategory(categoryList);
+
+				}
+				else {
+					System.out.println("Invalid option entered!");
+				}
 
 			}
 			else if (option == 3) {
@@ -85,6 +106,7 @@ public class C206_CaseStudy {
 
 				}
 				else if (bidsOption == 3) {
+					C206_CaseStudy.deleteBids(bidsList);
 
 				}
 				else if (option == 5) {
@@ -128,7 +150,63 @@ public class C206_CaseStudy {
 		System.out.println("2. VIEW ALL");
 		System.out.println("3. DELETE");
 	}
+	//Category
+	public static Category inputCategory() {
+		String name = Helper.readString("Enter category name > ");
 
+		Category category1 = new Category(name);
+
+		return category1;
+	}
+	public static void addCategory(ArrayList<Category> categoryList, Category category1) {
+		categoryList.add(category1);
+		System.out.println("Category added");
+	}
+	public static String retrieveAllCategory(ArrayList<Category> categoryList) {
+		String output = "";
+		for (int i = 0; i < categoryList.size(); i++) {
+			output += String.format("%s \n", categoryList.get(i).toString());
+		}
+		return output;
+	}
+	public static void viewAllCategory(ArrayList<Category> categoryList) {
+		C206_CaseStudy.setHeader("CATEGORY LIST");
+		String output = String.format("%s \n", "NAME");
+		output += retrieveAllCategory(categoryList);
+		System.out.println(output);
+	}
+	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName) {
+		boolean isFound = false;
+		for(int i = 0; i < categoryList.size(); i++) {
+			String categoryName = categoryList.get(i).getName();
+			if(categoryName.equalsIgnoreCase(deleteName)) {
+				categoryList.remove(i);
+				isFound = true;
+			}
+		}
+		return isFound;
+	}
+
+	public static void deleteCategory(ArrayList<Category> categoryList) {
+		C206_CaseStudy.viewAllCategory(categoryList);
+		String deleteCategory = Helper.readString("Enter the item name to delete > ");
+		boolean isFound = doDeleteCategory(categoryList, deleteCategory);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this category? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Category deleted");
+			}
+
+			else {
+				System.out.println("Category not deleted!");
+			}
+		}else {
+			System.out.println("Category not found!");
+		}
+
+	}
+	
+	//Item
 	public static Item inputItem() {
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String name = Helper.readString("Enter item name > ");
@@ -195,6 +273,7 @@ public class C206_CaseStudy {
 		}
 
 	}
+	//Bid
 	public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
 		boolean isValid = false;
 
@@ -215,7 +294,7 @@ public class C206_CaseStudy {
 		String sellerEmail = Helper.readString("Enter seller email > ");
 		double price = Helper.readDouble("Enter Bids price >$");
 		boolean isValid = isValidBid(bidsList,price,itemList);
-		
+
 		if (isValid == true) {
 			Bid bids1 = new Bid(ID, name, buyerEmail, sellerEmail,price);
 			return bids1;
@@ -223,7 +302,7 @@ public class C206_CaseStudy {
 		else {
 			return null;
 		}
-	
+
 	}
 
 	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
@@ -248,12 +327,42 @@ public class C206_CaseStudy {
 	public static void viewAllBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.setHeader("BIDS LIST");
 		String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", "BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
-		
+
 		for (int i = 0; i < bidsList.size(); i++) {
 			output += String.format("%-54s \n", bidsList.get(i).toString());
 		}
 
 		System.out.println(output);
 	}
+	public static boolean doDeleteBids(ArrayList<Bid> bidsList, int deleteID) {
+		boolean isFound = false;
+		for(int i = 0; i < bidsList.size(); i++) {
+			int bidsID = bidsList.get(i).getId();
+			if(bidsID == deleteID) {
+				bidsList.remove(i);
+				isFound = true;
+			}
+		}
+		return isFound;
+	}
+
+	public static void deleteBids(ArrayList<Bid> bidsList) {
+		C206_CaseStudy.viewAllBids(bidsList);
+		int deleteID = Helper.readInt("Enter the bids ID to delete > ");
+		boolean isFound = doDeleteBids(bidsList, deleteID);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this bids? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Bids deleted");
+			}
+
+			else {
+				System.out.println("Bids not deleted!");
+			}
+		}else {
+			System.out.println("Bids not found!");
+		}
+	}
+
 
 }//class
