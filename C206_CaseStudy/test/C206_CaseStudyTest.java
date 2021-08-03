@@ -79,8 +79,8 @@ public class C206_CaseStudyTest {
 	@Test
 	public void retrieveAllUserTest() {
 
-		// Test if Item list is not null but empty -boundary
-		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
+		// Test if account list is not null but empty -boundary
+		assertNotNull("Test if there is valid account arraylist to retrieve item", accList);
 
 
 		String allAcc = C206_CaseStudy.retrieveAllUser(accList);
@@ -134,6 +134,7 @@ public class C206_CaseStudyTest {
 	//Issue 2
 	@Test
 	public void addCategoryTest() {
+		// Test if category list is not null but empty -boundary
 		assertNotNull("Test if there is valid Category arraylist to retrieve item", categoryList);
 
 		C206_CaseStudy.addCategory(categoryList, cate1);
@@ -151,6 +152,7 @@ public class C206_CaseStudyTest {
 	}
 	@Test
 	public void retrieveAllCategoryTest() {
+		// Test if category list is not null but empty -boundary
 		assertNotNull("Test if there is valid category arraylist to retrieve item", categoryList);
 
 		//test if the list of category retrieved is empty -Boundary
@@ -174,6 +176,7 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void doDeleteCategoryTest() {
+		// Test if category list is not null but empty -boundary
 		assertNotNull("Test if there is valid Category arraylist to retrieve item", categoryList);
 
 		C206_CaseStudy.addCategory(categoryList, cate1);
