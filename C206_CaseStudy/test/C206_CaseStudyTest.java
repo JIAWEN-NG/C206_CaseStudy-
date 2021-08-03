@@ -321,6 +321,7 @@ public class C206_CaseStudyTest {
 	}
 
 	//Issue 5
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -343,6 +344,10 @@ public class C206_CaseStudyTest {
 
 	@After
 	public void tearDown() throws Exception {
+		bb1 = null;
+		bb2 = null;
+		s1 = null;
+		s2 = null ;
 
 	}
 
