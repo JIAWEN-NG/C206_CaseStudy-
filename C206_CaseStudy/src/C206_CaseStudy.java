@@ -295,11 +295,12 @@ public class C206_CaseStudy {
 		output += retrieveAllCategory(categoryList);
 		System.out.println(output);
 	}
+	
 	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName) {
 		boolean isFound = false;
 		for(int i = 0; i < categoryList.size(); i++) {
 			String categoryName = categoryList.get(i).getName();
-			if(categoryName.equalsIgnoreCase(deleteName)) {
+			if(deleteName.equalsIgnoreCase(categoryName)) {
 				categoryList.remove(i);
 				isFound = true;
 			}

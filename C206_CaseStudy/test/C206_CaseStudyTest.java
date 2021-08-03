@@ -15,8 +15,8 @@ public class C206_CaseStudyTest {
 	private Buyer bb2;
 	private Seller s1;
 	private Seller s2;
-	private Category cat1;
-	private Category cat2;
+	private Category cate1;
+	private Category cate2;
 	private Item item1;
 	private Item item2;
 	private Bid b1;
@@ -136,17 +136,17 @@ public class C206_CaseStudyTest {
 	public void addCategoryTest() {
 		assertNotNull("Test if there is valid Category arraylist to retrieve item", categoryList);
 
-		C206_CaseStudy.addCategory(categoryList, cat1);
+		C206_CaseStudy.addCategory(categoryList, cate1);
 		//Given an empty list, after adding 1 category, the size of the list is 1 - normal
 		//The category just added is as same as the first item of the list
 		assertEquals("Check that Category arraylist size is 1", 1, categoryList.size());
-		assertSame("Check that Category is added", cat1, categoryList.get(0));
+		assertSame("Check that Category is added", cate1, categoryList.get(0));
 
-		C206_CaseStudy.addCategory(categoryList, cat2);
+		C206_CaseStudy.addCategory(categoryList, cate2);
 		//Given an empty list, after adding 1 category, the size of the list is 1 - normal
 		//The category just added is as same as the first item of the list
 		assertEquals("Check that Category arraylist size is 1", 2, categoryList.size());
-		assertSame("Check that Category is added", cat2, categoryList.get(1));
+		assertSame("Check that Category is added", cate2, categoryList.get(1));
 
 	}
 	@Test
@@ -159,33 +159,34 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that ViewAllCategory list", testOutput, allCat);
 
 		//Given an empty list, after adding 2 category, test if the size of the list is 2 - normal
-		C206_CaseStudy.addCategory(categoryList, cat1);
-		C206_CaseStudy.addCategory(categoryList, cat2);
-		assertEquals("Test that category arraylist size is 2?", 2, itemList.size());
+		C206_CaseStudy.addCategory(categoryList, cate1);
+		C206_CaseStudy.addCategory(categoryList, cate2);
+		assertEquals("Test that category arraylist size is 2?", 2, categoryList.size());
 
 		//test if the expected output string same as the list of category retrieved 	
 		allCat = C206_CaseStudy.retrieveAllCategory(categoryList);
 
 		testOutput = String.format("%s \n", "PETS");
-		testOutput += String.format("%s \n", 2, "FRUITS");
+		testOutput += String.format("%s \n", "FRUITS");
 
 		assertEquals("Test that ViewAllCategory list", testOutput, allCat);
 	}
+	
 	@Test
-	public void doDeleteCAtegoryTest() {
-		
+	public void doDeleteCategoryTest() {
 		assertNotNull("Test if there is valid Category arraylist to retrieve item", categoryList);
 
-		C206_CaseStudy.addCategory(categoryList, cat1);
-		C206_CaseStudy.addCategory(categoryList, cat2);
-		String deleteCat = "pets";
-		String deleteCat2 = "fruits";
+		C206_CaseStudy.addCategory(categoryList, cate1);
+		C206_CaseStudy.addCategory(categoryList, cate2);
+		
+		String deleteCat = "PETS";
+		String deleteCat2 = "FRUITS";
 
 		C206_CaseStudy.doDeleteCategory(categoryList, deleteCat);
 		//Given an list of 2 category, after removing 1 category, the size of the list is 1 - normal
 		//The item just delete is remove and second category is same as the first item of the list
 		assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
-		assertSame("Check that a category is removed", item2, categoryList.get(0));
+		assertSame("Check that a Category is removed", cate1, categoryList.get(0));
 
 		C206_CaseStudy.doDeleteCategory(categoryList, deleteCat2);
 		//Given an list of 1 category, after removing 1 category, the size of the list is 0 - normal
@@ -225,8 +226,10 @@ public class C206_CaseStudyTest {
 		//test if the expected output string same as the list of item retrieved 	
 		allItem = C206_CaseStudy.retrieveAllItem(itemList);
 
-		testOutput = String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 1, "Dog", "happy@gmail.com", "sam@gmail.com", 50.00);
-		testOutput += String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 2, "Cat", "kkq@gmail.com", "sammy@gmail.com", 60.00);
+		testOutput = String.format("%-10s %-20s %-10.2f %-15s %-15s %-10.2f \n", "DOG", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
+				LocalDate.parse("01/01/2010", formatter2), 5.00);
+		testOutput += String.format("%-10s %-20s %-10.2f %-15s %-15s %-10.2f \n", "CAT", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
+				LocalDate.parse("01/01/2010", formatter2), 5.00);
 
 		assertEquals("Test that ViewAllItem list", testOutput, allItem);
 	}
@@ -334,8 +337,8 @@ public class C206_CaseStudyTest {
 		s1 = new Seller("Jenny","Seller","Jenny@gmail.com",7897890);
 		s2 = new Seller("ken","Seller","ken@gmail.com",0001234);
 
-		cat2 = new Category("PETS");
-		cat2 = new Category("FRUITS");
+		cate1 = new Category("PETS");
+		cate2 = new Category("FRUITS");
 	}
 
 	@After
