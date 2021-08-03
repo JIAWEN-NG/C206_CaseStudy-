@@ -132,6 +132,66 @@ public class C206_CaseStudyTest {
 
 
 	//Issue 2
+	@Test
+	public void addCategoryTest() {
+		assertNotNull("Test if there is valid Category arraylist to retrieve item", categoryList);
+
+		C206_CaseStudy.addCategory(categoryList, cat1);
+		//Given an empty list, after adding 1 category, the size of the list is 1 - normal
+		//The category just added is as same as the first item of the list
+		assertEquals("Check that Category arraylist size is 1", 1, categoryList.size());
+		assertSame("Check that Category is added", cat1, categoryList.get(0));
+
+		C206_CaseStudy.addCategory(categoryList, cat2);
+		//Given an empty list, after adding 1 category, the size of the list is 1 - normal
+		//The category just added is as same as the first item of the list
+		assertEquals("Check that Category arraylist size is 1", 2, categoryList.size());
+		assertSame("Check that Category is added", cat2, categoryList.get(1));
+
+	}
+	@Test
+	public void retrieveAllCategoryTest() {
+		assertNotNull("Test if there is valid category arraylist to retrieve item", categoryList);
+
+		//test if the list of category retrieved is empty -Boundary
+		String allCat = C206_CaseStudy.retrieveAllCategory(categoryList);
+		String testOutput = "";
+		assertEquals("Check that ViewAllCategory list", testOutput, allCat);
+
+		//Given an empty list, after adding 2 category, test if the size of the list is 2 - normal
+		C206_CaseStudy.addCategory(categoryList, cat1);
+		C206_CaseStudy.addCategory(categoryList, cat2);
+		assertEquals("Test that category arraylist size is 2?", 2, itemList.size());
+
+		//test if the expected output string same as the list of category retrieved 	
+		allCat = C206_CaseStudy.retrieveAllCategory(categoryList);
+
+		testOutput = String.format("%s \n", "PETS");
+		testOutput += String.format("%s \n", 2, "FRUITS");
+
+		assertEquals("Test that ViewAllCategory list", testOutput, allCat);
+	}
+	@Test
+	public void doDeleteCAtegoryTest() {
+		
+		assertNotNull("Test if there is valid Category arraylist to retrieve item", categoryList);
+
+		C206_CaseStudy.addCategory(categoryList, cat1);
+		C206_CaseStudy.addCategory(categoryList, cat2);
+		String deleteCat = "pets";
+		String deleteCat2 = "fruits";
+
+		C206_CaseStudy.doDeleteCategory(categoryList, deleteCat);
+		//Given an list of 2 category, after removing 1 category, the size of the list is 1 - normal
+		//The item just delete is remove and second category is same as the first item of the list
+		assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
+		assertSame("Check that a category is removed", item2, categoryList.get(0));
+
+		C206_CaseStudy.doDeleteCategory(categoryList, deleteCat2);
+		//Given an list of 1 category, after removing 1 category, the size of the list is 0 - normal
+		//The item just delete is remove and second category is same as the first item of the list
+		assertEquals("Check that category arraylist size is 0", 0, categoryList.size());
+	}
 
 
 	//Issue 3
