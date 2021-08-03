@@ -195,6 +195,12 @@ public class C206_CaseStudyTest {
 		//Given an list of 1 category, after removing 1 category, the size of the list is 0 - normal
 		//The item just delete is remove and second category is same as the first item of the list
 		assertEquals("Check that category arraylist size is 0", 0, categoryList.size());
+		
+		//Test if category delete is match with the category inside the categroyList
+		String deleteCat3 = "DRINKS";
+		Boolean delete = C206_CaseStudy.doDeleteCategory(categoryList, deleteCat3);
+		assertFalse("Check if the category delete exist in the categoryList", delete);
+		
 	}
 
 
