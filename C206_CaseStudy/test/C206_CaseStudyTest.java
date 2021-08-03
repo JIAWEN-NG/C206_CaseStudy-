@@ -344,10 +344,15 @@ public class C206_CaseStudyTest {
 
 	@After
 	public void tearDown() throws Exception {
+		item1 = null;
+		item2 = null;
 		bb1 = null;
 		bb2 = null;
 		s1 = null;
-		s2 = null ;
+		s2 = null;
+		cate1 = null;
+		cate2 = null;
+		
 
 	}
 
