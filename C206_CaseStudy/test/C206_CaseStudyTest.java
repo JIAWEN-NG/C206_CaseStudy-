@@ -186,7 +186,7 @@ public class C206_CaseStudyTest {
 		//Given an list of 2 category, after removing 1 category, the size of the list is 1 - normal
 		//The item just delete is remove and second category is same as the first item of the list
 		assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
-		assertSame("Check that a Category is removed", cate1, categoryList.get(0));
+		assertSame("Check that a Category is removed", cate2, categoryList.get(0));
 
 		C206_CaseStudy.doDeleteCategory(categoryList, deleteCat2);
 		//Given an list of 1 category, after removing 1 category, the size of the list is 0 - normal
