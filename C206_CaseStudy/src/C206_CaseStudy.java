@@ -418,8 +418,14 @@ public class C206_CaseStudy {
 
 	//OPTION 3: Item Services, done by Rachel  
 	public static Item inputItem() {
-		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String name = Helper.readString("Enter item name > ");
+		boolean vIName = C206_CaseStudy.validItemName(name);
+		while (vIName == false ) {
+			System.out.println("Invalid Item Name");
+			name = Helper.readString("Enter item name > ");
+
+		}
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String description = Helper.readString("Enter description > ");
 		double minPrice = Helper.readInt("Enter minimum bid price >$ ");
 		String startDate = Helper.readString("Enter auction start date > ");
@@ -432,6 +438,7 @@ public class C206_CaseStudy {
 		Item item1= new Item(name,description,minPrice,start,end,increment);
 
 		return item1;
+		
 
 	}
 	public static boolean validItemName (String itemName) {
