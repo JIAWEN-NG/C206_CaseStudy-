@@ -354,8 +354,8 @@ public class C206_CaseStudy {
 		String name = Helper.readString("Enter item name > ");
 		String description = Helper.readString("Enter description > ");
 		double minPrice = Helper.readInt("Enter minimum bid price >$ ");
-		String startDate = Helper.readString("Enter acution start date > ");
-		String endDate = Helper.readString("Enter acution end date > ");
+		String startDate = Helper.readString("Enter auction start date > ");
+		String endDate = Helper.readString("Enter auction end date > ");
 		double increment = Helper.readDouble("Enter bid increment amount > $");
 
 		LocalDate start = LocalDate.parse(startDate, formatter2);
