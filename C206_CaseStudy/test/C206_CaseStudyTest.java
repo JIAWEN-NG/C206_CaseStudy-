@@ -11,10 +11,9 @@ import org.junit.Test;
 public class C206_CaseStudyTest {
 
 
-	private Buyer bb1;
-	private Buyer bb2;
-	private Seller s1;
-	private Seller s2;
+	
+	private Account a1;
+	private Account a2;
 	private Category cate1;
 	private Category cate2;
 	private Item item1;
@@ -38,47 +37,42 @@ public class C206_CaseStudyTest {
 
 
 	//Issue 1
-	//Test be Jia Wen
+	//Test by Jia Wen
 	@Test
 	public void addBuyerTest() {
 
 		// Account list is not null, so that can add a new account - boundary
 		assertNotNull("Test if there is valid Account arraylist to retrieve item", accList);
 
-		C206_CaseStudy.addBuyer(accList,bb1);
+		C206_CaseStudy.addAccount(accList,a1);
 
 		//Given an empty list, after adding 1 buyer, the size of the list is 1 - normal
-		//The buyer just added is as same as the first item of the list
+		//The Account just added is as same as the first item of the list
 		assertEquals("Check that account arraylist size is 1", 1, accList.size());
-		assertSame("Check that buyer account is added", bb1, accList.get(0));
+		assertSame("Check that buyer account is added", a1, accList.get(0));
 
-		//Add another buyer . test The size of the list is 2? -normal
-		//The buyer just added is as same as the second buyer of the list
-		C206_CaseStudy.addBuyer(accList,bb2);
+		//Add another Account . test The size of the list is 2? -normal
+		//The Account just added is as same as the second Account of the list
+		C206_CaseStudy.addAccount(accList,a2);
 		assertEquals("Check that account arraylist size is 2", 2, accList.size());
-		assertSame("Check that buyer account is added", bb2, accList.get(1));
+		assertSame("Check that buyer account is added",a2, accList.get(1));
 	}
-	//Test be Jia Wen
+	//Test by Jia Wen
 	@Test
-	public void addSellerTest() {
-
-		// Account list is not null, so that can add a new account - boundary
-		assertNotNull("Test if there is valid Account arraylist to retrieve item", accList);
-
-		C206_CaseStudy.addSeller(accList,s1);
-
-		//Given an empty list, after adding 1 seller, the size of the list is 1 - normal
-		//The seller just added is as same as the first item of the list
-		assertEquals("Check that account arraylist size is 1", 1, accList.size());
-		assertSame("Check that seller account is added", s1, accList.get(0));
-
-		//Add another seller . test The size of the list is 2? -normal
-		//The seller just added is as same as the second buyer of the list
-		C206_CaseStudy.addSeller(accList,s2);
-		assertEquals("Check that account arraylist size is 2", 2, accList.size());
-		assertSame("Check that seller account is added", s2, accList.get(1));
+	public void validEmailTest() {
+		
+		String validEmail = "Joe123@gmail.com";
+		String invalidEmail = "Joe123";
+		
+		boolean isValid = C206_CaseStudy.validEmail(validEmail);
+		assertTrue(isValid);
+		
+		boolean notValid = C206_CaseStudy.validEmail(invalidEmail);
+		assertFalse(notValid);
+		
 	}
-	//Test be Jia Wen
+	
+	//Test by Jia Wen
 	@Test
 	public void retrieveAllUserTest() {
 
@@ -91,8 +85,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that viewAllAccount list", testOutput, allAcc);
 
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
-		C206_CaseStudy.addBuyer(accList,bb1);
-		C206_CaseStudy.addSeller(accList,s1);
+		C206_CaseStudy.addAccount(accList,a1);
+		C206_CaseStudy.addAccount(accList,a2);
 
 		assertEquals("Test that Item arraylist size is 2?", 2, accList.size());
 
@@ -103,16 +97,17 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-10s %-10s %-15s %-10d \n", "Jenny","Seller","Jenny@gmail.com",7897890);
 
 		assertEquals("Test that viewAllAccount list", testOutput, allAcc);
+		
 	}
-	//Test be Jia Wen
+	//Test by Jia Wen
 	@Test
 	public void doDeleteAccTest() {
 		//C206_CaseStudy.deleteAcc(accList);
 		//boundary
 		assertNotNull("Test if there is valid Account arraylist to retrieve item", accList);
 
-		C206_CaseStudy.addBuyer(accList,bb1);
-		C206_CaseStudy.addSeller(accList,s1);
+		C206_CaseStudy.addAccount(accList,a1);
+		C206_CaseStudy.addAccount(accList,a2);
 		
 		
 		String deleteEmail = "Jay@gmail.com";
@@ -123,7 +118,7 @@ public class C206_CaseStudyTest {
 		//Given an list of 2 account, after removing 1 account, the size of the list is 1 - normal
 		//The account just delete is remove and second item is same as the first item of the list
 		assertEquals("Check that Acoount arraylist size is 1", 1, accList.size());
-		assertSame("Check that a Account is removed", s1, accList.get(0));
+		assertSame("Check that a Account is removed", a2, accList.get(0));
 
 		C206_CaseStudy.doDeleteAcc(accList, deleteEmail2);
 		//Given an list of 2 account, after removing 1 account, the size of the list is 0 - normal
@@ -353,10 +348,9 @@ public class C206_CaseStudyTest {
 		b1 = new Bid(1, "Dog", "happy@gmail.com", "sam@gmail.com", 50.00);
 		b2 = new Bid(2, "Cat", "kkq@gmail.com", "sammy@gmail.com", 60.00);
 
-		bb1 = new Buyer("Jay","Buyer","Jay@gmail.com",1234567);
-		bb2 = new Buyer("Sam","Buyer","Sam@gmail.com",7654321);
-		s1 = new Seller("Jenny","Seller","Jenny@gmail.com",7897890);
-		s2 = new Seller("ken","Seller","ken@gmail.com",0001234);
+		a1 = new Account("Jay","Buyer","Jay@gmail.com",1234567);
+		a2 = new Account("Jenny","Seller","Jenny@gmail.com",7897890);
+		
 
 		cate1 = new Category("PETS");
 		cate2 = new Category("FRUITS");
@@ -366,10 +360,8 @@ public class C206_CaseStudyTest {
 	public void tearDown() throws Exception {
 		item1 = null;
 		item2 = null;
-		bb1 = null;
-		bb2 = null;
-		s1 = null;
-		s2 = null;
+		a1 = null;
+		a2 = null;
 		cate1 = null;
 		cate2 = null;
 		
