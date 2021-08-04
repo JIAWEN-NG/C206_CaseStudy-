@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+ import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -9,13 +9,9 @@ import java.util.Date;
  * I will not copy or allow others to copy my code.
  * I understand that copying code is considered as plagiarism.
  *
- * 20012122, 28 Jul 2021 20:53:23
+ * 20011472, 28 Jul 2021 20:53:23
  */
 
-/**
- * @author 20012122
- *
- */
 public class Item {
 	
 	private String itemName;
@@ -92,4 +88,4 @@ public class Item {
 		return itemInfo;
 	}
 
-}//
+}
