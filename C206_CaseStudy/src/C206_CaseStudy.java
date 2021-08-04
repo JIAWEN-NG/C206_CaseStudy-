@@ -609,8 +609,8 @@ public class C206_CaseStudy {
 			System.out.println("Bids not found!");
 		}
 	}
-	//OPTION 5: Deal Services , done by Izhar
-	//deal
+	//OPTION 5: 
+	//Deal Services , done by Izhar
 	
 		public static Deal inputDeal(ArrayList<Deal> bidsList,ArrayList<Item> itemList) { 
 			C206_CaseStudy.setHeader("ADD NEW DEAL"); 

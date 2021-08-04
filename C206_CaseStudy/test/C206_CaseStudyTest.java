@@ -291,6 +291,24 @@ public class C206_CaseStudyTest {
 	//Issue 3
 	//Test by Rachel
 	@Test
+	public void validItemNameTest() {
+		
+		String validItemName = "Portable Speaker";
+		String invalidItemName = "P";
+		
+		//boundary condition -check that Name is not null 
+		assertNotNull(validItemName);
+		
+		// normal condition - test for valid item name (2-20 character) returns true 
+		boolean isValid = C206_CaseStudy. validItemName( validItemName);
+		assertTrue(isValid);
+		
+		// error condition - test for invalid item name ( character < 2 ,characters > 30) returns false 
+		boolean notValid = C206_CaseStudy. validItemName( invalidItemName);
+		assertFalse(notValid);
+		
+	}
+	@Test
 	public void addItemTest() {
 		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
 
