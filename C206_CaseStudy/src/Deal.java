@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 
 /**
  * I declare that this code was written by me.
@@ -14,9 +15,9 @@ public class Deal {
 	private String sellerEmail;
 	private String buyerEmail;
 	private double transactionPrice;
-	private String closeDate;
+	private LocalDate closeDate;
 	
-	public Deal(int dealId, String name, String sellerEmail, String buyerEmail, double transactionPrice, String closeDate) {
+	public Deal(int dealId, String name, String sellerEmail, String buyerEmail, double transactionPrice, LocalDate closeDate) {
 		this.dealId = dealId;
 		this.name = name;
 		this.sellerEmail = sellerEmail;
@@ -68,19 +69,19 @@ public class Deal {
 			this.transactionPrice = transactionPrice;
 		}
 		
-		public String getCloseDate() {
+		public LocalDate getCloseDate() {
 			return closeDate;
 		}
 		
-		public void setCloseDate(String closeDate) {
+		public void setCloseDate(LocalDate closeDate) {
 			this.closeDate = closeDate;
 		}
 		
 		public String toString() {
-			String itemInfo = String.format("%-10s %-10s %-15s %-20s %-10.2f", 
+			String dealInfo = String.format("%-10d %-10s %-15s %-20s %-10.2f %-10s", 
 					dealId, name, sellerEmail, buyerEmail, transactionPrice, closeDate);
 			
-			return itemInfo;
+			return dealInfo;
 		}
 
 }

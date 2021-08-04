@@ -21,7 +21,7 @@ public class C206_CaseStudy {
 		ArrayList<Category> categoryList = new ArrayList<Category>();
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		ArrayList<Bid> bidsList = new ArrayList<Bid>();
-		ArrayList<Deal> DealList = new ArrayList<Deal>();
+		ArrayList<Deal> dealList = new ArrayList<Deal>();
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -162,15 +162,15 @@ public class C206_CaseStudy {
 
 				int dealOption = Helper.readInt("Enter option to select service type > ");
 				if(dealOption == 1 ) {
-					C206_CaseStudy.ViewAllDeal(DealList);
-					C206_CaseStudy.AddDeal(DealList);
+					Deal deal1 = InputDeal(dealList);
+					C206_CaseStudy.addDeal(dealList, deal1);	
 				}
 				else if (dealOption == 2) {
-					C206_CaseStudy.ViewAllDeal(DealList);
+					C206_CaseStudy.ViewAllDeal(dealList);
 
 				}
 				else if (dealOption == 3) {
-					C206_CaseStudy.DeleteDeal(DealList);
+					C206_CaseStudy.DeleteDeal(dealList);
 
 				}
 			}
@@ -487,7 +487,7 @@ public class C206_CaseStudy {
 			}
 		}
 		return isFound;
-	}//
+	}
 
 	public static void deleteBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.viewAllBids(bidsList);
@@ -506,52 +506,88 @@ public class C206_CaseStudy {
 			System.out.println("Bids not found!");
 		}
 	}
-	public static void InputDeal(ArrayList<Deal> DealList) { 
+	public static Deal InputDeal(ArrayList<Deal> DealList) { 
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		System.out.println(""); 
 		System.out.println("ADD DEAL"); 
+		int DealId = Helper.readInt("Enter deal ID > "); 
+		String itemName = Helper.readString("Enter Item Name > ");
+		String sellerEmail = Helper.readString("Enter Seller Email");
 		String BuyerEmail = Helper.readString("Enter your email > "); 
-		double newBidPrice = Helper.readDouble("Enter your deal Price >"); 
-		int DealId = Helper.readInt("Enter the bid ID of the item you want to bid > "); 
-		for (int i = 0; i < DealList.size(); i++) { 
-			if (DealId == DealList.get(i).getdealId()) { 
+		double transactionPrice = Helper.readDouble("Enter your deal Price > $");
+		String closeDate = Helper.readString("Enter closing date > ");
+		
+		LocalDate closing = LocalDate.parse(closeDate, formatter2);
+	
+			Deal deal1 = new Deal(DealId,itemName,sellerEmail,BuyerEmail,transactionPrice,closing);
 
-				System.out.println("You have successfully added the deal"); 
-				DealList.get(i).setBuyerEmail(BuyerEmail); 
-				DealList.get(i).setTransactionPrice(newBidPrice); 
-			} 
+			return deal1;
 
-			else { 
-				System.out.println("Deal ID does not exist"); 
-			} 
-		} 
-	}
-
-	public static void ViewAllDeal(ArrayList<Deal> DealList) { 
+		}
+		public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
+			dealList.add(deal1);
+			System.out.println("Deal added");
+		}
+		
+		public static String retrieveAllDeal(ArrayList<Deal> dealList) {
+			String output = "";
+			for(int i = 0; i < dealList.size(); i++) {
+				output += String.format("%-80s \n", dealList.get(i).toString());
+			}
+			return output;
+		}
+	
+	public static void ViewAllDeal(ArrayList<Deal> dealList) { 
 
 		String output = ""; 
-		output += String.format("%-40s %-39s %-20s %30s %40s %25s\n", "Deal ID", "Item Name", "Description", 
+		output = String.format("%-10s %-10s %-15s %-20s %-10s %-10s\n", "Deal ID", "Item Name", "Description", 
 				"Seller Email", "Transaction price($)", "Ending Date"); 
-		for (int x = 0; x < DealList.size(); x++) { 
-			output += String.format("%-40s %-39s %-20s %30s %40s %30s %25s\n", DealList.get(x).getdealId(), 
-					DealList.get(x).getName(), DealList.get(x).getSellerEmail(), DealList.get(x).getBuyerEmail(), 
-					DealList.get(x).getTransactionPrice(), DealList.get(x).getCloseDate()); 
-		} 
-
+		output += retrieveAllDeal(dealList);
+		
 		System.out.println(output); 
 	}
 
-	public static void DeleteDeal(ArrayList<Deal> DealList) { 
+	public static void DeleteDeal(ArrayList<Deal> dealList) { 
 		System.out.println(""); 
 		int RemoveDeal = Helper.readInt("Enter the Deal ID to delete > "); 
-		for (int i = 0; i < DealList.size(); i++) { 
-			if (RemoveDeal == DealList.get(i).getdealId()) { 
-				DealList.remove(i); 
+		for (int i = 0; i < dealList.size(); i++) { 
+			if (RemoveDeal == dealList.get(i).getdealId()) { 
+				dealList.remove(i); 
 				System.out.println("Deal successfully removed"); 
 			} else { 
 				System.out.println("Deal ID does not exist"); 
 			} 
 		} 
 	} 
+	public static boolean doDeleteDeal(ArrayList<Deal> dealList, int deleteID) {
+		boolean isFound = false;
+		for(int i = 0; i < dealList.size(); i++) {
+			int dealID = dealList.get(i).getdealId();
+			if(dealID == deleteID) {
+				dealList.remove(i);
+				isFound = true;
+			}
+		}
+		return isFound;
+	}
+
+	public static void deleteDeal(ArrayList<Deal> dealList) {
+		C206_CaseStudy.ViewAllDeal(dealList);
+		int deleteID = Helper.readInt("Enter the deal ID to delete > ");
+		boolean isFound = doDeleteDeal(dealList, deleteID);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Deal deleted");
+			}
+
+			else {
+				System.out.println("Deal not deleted!");
+			}
+		}else {
+			System.out.println("Deal not found!");
+		}
+	}
 
 
 }//class
