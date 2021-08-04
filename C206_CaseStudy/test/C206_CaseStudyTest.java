@@ -273,7 +273,7 @@ public class C206_CaseStudyTest {
 	}
 
 	//Issue 4
-	//Test by Jia Wen and Chu En
+	//Test by Chu En
 	@Test
 	public void addBidTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -314,7 +314,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllBids list", testOutput, allBids);
 
 	}
-	//Test by Jia Wen and Chu En
+	//Test by Jia Wen
 	@Test
 	public void doDeleteBidsTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);

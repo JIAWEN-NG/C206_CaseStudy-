@@ -24,6 +24,13 @@ public class C206_CaseStudy {
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		//Main program codes done by Jia Wen and Chu En 
+		//OPTION 1: Done by Jia Wen
+		//OPTION 2: Done by Chu En 
+		//OPTION 3: Done by Rachel 
+		//OPTION 4: Done by Jia Wen and Chu En 
+		//OPTION 5: Done by Izhar
 
 
 		int option = 0;
@@ -32,7 +39,8 @@ public class C206_CaseStudy {
 
 			menu();
 			option = Helper.readInt("Enter an option > ");
-
+			
+			//OPTION 1: Done by Jia Wen
 			if (option == 1) {
 				C206_CaseStudy.setHeader("ACCOUNT SERVICES");
 				optionTypeMenu();
@@ -56,8 +64,7 @@ public class C206_CaseStudy {
 						System.out.println("Invalid option");
 					}
 
-
-				}
+				} 
 				else if (accOption == 2) {
 					C206_CaseStudy.viewAllAccount(accList);
 				}
@@ -70,6 +77,8 @@ public class C206_CaseStudy {
 
 				}
 			}
+			
+			//OPTION 2: Done by Chu En 
 			else if (option == 2) {
 				C206_CaseStudy.setHeader("CATEGORY SERVICES");
 				optionTypeMenu();
@@ -93,6 +102,7 @@ public class C206_CaseStudy {
 				}
 
 			}
+			//OPTION 3: Done by Rachel
 			else if (option == 3) {
 				C206_CaseStudy.setHeader("ITEM SERVICES");
 				optionTypeMenu();
@@ -117,6 +127,7 @@ public class C206_CaseStudy {
 				}
 
 			}
+			//OPTION 4: Done by Jia Wen and Chu En 
 			else if (option == 4) {
 				C206_CaseStudy.setHeader("BIDS SERVICE");
 				optionTypeMenu();
@@ -127,15 +138,34 @@ public class C206_CaseStudy {
 					Bid bids1 = inputBid(bidsList, itemList);
 					C206_CaseStudy.addBid(bidsList, bids1);	
 				}
+				// Done by Chu En 
 				else if (bidsOption == 2) {
 					C206_CaseStudy.viewAllBids(bidsList);
 
 				}
+				// Done by Jia Wen 
 				else if (bidsOption == 3) {
 					C206_CaseStudy.deleteBids(bidsList);
 
 				}
+				//OPTION 5: Done by Izhar
 				else if (option == 5) {
+					C206_CaseStudy.setHeader("DEAL SERVICE");
+					optionTypeMenu();
+
+					int dealOption = Helper.readInt("Enter option to select service type > ");
+					if(dealOption == 1 ) {
+						Deal deal1 = InputDeal(dealList);
+						C206_CaseStudy.addDeal(dealList, deal1);	
+					}
+					else if (dealOption == 2) {
+						C206_CaseStudy.ViewAllDeal(dealList);
+
+					}
+					else if (dealOption == 3) {
+						C206_CaseStudy.DeleteDeal(dealList);
+
+					}
 
 				}
 				else if (option == OPTION_QUIT) {
@@ -146,25 +176,6 @@ public class C206_CaseStudy {
 				}
 
 			}
-			else if (option == 5) {
-				C206_CaseStudy.setHeader("DEAL SERVICE");
-				optionTypeMenu();
-
-				int dealOption = Helper.readInt("Enter option to select service type > ");
-				if(dealOption == 1 ) {
-					Deal deal1 = InputDeal(dealList);
-					C206_CaseStudy.addDeal(dealList, deal1);	
-				}
-				else if (dealOption == 2) {
-					C206_CaseStudy.ViewAllDeal(dealList);
-
-				}
-				else if (dealOption == 3) {
-					C206_CaseStudy.DeleteDeal(dealList);
-
-				}
-			}
-
 		}
 
 	}//main
