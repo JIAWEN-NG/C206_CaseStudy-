@@ -144,8 +144,6 @@ public class C206_CaseStudyTest {
 		String e2 = "";
 		int p2 = 7654321;
 
-
-
 		// error condition - test that one input is empty will return false 
 		boolean isEmpty = C206_CaseStudy.notEmptyAcc(n2,r2,e2,p2);
 		assertTrue(isEmpty);
