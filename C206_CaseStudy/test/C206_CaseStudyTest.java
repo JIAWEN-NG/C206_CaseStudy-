@@ -318,7 +318,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addItem(itemList, item2);
 		assertEquals("Test that Item arraylist size is 2?", 2, itemList.size());
 
-		//test if the expected output string same as the list of item retrieved 	
+		//test if the expected output string is same as the list of item retrieved 	
 		allItem = C206_CaseStudy.retrieveAllItem(itemList);
 
 		testOutput = String.format("%-10s %-20s %-10.2f %-15s %-15s %-10.2f \n", "DOG", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
@@ -352,7 +352,7 @@ public class C206_CaseStudyTest {
 	}
 
 	//Issue 4
-	//Test by Chu En
+	//Test by Jia Wen and Chu En
 	@Test
 	public void addBidTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -393,7 +393,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllBids list", testOutput, allBids);
 
 	}
-	//Test by Jia Wen
+	//Test by Jia Wen and Chu En
 	@Test
 	public void doDeleteBidsTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -419,7 +419,7 @@ public class C206_CaseStudyTest {
 		assertFalse("Test that non-esiting bid is NOT ok to delete",delete);
 	}
 
-	//Issue 5
+	//Issue 
 	
 
 	@Before

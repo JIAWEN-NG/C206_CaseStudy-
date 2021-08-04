@@ -1,15 +1,13 @@
  import java.time.LocalDate;
 import java.util.Date;
 
-/**
- * 
- */
+
 /**
  * I declare that this code was written by me.
  * I will not copy or allow others to copy my code.
  * I understand that copying code is considered as plagiarism.
  *
- * 20011472, 28 Jul 2021 20:53:23
+ * 20011472, 4 Aug 2021 9:50:08 am
  */
 
 public class Item {
