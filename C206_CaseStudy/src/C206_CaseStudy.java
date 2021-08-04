@@ -85,8 +85,8 @@ public class C206_CaseStudy {
 			//						} else  if (accOption == 2) {
 
 			if (accType == 1) {
-				Category category1 = inputCategory();
-				C206_CaseStudy.addCategory(categoryList, category1);
+				Bid category1 = inputBid(bidsList, itemList);
+				C206_CaseStudy.addBid(bidsList, category1);
 
 			}
 			else if (accType == 2) {
@@ -504,16 +504,6 @@ public class C206_CaseStudy {
 			return false;
 		}		
 	}
-	public static boolean notEmptyCate(String name) {
-		String patternEmpty = "\\s*";
-
-		if (Pattern.matches(patternEmpty,name)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 
 
 	public static String retrieveAllCategory(ArrayList<Category> categoryList) {
@@ -664,14 +654,23 @@ public class C206_CaseStudy {
 	public static Bid inputBid(ArrayList<Bid> bidsList,ArrayList<Item> itemList) {
 		int ID = Helper.readInt("Enter Bids ID > ");
 		String name = Helper.readString("Enter name > ");
-		boolean validName = C206_CaseStudy.isValidName(name);
+		boolean validName = C206_CaseStudy.isValidBidName(name);
 		while (validName == false ) {
 			System.out.println("Please enter cetegory name less than 20 character");
 			name = Helper.readString("Enter Category name > ");
 		}
 		String buyerEmail = Helper.readString("Enter Buyer email > ");
-		boolean validEmail = C206_CaseStudy.isValidName(name);
+		boolean validBuyerEmail = C206_CaseStudy.isValidEmail(buyerEmail);
+		while (validBuyerEmail ==  false) {
+			System.out.println("Invalid Email");
+			name = Helper.readString("Enter Buyer Email > ");
+		}
 		String sellerEmail = Helper.readString("Enter seller email > ");
+		boolean validSellerEmail = C206_CaseStudy.isValidEmail(sellerEmail);
+		while (validSellerEmail ==  false) {
+			System.out.println("Invalid Email");
+			name = Helper.readString("Enter Seller Email > ");
+		}
 		double price = Helper.readDouble("Enter Bids price >$");
 		boolean isValid = isValidBid(bidsList,price,itemList);
 
@@ -682,7 +681,6 @@ public class C206_CaseStudy {
 		else {
 			return null;
 		}
-
 	}
 	//Done by Chu En 
 	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
@@ -692,6 +690,16 @@ public class C206_CaseStudy {
 		else {
 			bidsList.add(bids1);
 			System.out.println("Bids Added");
+		}
+	}
+	public static boolean isValidBidName (String name) {
+		String namePattern = "[a-zA-Z]{2,30}";
+		boolean isValid = Pattern.matches(namePattern, name);
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	public static boolean isValidEmail(String email) {
