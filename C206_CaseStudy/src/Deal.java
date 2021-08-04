@@ -17,13 +17,13 @@ public class Deal {
 	private double transactionPrice;
 	private LocalDate closeDate;
 	
-	public Deal(int dealId, String name, String sellerEmail, String buyerEmail, double transactionPrice, LocalDate closeDate) {
+	public Deal(int dealId, String name, String sellerEmail, String buyerEmail, double transactionPrice, LocalDate closeDate2) {
 		this.dealId = dealId;
 		this.name = name;
 		this.sellerEmail = sellerEmail;
 		this.buyerEmail = buyerEmail;
 		this.transactionPrice = transactionPrice;
-		this.closeDate = closeDate;
+		this.closeDate = closeDate2;
 		
 	}
 		
