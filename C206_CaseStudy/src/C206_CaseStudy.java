@@ -63,11 +63,86 @@ public class C206_CaseStudy {
 
 				}
 				else if (adminOption == 2) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
 
+					if (optionType == 1) {
+						Category cate = inputCategory();
+						C206_CaseStudy.addCategory(categoryList, cate);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllCategory(categoryList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteCategory(categoryList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+
+				}
+				else if (adminOption == 3) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Item item = inputItem();
+						C206_CaseStudy.addItem(itemList, item);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllItem(itemList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteItem(itemList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
 
 				} 
+				else if (adminOption == 4) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Bid bids = inputBid(bidsList, itemList);
+						C206_CaseStudy.addBid(bidsList, bids);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllBids(bidsList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteBids(bidsList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+				}
+				else if (adminOption == 5) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Deal deal = inputDeal(dealList, itemList);
+						C206_CaseStudy.addDeal(dealList, deal);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllDeals(dealList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteDeal(dealList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+				}else if (adminOption == 6) {
+					System.out.println("Bye Bye");
+				}else {
+					System.out.println("Invalid option!");
+				}
 			}
 		}
+		
 
 	}//main
 
@@ -580,6 +655,7 @@ public class C206_CaseStudy {
 	//Deal Services , done by Izhar
 	
 		public static Deal inputDeal(ArrayList<Deal> bidsList,ArrayList<Item> itemList) { 
+			DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			C206_CaseStudy.setHeader("ADD NEW DEAL"); 
 			  
 			  int dealId = Helper.readInt("Enter deal ID > ");
@@ -589,7 +665,9 @@ public class C206_CaseStudy {
 			  double transactionPrice = Helper.readDouble("Enter transaction price > ");
 		      String closeDate = Helper.readString("Enter close deal (DD/MM/YYYY) > "); 
 		      
-		      Deal deal1 = new Deal(dealId, itemName, sellerEmail, buyerEmail, transactionPrice, closeDate);
+		      LocalDate closing = LocalDate.parse(closeDate, formatter2);
+		      
+		      Deal deal1 = new Deal(dealId, itemName, sellerEmail, buyerEmail, transactionPrice, closing);
 		      return deal1;
 			 
 			     
@@ -597,8 +675,8 @@ public class C206_CaseStudy {
 		
 		public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
 
-		    if (deal1.getItemName().isEmpty() || deal1.getSellerEmail().isEmpty() || deal1.getBuyerEmail().isEmpty()
-		        || deal1.getCloseDate().isEmpty()) {
+		    if (deal1.getName().isEmpty() || deal1.getSellerEmail().isEmpty() || deal1.getBuyerEmail().isEmpty()
+		        || deal1.getCloseDate() == null) {
 		      System.out.println("Please fill in all mandatory fields!");
 		    } else {
 		      dealList.add(deal1);
@@ -612,7 +690,7 @@ public class C206_CaseStudy {
 
 		    for (Deal d : dealList) {
 
-		      output += String.format("\n%-10d %-25s %-30s %-30s %-9.2f %11s", d.getdealId(), d.getItemName(),
+		      output += String.format("\n%-10d %-25s %-30s %-30s %-9.2f %11s", d.getdealId(), d.getName(),
 		          d.getSellerEmail(), d.getBuyerEmail(), d.getTransactionPrice(), d.getCloseDate());
 		    }
 		    return output;
