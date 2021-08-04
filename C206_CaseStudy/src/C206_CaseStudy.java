@@ -36,140 +36,48 @@ public class C206_CaseStudy {
 		//OPTION 5: Done by Izhar
 
 
-		int option = 0;
+		int login = Helper.readInt("Enter login option > ");
 
-		while (option != OPTION_QUIT ) {
+		if(login == 1) {
+			int adminOption = Helper.readInt("Enter option to select service type > ");
+			while(adminOption != OPTION_QUIT) {
 
-			menu();
-			option = Helper.readInt("Enter an option > ");
+				//OPTION 1: Done by jia wen 
+				if (adminOption == 1) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
 
-			//OPTION 1: Done by Jia Wen
-			if (option == 1) {
-				C206_CaseStudy.setHeader("ACCOUNT SERVICES");
-				optionTypeMenu();
+					if (optionType == 1) {
+						Account acc = inputAccount();
+						C206_CaseStudy.addAccount(accList,acc);
 
-				int accOption = Helper.readInt("Enter option to select service type > ");
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllAccount(accList);
 
-				if (accOption == 1) {
-					Account acc = inputAccount();
-					C206_CaseStudy.addAccount(accList,acc);
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteAcc(accList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+
+				}
+				else if (adminOption == 2) {
 
 
 				} 
-				else if (accOption == 2) {
-					C206_CaseStudy.viewAllAccount(accList);
-				}
-				else if(accOption == 3) {
-					C206_CaseStudy.deleteAcc(accList);
-
-				}
-				else {
-					System.out.println("Invalid option entered!");
-
-				}
-			}
-
-			//OPTION 2: Done by Chu En 
-			else if (option == 2) {
-				C206_CaseStudy.setHeader("CATEGORY SERVICES");
-				optionTypeMenu();
-
-				int categoryOption = Helper.readInt("Enter option to select service type > ");
-
-				if (categoryOption == 1) {
-					Category category1 = inputCategory();
-					C206_CaseStudy.addCategory(categoryList, category1);
-
-				}
-				else if (categoryOption == 2) {
-					C206_CaseStudy.viewAllCategory(categoryList);
-				}
-				else if(categoryOption == 3) {
-					C206_CaseStudy.deleteCategory(categoryList);
-
-				}
-				else {
-					System.out.println("Invalid option entered!");
-				}
-
-			}
-			//OPTION 3: Done by Rachel
-			else if (option == 3) {
-				C206_CaseStudy.setHeader("ITEM SERVICES");
-				optionTypeMenu();
-
-
-				int itemOption = Helper.readInt("Enter option to select service type > ");
-
-				if (itemOption == 1) {
-					Item item1 = inputItem();
-					C206_CaseStudy.addItem(itemList, item1);
-
-				}
-				else if (itemOption == 2) {
-					C206_CaseStudy.viewAllItem(itemList);
-				}
-				else if(itemOption == 3) {
-					C206_CaseStudy.deleteItem(itemList);
-
-				}
-				else {
-					System.out.println("Invalid option entered!");
-				}
-
-			}
-			//OPTION 4: Done by Jia Wen and Chu En 
-			else if (option == 4) {
-				C206_CaseStudy.setHeader("BIDS SERVICE");
-				optionTypeMenu();
-
-				int bidsOption = Helper.readInt("Enter option to select service type > ");
-				if(bidsOption == 1) {
-					C206_CaseStudy.viewAllBids(bidsList);
-					Bid bids1 = inputBid(bidsList, itemList);
-					C206_CaseStudy.addBid(bidsList, bids1);	
-				}
-				// Done by Chu En 
-				else if (bidsOption == 2) {
-					C206_CaseStudy.viewAllBids(bidsList);
-
-				}
-				// Done by Jia Wen 
-				else if (bidsOption == 3) {
-					C206_CaseStudy.deleteBids(bidsList);
-
-				}
-				//OPTION 5: Done by Izhar
-				else if (option == 5) {
-					C206_CaseStudy.setHeader("DEAL SERVICE");
-					optionTypeMenu();
-
-					int dealOption = Helper.readInt("Enter option to select service type > ");
-					if(dealOption == 1 ) {
-						Deal deal1 = InputDeal(dealList);
-						C206_CaseStudy.addDeal(dealList, deal1);	
-					}
-					else if (dealOption == 2) {
-						C206_CaseStudy.ViewAllDeal(dealList);
-
-					}
-					else if (dealOption == 3) {
-						C206_CaseStudy.DeleteDeal(dealList);
-
-					}
-
-				}
-				else if (option == OPTION_QUIT) {
-
-				}
-				else {
-					System.out.println("You have enetered an invalid option!");
-				}
-
 			}
 		}
 
 	}//main
+
+
+
+	public static void login() {
+		C206_CaseStudy.setHeader("Login system");
+		System.out.println("1. Login as Adminstrator");
+		System.out.println("2. Login as Student");
+	}
 
 	// done by Jia wen 
 	public static void menu() {
@@ -195,6 +103,12 @@ public class C206_CaseStudy {
 		System.out.println("1. ADD");
 		System.out.println("2. VIEW ALL");
 		System.out.println("3. DELETE");
+	}
+
+
+	public static void accType() {
+		System.out.println("Buyer");
+		System.out.println("Seller");
 	}
 
 	//OPTION 1: Account Services, done by Jia Wen 
@@ -335,10 +249,10 @@ public class C206_CaseStudy {
 
 	public static void deleteAcc(ArrayList<Account> accList) {
 		C206_CaseStudy.viewAllAccount(accList);
-		
+
 		String email = Helper.readString("Enter email > ");
 		boolean vEmail = C206_CaseStudy.validEmail(email);
-		
+
 		while (vEmail == false ) {
 			System.out.println("Invalid Email");
 			email = Helper.readString("Enter email > ");
@@ -361,16 +275,44 @@ public class C206_CaseStudy {
 
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
-		String name = Helper.readString("Enter category name > ");
+		String name = Helper.readString("Enter name > ");
+		boolean validName = C206_CaseStudy.isValidCateName(name);
+		while (validName == false ) {
+			System.out.println("Please enter cetegory name less than 20 character");
+			name = Helper.readString("Enter Category name > ");
+		}
 
-		Category category1 = new Category(name);
+		if(validName == true) {
+			Category category1 = new Category(name);
+			return category1;
+		}
+		else {
+			return null;
+		}
 
-		return category1;
 	}	
 	public static void addCategory(ArrayList<Category> categoryList, Category category1) {
-		categoryList.add(category1);
-		System.out.println("Category added");
+		if (category1 == null) {
+			System.out.println("Category not added");
+		}
+		else {
+			categoryList.add(category1);
+			System.out.println("Category added");
+		}
 	}
+
+	public static boolean isValidCateName(String name) {
+		String namePattern = "[a-zA-Z]{2,20}";
+		boolean isValid = Pattern.matches(namePattern, name);
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}		
+	}
+
+
 	public static String retrieveAllCategory(ArrayList<Category> categoryList) {
 		String output = "";
 		for (int i = 0; i < categoryList.size(); i++) {
@@ -389,7 +331,7 @@ public class C206_CaseStudy {
 		boolean isFound = false;
 		for(int i = 0; i < categoryList.size(); i++) {
 			String categoryName = categoryList.get(i).getName();
-			if(deleteName.equalsIgnoreCase(categoryName)) {
+			if(categoryName.equalsIgnoreCase(categoryName)) {
 				categoryList.remove(i);
 				isFound = true;
 			}
@@ -438,7 +380,7 @@ public class C206_CaseStudy {
 		Item item1= new Item(name,description,minPrice,start,end,increment);
 
 		return item1;
-		
+
 
 	}
 	public static boolean validItemName (String itemName) {
@@ -499,9 +441,10 @@ public class C206_CaseStudy {
 		}
 
 	}
+
 	//OPTION 4: Bid Services, Done By Chu En and Jia Wen 
 
-	//Done by chu en 
+	//Done by Chu En 
 	public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
 		boolean isValid = false;
 
@@ -511,20 +454,37 @@ public class C206_CaseStudy {
 			}
 			else {
 				for (int i = 0; i < bidsList.size(); i++) {
+
 					if (price >= bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
 						isValid = true;
 					}
 				}
+
 			}
 		}
 		return isValid;
 	}
-	//Done by chu en 
+	//Done by Chu En 
 	public static Bid inputBid(ArrayList<Bid> bidsList,ArrayList<Item> itemList) {
 		int ID = Helper.readInt("Enter Bids ID > ");
-		String name = Helper.readString("Enter Item Name > ");
+		String name = Helper.readString("Enter name > ");
+		boolean validName = C206_CaseStudy.isValidBidName(name);
+		while (validName == false ) {
+			System.out.println("Please enter cetegory name less than 20 character");
+			name = Helper.readString("Enter Category name > ");
+		}
 		String buyerEmail = Helper.readString("Enter Buyer email > ");
+		boolean validBuyerEmail = C206_CaseStudy.validEmail(buyerEmail);
+		while (validBuyerEmail ==  false) {
+			System.out.println("Invalid Email");
+			name = Helper.readString("Enter Buyer Email > ");
+		}
 		String sellerEmail = Helper.readString("Enter seller email > ");
+		boolean validSellerEmail = C206_CaseStudy.validEmail(sellerEmail);
+		while (validSellerEmail ==  false) {
+			System.out.println("Invalid Email");
+			name = Helper.readString("Enter Seller Email > ");
+		}
 		double price = Helper.readDouble("Enter Bids price >$");
 		boolean isValid = isValidBid(bidsList,price,itemList);
 
@@ -535,9 +495,8 @@ public class C206_CaseStudy {
 		else {
 			return null;
 		}
-
 	}
-	//Done by chu en 
+	//Done by Chu En 
 	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
 		if (bids1 == null ) {
 			System.out.println("Invalid bid");
@@ -547,11 +506,19 @@ public class C206_CaseStudy {
 			System.out.println("Bids Added");
 		}
 	}
-	//Done by Jia Wen 
+	public static boolean isValidBidName (String name) {
+		String namePattern = "[a-zA-Z]{2,20}";
+		boolean isValid = Pattern.matches(namePattern, name);
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}//done by Jia Wen 
 	public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
 		Collections.sort(bidsList,new Comparator<Bid>() {
 			public int compare(Bid b1, Bid b2) {
-
 				return Double.compare(b2.getPrice(), b1.getPrice());	
 			}
 		});
