@@ -434,6 +434,16 @@ public class C206_CaseStudy {
 		return item1;
 
 	}
+	public static boolean validItemName (String itemName) {
+		String namePattern = "[a-zA-Z]{2,30}";
+		boolean isValid = Pattern.matches(namePattern, itemName);
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	public static void addItem(ArrayList<Item> itemList, Item item1) {
 		itemList.add(item1);
 		System.out.println("Item added");
