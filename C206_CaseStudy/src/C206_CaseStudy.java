@@ -594,89 +594,85 @@ public class C206_CaseStudy {
 			System.out.println("Bids not found!");
 		}
 	}
-	//OPTION 5: Deal Services , done by Izhar
-	public static Deal InputDeal(ArrayList<Deal> DealList) { 
-		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		System.out.println(""); 
-		System.out.println("ADD DEAL"); 
-		int DealId = Helper.readInt("Enter deal ID > "); 
-		String itemName = Helper.readString("Enter Item Name > ");
-		String sellerEmail = Helper.readString("Enter Seller Email");
-		String BuyerEmail = Helper.readString("Enter your email > "); 
-		double transactionPrice = Helper.readDouble("Enter your deal Price > $");
-		String closeDate = Helper.readString("Enter closing date > ");
+	//OPTION 5: 
+	//Deal Services , done by Izhar
+	
+		public static Deal inputDeal(ArrayList<Deal> bidsList,ArrayList<Item> itemList) { 
+			C206_CaseStudy.setHeader("ADD NEW DEAL"); 
+			  
+			  int dealId = Helper.readInt("Enter deal ID > ");
+			  String itemName = Helper.readString("Enter item name > ");
+			  String sellerEmail = Helper.readString("Enter seller's email > ");
+	          String buyerEmail = Helper.readString("Enter buyer's email > ");
+			  double transactionPrice = Helper.readDouble("Enter transaction price > ");
+		      String closeDate = Helper.readString("Enter close deal (DD/MM/YYYY) > "); 
+		      
+		      Deal deal1 = new Deal(dealId, itemName, sellerEmail, buyerEmail, transactionPrice, closeDate);
+		      return deal1;
+			 
+			     
+			   }
+		
+		public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
 
-		LocalDate closing = LocalDate.parse(closeDate, formatter2);
+		    if (deal1.getItemName().isEmpty() || deal1.getSellerEmail().isEmpty() || deal1.getBuyerEmail().isEmpty()
+		        || deal1.getCloseDate().isEmpty()) {
+		      System.out.println("Please fill in all mandatory fields!");
+		    } else {
+		      dealList.add(deal1);
+		      System.out.println("Successfully added new deal!");
+		    }
 
-		Deal deal1 = new Deal(DealId,itemName,sellerEmail,BuyerEmail,transactionPrice,closing);
+		  }
+		
+		public static String retrieveAllDeals(ArrayList<Deal> dealList) {
+		    String output = "";
 
-		return deal1;
+		    for (Deal d : dealList) {
 
-	}
-	public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
-		dealList.add(deal1);
-		System.out.println("Deal added");
-	}
+		      output += String.format("\n%-10d %-25s %-30s %-30s %-9.2f %11s", d.getdealId(), d.getItemName(),
+		          d.getSellerEmail(), d.getBuyerEmail(), d.getTransactionPrice(), d.getCloseDate());
+		    }
+		    return output;
+		  }
+		
+		public static void viewAllDeals(ArrayList<Deal> dealList) {
 
-	public static String retrieveAllDeal(ArrayList<Deal> dealList) {
-		String output = "";
-		for(int i = 0; i < dealList.size(); i++) {
-			output += String.format("%-80s \n", dealList.get(i).toString());
-		}
-		return output;
-	}
+		    String output = String.format("%-10s %-25s %-30s %-30s %-9s %11s", "DEAL ID", "ITEM NAME", "SELLER EMAIL",
+		        "BUYER EMAIL", "TRANSACTION PRICE", "CLOSE DATE");
+		    output += retrieveAllDeals(dealList);
+		    System.out.println(output);
 
-	public static void ViewAllDeal(ArrayList<Deal> dealList) { 
+		  }
+		
+		public static boolean doDeleteDeal(ArrayList<Deal> dealList, int dealID, char cfm) {
 
-		String output = ""; 
-		output = String.format("%-10s %-10s %-15s %-20s %-10s %-10s\n", "Deal ID", "Item Name", "Description", 
-				"Seller Email", "Transaction price($)", "Ending Date"); 
-		output += retrieveAllDeal(dealList);
+		    boolean isDeleted = false;
 
-		System.out.println(output); 
-	}
+		    for (Deal d : dealList) {
+		      if (dealID == d.getdealId() && (cfm == 'Y' || cfm == 'y')) {
+		        dealList.remove(d);
+		        isDeleted = true;
+		        break;
+		      }
+		    }
 
-	public static void DeleteDeal(ArrayList<Deal> dealList) { 
-		System.out.println(""); 
-		int RemoveDeal = Helper.readInt("Enter the Deal ID to delete > "); 
-		for (int i = 0; i < dealList.size(); i++) { 
-			if (RemoveDeal == dealList.get(i).getdealId()) { 
-				dealList.remove(i); 
-				System.out.println("Deal successfully removed"); 
-			} else { 
-				System.out.println("Deal ID does not exist"); 
-			} 
-		} 
-	} 
-	public static boolean doDeleteDeal(ArrayList<Deal> dealList, int deleteID) {
-		boolean isFound = false;
-		for(int i = 0; i < dealList.size(); i++) {
-			int dealID = dealList.get(i).getdealId();
-			if(dealID == deleteID) {
-				dealList.remove(i);
-				isFound = true;
-			}
-		}
-		return isFound;
-	}
+		    return isDeleted;
+		  }
+		
+		public static void deleteDeal(ArrayList<Deal> dealList) {
+			C206_CaseStudy.setHeader("Delete deal");
+		    C206_CaseStudy.viewAllDeals(dealList);
+		    int dealID = Helper.readInt("Enter deal ID you want to delete > ");
+		    char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
+		    boolean isDeleted = doDeleteDeal(dealList, dealID, cfm);
 
-	public static void deleteDeal(ArrayList<Deal> dealList) {
-		C206_CaseStudy.ViewAllDeal(dealList);
-		int deleteID = Helper.readInt("Enter the deal ID to delete > ");
-		boolean isFound = doDeleteDeal(dealList, deleteID);
-		if(isFound == true ) {
-			char toDelete = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
-			if (toDelete == 'Y' | toDelete == 'y') {
-				System.out.println("Deal deleted");
-			}
-
-			else {
-				System.out.println("Deal not deleted!");
-			}
-		}else {
-			System.out.println("Deal not found!");
-		}
-	}
+		    if (isDeleted == false) {
+		      System.out.println("Delete was unsuccessful. Please enter a valid deal ID.");
+		    } else {
+		      System.out.println("Deal ID " + dealID + " successfully deleted!");
+		    }
+		  }
 
 
 }//class

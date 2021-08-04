@@ -39,14 +39,14 @@ public class C206_CaseStudyTest {
 	//Issue 1
 	//Test by Jia Wen
 	@Test
-	public void addBuyerTest() {
+	public void addAccountTest() {
 
 		// Account list is not null, so that can add a new account - boundary
 		assertNotNull("Test if there is valid Account arraylist to retrieve item", accList);
 
 		C206_CaseStudy.addAccount(accList,a1);
 
-		//Given an empty list, after adding 1 buyer, the size of the list is 1 - normal
+		//Given an empty list, after adding 1 Account, the size of the list is 1 - normal
 		//The Account just added is as same as the first item of the list
 		assertEquals("Check that account arraylist size is 1", 1, accList.size());
 		assertSame("Check that buyer account is added", a1, accList.get(0));
@@ -144,8 +144,6 @@ public class C206_CaseStudyTest {
 		String e2 = "";
 		int p2 = 7654321;
 
-
-
 		// error condition - test that one input is empty will return false 
 		boolean isEmpty = C206_CaseStudy.notEmptyAcc(n2,r2,e2,p2);
 		assertTrue(isEmpty);
@@ -210,7 +208,7 @@ public class C206_CaseStudyTest {
 
 		//error condition , if account does not exist cannot delete 
 		boolean delete = C206_CaseStudy.doDeleteAcc(accList, "jojo@gmail.com");
-		assertFalse("Test that non-esiting item is NOT ok to delete", delete);
+		assertFalse("Test that non-existing item is NOT ok to delete", delete);
 	}
 
 
@@ -313,6 +311,24 @@ public class C206_CaseStudyTest {
 
 	//Issue 3
 	//Test by Rachel
+	@Test
+	public void validItemNameTest() {
+		
+		String validItemName = "Portable Speaker";
+		String invalidItemName = "P";
+		
+		//boundary condition -check that Name is not null 
+		assertNotNull(validItemName);
+		
+		// normal condition - test for valid item name (2-20 character) returns true 
+		boolean isValid = C206_CaseStudy. validItemName( validItemName);
+		assertTrue(isValid);
+		
+		// error condition - test for invalid item name ( character < 2 ,characters > 30) returns false 
+		boolean notValid = C206_CaseStudy. validItemName( invalidItemName);
+		assertFalse(notValid);
+		
+	}
 	@Test
 	public void addItemTest() {
 		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
@@ -486,9 +502,65 @@ public class C206_CaseStudyTest {
 		assertFalse(notValid1);
 	}
 
+<<<<<<< HEAD
+	//Issue 5
+		@Test
+		public void addDealTest() {
+			assertNotNull("Test if there is valid Deal arraylist to retrieve item", dealList);
+			
+			C206_CaseStudy.addDeal(dealList, d1);
+			assertEquals("Check that deal arraylist size is 1", 1, dealList.size());
+			assertSame("Check that deal is added", d1, dealList.get(0));
+			
+			C206_CaseStudy.addDeal(dealList, d2);
+			assertEquals("Check that deal arraylist size is 2", 2, dealList.size());
+			assertSame("Check that deal is added", d2, dealList.get(1));
+			
+		}
+		@Test
+		public void retrieveAllDealsTest() {
+			assertNotNull("Test if there is valid deal arraylist to retrieve item", dealList);
+=======
 	//Issue 
 
+>>>>>>> branch 'master' of https://github.com/20011454-Siet-Chu-En/C206_CaseStudy-.git
 
+			String allDeal = C206_CaseStudy.retrieveAllDeals(dealList);
+			String testOutput = "";
+			assertEquals("Check that ViewAllDeals list", testOutput, allDeal);
+
+			C206_CaseStudy.addDeal(dealList, d1);
+			C206_CaseStudy.addDeal(dealList, d2);
+			assertEquals("Test that Deal arraylist size is 2?", 2, dealList.size());
+	 	
+			allDeal = C206_CaseStudy.retrieveAllDeals(dealList);
+
+			testOutput = String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 1, "Dog", "happy@gmail.com", "sam@gmail.com", 50.00);
+			testOutput += String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 2, "Cat", "kkq@gmail.com", "sammy@gmail.com", 60.00);
+
+			assertEquals("Test that ViewAllBids list", testOutput, allDeal);
+		}
+		@Test
+		public void doDeleteDealTest() {
+			assertNotNull("Test if there is valid deal arraylist to retrieve item", dealList);
+
+			C206_CaseStudy.addDeal(dealList,d1);
+			C206_CaseStudy.addDeal(dealList,d2);
+			int deleteID = 1;
+			int deleteID2 = 2;
+			
+			C206_CaseStudy.doDeleteDeal(dealList, deleteID);
+			assertEquals("Check that deal arraylist size is 1", 1, dealList.size());
+			assertSame("Check that a deal is remove", d2, dealList.get(0));
+
+			C206_CaseStudy.doDeleteDeal(dealList, deleteID2);
+			assertEquals("Check that deal arraylist size is 0", 0, dealList.size());
+			
+			boolean delete = C206_CaseStudy.doDeleteDeal(dealList, 4);
+			assertFalse("Test that non-existing deal is NOT ok to delete",delete);
+			
+		}
+		
 	@Before
 	public void setUp() throws Exception {
 		//prepare test data 
