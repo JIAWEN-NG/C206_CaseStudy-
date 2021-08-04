@@ -61,14 +61,98 @@ public class C206_CaseStudyTest {
 	@Test
 	public void validEmailTest() {
 		
+		
 		String validEmail = "Joe123@gmail.com";
 		String invalidEmail = "Joe123";
 		
+		//boundary condition -check that email is not null 
+		assertNotNull(validEmail);
+		
+		// normal condition - test that an valid email (with "@" in email ) will return true 
 		boolean isValid = C206_CaseStudy.validEmail(validEmail);
 		assertTrue(isValid);
 		
+		// error condition - test that an invalid email (without "@" in email )will return false 
 		boolean notValid = C206_CaseStudy.validEmail(invalidEmail);
 		assertFalse(notValid);
+		
+	}
+	@Test
+	public void validNameTest() {
+		
+		String validName = "Joey";
+		String invalidName = "J";
+		
+		//boundary condition -check that Name is not null 
+		assertNotNull(validName);
+		
+		// normal condition - test that an valid name (2-15 character) will return true 
+		boolean isValid = C206_CaseStudy.validName(validName);
+		assertTrue(isValid);
+		
+		// error condition - test that an invalid name ( character < 2 ,characters > 15) will return false 
+		boolean notValid = C206_CaseStudy.validName(invalidName);
+		assertFalse(notValid);
+		
+	}
+	@Test
+	public void validRoleTest() {
+		
+		String validRole = "seller";
+		String invalidRole = "user";
+		
+		//boundary condition -check that Role is not null 
+		assertNotNull(validRole);
+		
+		// normal condition - test that an valid role ("seller","buyer","admin") will return true 
+		boolean isValid = C206_CaseStudy.validRole(validRole);
+		assertTrue(isValid);
+		
+		// error condition - test that an invalid role will return false 
+		boolean notValid = C206_CaseStudy.validRole(invalidRole);
+		assertFalse(notValid);
+		
+	}
+	@Test
+	public void validPasswordTest() {
+		
+		int validPass = 1234567;
+		int invalidPass = 12345;
+		
+		//boundary condition -check that Role is not null 
+		assertNotNull(validPass);
+		
+		// normal condition - test that an valid password (len == 7) will return true 
+		boolean isValid = C206_CaseStudy.validPassword(validPass);
+		assertTrue(isValid);
+		
+		// error condition - test that an invalid password will (len > 7 , len < 7) return false 
+		boolean notValid = C206_CaseStudy.validPassword(invalidPass);
+		assertFalse(notValid);
+		
+	}
+	@Test
+	public void notEmptyAccTest() {
+		
+		String n1 = "Joe";
+		String r1 = "Seller";
+		String e1 = "Joe@gmail.com";
+		int p1 = 1234567;
+		
+		String n2 = "Sam";
+		String r2 = "Seller";
+		String e2 = "";
+		int p2 = 7654321;
+		
+		
+		
+		// error condition - test that one input is empty will return false 
+		boolean isEmpty = C206_CaseStudy.notEmptyAcc(n2,r2,e2,p2);
+		assertTrue(isEmpty);
+		
+		// normal condition - test that if all user input is filled and is valid, will return true 
+		boolean notEmpty = C206_CaseStudy.notEmptyAcc(n1,r1,e1,p1);
+		assertFalse(notEmpty);
 		
 	}
 	
