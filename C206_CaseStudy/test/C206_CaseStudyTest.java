@@ -334,12 +334,12 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
 
 		C206_CaseStudy.addItem(itemList, item1);
-		assertEquals("Check that items arraylist size is 1", 1, itemList.size());
-		assertSame("Check that items is added", item1, itemList.get(0));
+		assertEquals("Check that item arraylist size is 1", 1, itemList.size());
+		assertSame("Check that item is added", item1, itemList.get(0));
 
 		C206_CaseStudy.addItem(itemList, item2);
 		assertEquals("Check that items arraylist size is 1", 2, itemList.size());
-		assertSame("Check that items is added", item2, itemList.get(1));
+		assertSame("Check that item is added", item2, itemList.get(1));
 
 	}
 	//Test by Rachel
@@ -355,7 +355,7 @@ public class C206_CaseStudyTest {
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 		C206_CaseStudy.addItem(itemList, item1);
 		C206_CaseStudy.addItem(itemList, item2);
-		assertEquals("Test that Item arraylist size is 2?", 2, itemList.size());
+		assertEquals("Test that Item arraylist size is 2", 2, itemList.size());
 
 		//test if the expected output string is same as the list of item retrieved 	
 		allItem = C206_CaseStudy.retrieveAllItem(itemList);
@@ -365,13 +365,13 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-10s %-20s %-10.2f %-15s %-15s %-10.2f \n", "CAT", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
 				LocalDate.parse("01/01/2010", formatter2), 5.00);
 
-		assertEquals("Test that ViewAllItem list", testOutput, allItem);
+		assertEquals("Test ViewAllItem list", testOutput, allItem);
 	}
 	//Test by Rachel
 	@Test
 	public void doDeleteItemTest() {
 
-		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
+		assertNotNull("Test that there is valid Item arraylist to retrieve item", itemList);
 
 		C206_CaseStudy.addItem(itemList, item1);
 		C206_CaseStudy.addItem(itemList, item2);
