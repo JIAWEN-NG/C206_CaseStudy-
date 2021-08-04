@@ -347,7 +347,7 @@ public class C206_CaseStudyTest {
 	public void retrieveAllItemTest() {
 		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
 
-		//test if the list of item retrieved is empty -Boundary
+		//test if itemList retrieved is empty -Boundary
 		String allItem = C206_CaseStudy.retrieveAllItem(itemList);
 		String testOutput = "";
 		assertEquals("Check that ViewAllItem list", testOutput, allItem);
@@ -357,7 +357,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addItem(itemList, item2);
 		assertEquals("Test that Item arraylist size is 2", 2, itemList.size());
 
-		//test if the expected output string is same as the list of item retrieved 	
+		//test if the expected output is same as the itemList retrieved 	
 		allItem = C206_CaseStudy.retrieveAllItem(itemList);
 
 		testOutput = String.format("%-10s %-20s %-10.2f %-15s %-15s %-10.2f \n", "DOG", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
@@ -379,14 +379,14 @@ public class C206_CaseStudyTest {
 		String deleteName2 = "Cat";
 
 		C206_CaseStudy.doDeleteItem(itemList, deleteName);
-		//Given an list of 2 item, after removing 1 item, the size of the list is 1 - normal
-		//The item just delete is remove and second item is same as the first item of the list
+		//Given an arraylist of 2 item, after removing 1 item, the size of the list is 1 - normal
+		//The item deleted is removed and second item is same as the first item of the list
 		assertEquals("Check that Item arraylist size is 1", 1, itemList.size());
 		assertSame("Check that a Item is removed", item2, itemList.get(0));
 
 		C206_CaseStudy.doDeleteItem(itemList, deleteName2);
-		//Given an list of 1 item, after removing 1 item, the size of the list is 0 - normal
-		//The item just delete is remove and second item is same as the first item of the list
+		//Given an arraylist of 1 item, after removing 1 item, the size of the list is 0 - normal
+		//The item deleted is removed and second item is same as the first item of the list
 		assertEquals("Check that item arraylist size is 0", 0, itemList.size());
 	}
 
