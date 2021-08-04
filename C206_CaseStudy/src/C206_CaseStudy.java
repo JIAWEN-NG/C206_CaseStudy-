@@ -269,7 +269,7 @@ public class C206_CaseStudy {
 	}
 
 	public static boolean isValidCateName(String name) {
-		String namePattern = "[a-zA-Z]{2,15}";
+		String namePattern = "[a-zA-Z]{2,20}";
 		boolean isValid = Pattern.matches(namePattern, name);
 		if (isValid) {
 			return true;
@@ -441,13 +441,13 @@ public class C206_CaseStudy {
 			name = Helper.readString("Enter Category name > ");
 		}
 		String buyerEmail = Helper.readString("Enter Buyer email > ");
-		boolean validBuyerEmail = C206_CaseStudy.isValidEmail(buyerEmail);
+		boolean validBuyerEmail = C206_CaseStudy.validEmail(buyerEmail);
 		while (validBuyerEmail ==  false) {
 			System.out.println("Invalid Email");
 			name = Helper.readString("Enter Buyer Email > ");
 		}
 		String sellerEmail = Helper.readString("Enter seller email > ");
-		boolean validSellerEmail = C206_CaseStudy.isValidEmail(sellerEmail);
+		boolean validSellerEmail = C206_CaseStudy.validEmail(sellerEmail);
 		while (validSellerEmail ==  false) {
 			System.out.println("Invalid Email");
 			name = Helper.readString("Enter Seller Email > ");
@@ -474,19 +474,8 @@ public class C206_CaseStudy {
 		}
 	}
 	public static boolean isValidBidName (String name) {
-		String namePattern = "[a-zA-Z]{2,30}";
+		String namePattern = "[a-zA-Z]{2,20}";
 		boolean isValid = Pattern.matches(namePattern, name);
-		if (isValid) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	public static boolean isValidEmail(String email) {
-		String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-		boolean isValid = Pattern.matches(emailPattern, email);
-
 		if (isValid) {
 			return true;
 		}

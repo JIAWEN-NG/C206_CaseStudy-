@@ -11,7 +11,7 @@ import org.junit.Test;
 public class C206_CaseStudyTest {
 
 
-	
+
 	private Account a1;
 	private Account a2;
 	private Category cate1;
@@ -60,102 +60,102 @@ public class C206_CaseStudyTest {
 	//Test by Jia Wen
 	@Test
 	public void validEmailTest() {
-		
-		
+
+
 		String validEmail = "Joe123@gmail.com";
 		String invalidEmail = "Joe123";
-		
+
 		//boundary condition -check that email is not null 
 		assertNotNull(validEmail);
-		
+
 		// normal condition - test that an valid email (with "@" in email ) will return true 
 		boolean isValid = C206_CaseStudy.validEmail(validEmail);
 		assertTrue(isValid);
-		
+
 		// error condition - test that an invalid email (without "@" in email )will return false 
 		boolean notValid = C206_CaseStudy.validEmail(invalidEmail);
 		assertFalse(notValid);
-		
+
 	}
 	@Test
 	public void validNameTest() {
-		
+
 		String validName = "Joey";
 		String invalidName = "J";
-		
+
 		//boundary condition -check that Name is not null 
 		assertNotNull(validName);
-		
+
 		// normal condition - test that an valid name (2-15 character) will return true 
 		boolean isValid = C206_CaseStudy.validName(validName);
 		assertTrue(isValid);
-		
+
 		// error condition - test that an invalid name ( character < 2 ,characters > 15) will return false 
 		boolean notValid = C206_CaseStudy.validName(invalidName);
 		assertFalse(notValid);
-		
+
 	}
 	@Test
 	public void validRoleTest() {
-		
+
 		String validRole = "seller";
 		String invalidRole = "user";
-		
+
 		//boundary condition -check that Role is not null 
 		assertNotNull(validRole);
-		
+
 		// normal condition - test that an valid role ("seller","buyer","admin") will return true 
 		boolean isValid = C206_CaseStudy.validRole(validRole);
 		assertTrue(isValid);
-		
+
 		// error condition - test that an invalid role will return false 
 		boolean notValid = C206_CaseStudy.validRole(invalidRole);
 		assertFalse(notValid);
-		
+
 	}
 	@Test
 	public void validPasswordTest() {
-		
+
 		int validPass = 1234567;
 		int invalidPass = 12345;
-		
+
 		//boundary condition -check that Role is not null 
 		assertNotNull(validPass);
-		
+
 		// normal condition - test that an valid password (len == 7) will return true 
 		boolean isValid = C206_CaseStudy.validPassword(validPass);
 		assertTrue(isValid);
-		
+
 		// error condition - test that an invalid password will (len > 7 , len < 7) return false 
 		boolean notValid = C206_CaseStudy.validPassword(invalidPass);
 		assertFalse(notValid);
-		
+
 	}
 	@Test
 	public void notEmptyAccTest() {
-		
+
 		String n1 = "Joe";
 		String r1 = "Seller";
 		String e1 = "Joe@gmail.com";
 		int p1 = 1234567;
-		
+
 		String n2 = "Sam";
 		String r2 = "Seller";
 		String e2 = "";
 		int p2 = 7654321;
-		
-		
-		
+
+
+
 		// error condition - test that one input is empty will return false 
 		boolean isEmpty = C206_CaseStudy.notEmptyAcc(n2,r2,e2,p2);
 		assertTrue(isEmpty);
-		
+
 		// normal condition - test that if all user input is filled and is valid, will return true 
 		boolean notEmpty = C206_CaseStudy.notEmptyAcc(n1,r1,e1,p1);
 		assertFalse(notEmpty);
-		
+
 	}
-	
+
 	//Test by Jia Wen
 	@Test
 	public void retrieveAllUserTest() {
@@ -181,7 +181,7 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-10s %-10s %-15s %-10d \n", "Jenny","Seller","Jenny@gmail.com",7897890);
 
 		assertEquals("Test that viewAllAccount list", testOutput, allAcc);
-		
+
 	}
 	//Test by Jia Wen
 	@Test
@@ -192,12 +192,12 @@ public class C206_CaseStudyTest {
 
 		C206_CaseStudy.addAccount(accList,a1);
 		C206_CaseStudy.addAccount(accList,a2);
-		
-		
+
+
 		String deleteEmail = "Jay@gmail.com";
 		String deleteEmail2 = "Jenny@gmail.com";
-		
-		
+
+
 		C206_CaseStudy.doDeleteAcc(accList, deleteEmail);
 		//Given an list of 2 account, after removing 1 account, the size of the list is 1 - normal
 		//The account just delete is remove and second item is same as the first item of the list
@@ -207,7 +207,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.doDeleteAcc(accList, deleteEmail2);
 		//Given an list of 2 account, after removing 1 account, the size of the list is 0 - normal
 		assertEquals("Check that Account arraylist size is 0", 0, accList.size());
-		
+
 		//error condition , if account does not exist cannot delete 
 		boolean delete = C206_CaseStudy.doDeleteAcc(accList, "jojo@gmail.com");
 		assertFalse("Test that non-esiting item is NOT ok to delete", delete);
@@ -258,27 +258,28 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllCategory list", testOutput, allCat);
 	}
-		@Test
-		public void isValidCateNameTest() {
-			
-			String validName = "Same";
-			String invalidName = "S";
-			String invalidName1 = "SSSSSSSSSSSSSSSSSSSSS";
-			
-			//boundary condition -check that Name is not null 
-			assertNotNull(validName);
-			
-			// normal condition - test that an valid name (2-20 character) will return true 
-			boolean isValid = C206_CaseStudy.isValidCateName(validName);
-			assertTrue(isValid);
-			
-			// error condition - test that an invalid name ( character < 2 )will return false 
-			boolean notValid = C206_CaseStudy.isValidCateName(invalidName);
-			assertFalse(notValid);
-			
-			// error condition - test that an invalid name (characters > 20) will return false 
-			boolean notValid1 = C206_CaseStudy.isValidCateName(invalidName1);
-			assertFalse(notValid1);
+	//Test by Chu En
+	@Test
+	public void isValidCateNameTest() {
+
+		String validName = "Same";
+		String invalidName = "S";
+		String invalidName1 = "SSSSSSSSSSSSSSSSSSSSS";
+		
+		//boundary condition -check that Name is not null 
+		assertNotNull(validName);
+		
+		// normal condition - test that an valid name (2-20 character) will return true 
+		boolean isValid = C206_CaseStudy.isValidCateName(validName);
+		assertTrue(isValid);
+		
+		// error condition - test that an invalid name ( character < 2 )will return false 
+		boolean notValid = C206_CaseStudy.isValidCateName(invalidName);
+		assertFalse(notValid);
+		
+		// error condition - test that an invalid name (characters > 20) will return false 
+		boolean notValid1 = C206_CaseStudy.isValidCateName(invalidName1);
+		assertFalse(notValid1);
 	}
 	//Test by Chu En
 	@Test
@@ -288,7 +289,7 @@ public class C206_CaseStudyTest {
 
 		C206_CaseStudy.addCategory(categoryList, cate1);
 		C206_CaseStudy.addCategory(categoryList, cate2);
-		
+
 		String deleteCat = "PETS";
 		String deleteCat2 = "FRUITS";
 
@@ -302,12 +303,12 @@ public class C206_CaseStudyTest {
 		//Given an list of 1 category, after removing 1 category, the size of the list is 0 - normal
 		//The item just delete is remove and second category is same as the first item of the list
 		assertEquals("Check that category arraylist size is 0", 0, categoryList.size());
-		
+
 		//Test if category delete is match with the category inside the categroyList
 		String deleteCat3 = "DRINKS";
 		Boolean delete = C206_CaseStudy.doDeleteCategory(categoryList, deleteCat3);
 		assertFalse("Check if the category delete exist in the categoryList", delete);
-		
+
 	}
 
 	//Issue 3
@@ -353,7 +354,7 @@ public class C206_CaseStudyTest {
 	//Test by Rachel
 	@Test
 	public void doDeleteItemTest() {
-		
+
 		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
 
 		C206_CaseStudy.addItem(itemList, item1);
@@ -374,7 +375,7 @@ public class C206_CaseStudyTest {
 	}
 
 	//Issue 4
-	//Test by Jia Wen and Chu En
+	//Test by Chu En
 	@Test
 	public void addBidTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -391,7 +392,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that bids arraylist size is 2", 2, bidsList.size());
 		assertSame("Check that bid is added", b2, bidsList.get(1));
 	}
-	//Test by Jia Wen and Chu En
+	//Test by Chu En
 	@Test
 	public void retrieveAllBidsTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -415,9 +416,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllBids list", testOutput, allBids);
 
 	}
-	
-	
-	//Test by Jia Wen and Chu En
+
+	//Test by Jia Wen 
 	@Test
 	public void doDeleteBidsTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -426,7 +426,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addBid(bidsList,b2);
 		int deleteId = 1;
 		int deleteId2 = 2;
-		
+
 		C206_CaseStudy.doDeleteBids(bidsList,deleteId);
 		//Given an list of 2 bids, after removing 1 item, the size of the list is 1 - normal
 		//The item just delete is remove and second item is same as the first item of the list
@@ -437,14 +437,57 @@ public class C206_CaseStudyTest {
 		//Given an list of 1 bids, after removing 1 item, the size of the list is 0 - normal
 		//The item just delete is remove and second item is same as the first item of the list
 		assertEquals("Check that Bids arraylist size is 0", 0, bidsList.size());
-		
+
 		// error condition, if bid ID does not exist , cannot delete 
 		boolean delete = C206_CaseStudy.doDeleteBids(bidsList,4);
 		assertFalse("Test that non-esiting bid is NOT ok to delete",delete);
 	}
+	//Test by Jia Wen
+	@Test
+	public void isValidBidTest() {
+
+		double bid1 = 55;
+		double bid2 = 53;
+
+		C206_CaseStudy.addItem(itemList, item1); // minBid 50 , increment 5
+		C206_CaseStudy.addBid(bidsList,b1);
+
+		//normal condition - if bid > minBid and bid = highest Bid + increment, will return Valid (true)	
+		boolean isValid = C206_CaseStudy.isValidBid(bidsList, bid1, itemList);
+		assertTrue(isValid);
+
+
+		//error condition - if bid != highest Bid + increment, will return false 
+		boolean notValid = C206_CaseStudy.isValidBid(bidsList, bid2, itemList);
+		assertFalse(notValid);
+
+	}
+	//Test by Chu En
+	@Test
+	public void isValidBidNameTest() {
+		
+		String validName = "Aame";
+		String invalidName = "A";
+		String invalidName1 = "AAAAAAAAAAAAAAAAAAAAA";
+		
+		//boundary condition -check that Name is not null 
+		assertNotNull(validName);
+		
+		// normal condition - test that an valid name (2-20 character) will return true 
+		boolean isValid = C206_CaseStudy.isValidBidName(validName);
+		assertTrue(isValid);
+		
+		// error condition - test that an invalid name ( character < 2 )will return false 
+		boolean notValid = C206_CaseStudy.isValidBidName(invalidName);
+		assertFalse(notValid);
+		
+		// error condition - test that an invalid name (characters > 20) will return false 
+		boolean notValid1 = C206_CaseStudy.isValidBidName(invalidName1);
+		assertFalse(notValid1);
+	}
 
 	//Issue 
-	
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -458,7 +501,7 @@ public class C206_CaseStudyTest {
 
 		a1 = new Account("Jay","Buyer","Jay@gmail.com",1234567);
 		a2 = new Account("Jenny","Seller","Jenny@gmail.com",7897890);
-		
+
 
 		cate1 = new Category("PETS");
 		cate2 = new Category("FRUITS");
@@ -472,7 +515,7 @@ public class C206_CaseStudyTest {
 		a2 = null;
 		cate1 = null;
 		cate2 = null;
-		
+
 
 	}
 
