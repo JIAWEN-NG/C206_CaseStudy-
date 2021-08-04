@@ -36,10 +36,43 @@ public class C206_CaseStudy {
 		//OPTION 5: Done by Izhar
 
 
-	}
+		int login = Helper.readInt("Enter login option > ");
+
+		if(login == 1) {
+			int adminOption = Helper.readInt("Enter option to select service type > ");
+			while(adminOption != OPTION_QUIT) {
+
+				//OPTION 1: Done by jia wen 
+				if (adminOption == 1) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Account acc = inputAccount();
+						C206_CaseStudy.addAccount(accList,acc);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllAccount(accList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteAcc(accList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+
+				}
+				else if (adminOption == 2) {
 
 
-	//main
+				} 
+			}
+		}
+
+	}//main
+
+
+
 	public static void login() {
 		C206_CaseStudy.setHeader("Login system");
 		System.out.println("1. Login as Adminstrator");
@@ -347,7 +380,7 @@ public class C206_CaseStudy {
 		Item item1= new Item(name,description,minPrice,start,end,increment);
 
 		return item1;
-		
+
 
 	}
 	public static boolean validItemName (String itemName) {
@@ -483,18 +516,7 @@ public class C206_CaseStudy {
 			return false;
 		}
 	}
-//	public static boolean isValidEmail(String email) {
-//		String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-//		boolean isValid = Pattern.matches(emailPattern, email);
-//
-//		if (isValid) {
-//			return true;
-//		}
-//		else {
-//			return false;
-//		}
-//	}
-	
+
 	//Done by Jia Wen 
 	public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
 		Collections.sort(bidsList,new Comparator<Bid>() {
