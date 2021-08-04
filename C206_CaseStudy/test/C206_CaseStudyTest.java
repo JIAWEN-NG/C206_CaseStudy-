@@ -38,6 +38,7 @@ public class C206_CaseStudyTest {
 
 
 	//Issue 1
+	//Test be Jia Wen
 	@Test
 	public void addBuyerTest() {
 
@@ -57,6 +58,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that account arraylist size is 2", 2, accList.size());
 		assertSame("Check that buyer account is added", bb2, accList.get(1));
 	}
+	//Test be Jia Wen
 	@Test
 	public void addSellerTest() {
 
@@ -76,6 +78,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that account arraylist size is 2", 2, accList.size());
 		assertSame("Check that seller account is added", s2, accList.get(1));
 	}
+	//Test be Jia Wen
 	@Test
 	public void retrieveAllUserTest() {
 
@@ -101,6 +104,7 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that viewAllAccount list", testOutput, allAcc);
 	}
+	//Test be Jia Wen
 	@Test
 	public void doDeleteAccTest() {
 		//C206_CaseStudy.deleteAcc(accList);
@@ -132,6 +136,7 @@ public class C206_CaseStudyTest {
 
 
 	//Issue 2
+	//Test by Chu En
 	@Test
 	public void addCategoryTest() {
 		// Test if category list is not null but empty -boundary
@@ -150,6 +155,7 @@ public class C206_CaseStudyTest {
 		assertSame("Check that Category is added", cate2, categoryList.get(1));
 
 	}
+	//Test by Chu En
 	@Test
 	public void retrieveAllCategoryTest() {
 		// Test if category list is not null but empty -boundary
@@ -173,7 +179,7 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllCategory list", testOutput, allCat);
 	}
-	
+	//Test by Chu En
 	@Test
 	public void doDeleteCategoryTest() {
 		// Test if category list is not null but empty -boundary
@@ -203,8 +209,8 @@ public class C206_CaseStudyTest {
 		
 	}
 
-
 	//Issue 3
+	//Test by Rachel
 	@Test
 	public void addItemTest() {
 		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
@@ -218,6 +224,7 @@ public class C206_CaseStudyTest {
 		assertSame("Check that items is added", item2, itemList.get(1));
 
 	}
+	//Test by Rachel
 	@Test
 	public void retrieveAllItemTest() {
 		assertNotNull("Test if there is valid Item arraylist to retrieve item", itemList);
@@ -242,6 +249,7 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllItem list", testOutput, allItem);
 	}
+	//Test by Rachel
 	@Test
 	public void doDeleteItemTest() {
 		
@@ -265,6 +273,7 @@ public class C206_CaseStudyTest {
 	}
 
 	//Issue 4
+	//Test by Jia Wen and Chu En
 	@Test
 	public void addBidTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -281,6 +290,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that bids arraylist size is 2", 2, bidsList.size());
 		assertSame("Check that bid is added", b2, bidsList.get(1));
 	}
+	//Test by Jia Wen and Chu En
 	@Test
 	public void retrieveAllBidsTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);
@@ -304,6 +314,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllBids list", testOutput, allBids);
 
 	}
+	//Test by Jia Wen and Chu En
 	@Test
 	public void doDeleteBidsTest() {
 		assertNotNull("Test if there is valid Bid arraylist to retrieve item", bidsList);

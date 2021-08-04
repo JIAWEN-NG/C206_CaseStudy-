@@ -16,11 +16,12 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
+
 		ArrayList<Account> accList = new ArrayList<Account>();
 		ArrayList<Category> categoryList = new ArrayList<Category>();
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		ArrayList<Bid> bidsList = new ArrayList<Bid>();
+		ArrayList<Deal> DealList = new ArrayList<Deal>();
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -33,6 +34,7 @@ public class C206_CaseStudy {
 		bidsList.add(new Bid(13, "ToT", "kkq@gmail.com", "ooa@gmail.com", 30.00));
 		categoryList.add(new Category("PETS"));
 		categoryList.add(new Category("STATIONARY"));
+
 
 		int option = 0;
 
@@ -153,9 +155,26 @@ public class C206_CaseStudy {
 					System.out.println("You have enetered an invalid option!");
 				}
 
-
-
 			}
+			else if (option == 5) {
+				C206_CaseStudy.setHeader("DEAL SERVICE");
+				optionTypeMenu();
+
+				int dealOption = Helper.readInt("Enter option to select service type > ");
+				if(dealOption == 1 ) {
+					C206_CaseStudy.ViewAllDeal(DealList);
+					C206_CaseStudy.AddDeal(DealList);
+				}
+				else if (dealOption == 2) {
+					C206_CaseStudy.ViewAllDeal(DealList);
+
+				}
+				else if (dealOption == 3) {
+					C206_CaseStudy.DeleteDeal(DealList);
+
+				}
+			}
+
 		}
 
 	}//main
@@ -211,8 +230,6 @@ public class C206_CaseStudy {
 		return userS;
 	}
 
-
-
 	public static void addBuyer(ArrayList<Account> accList, Buyer userB) {
 		accList.add(userB);
 		System.out.println("User Account added !");
@@ -223,14 +240,14 @@ public class C206_CaseStudy {
 		System.out.println("User Account added !");
 	}
 	public static String retrieveAllUser(ArrayList<Account> accList) {
-		
+
 		String output = "";
 		for (int i = 0; i < accList.size(); i++) {
 			output += String.format("%-48s \n", accList.get(i).toString());
 		}
-		
+
 		return output;
-		
+
 	}
 	public static void viewAllAccount(ArrayList<Account> accList) {
 		C206_CaseStudy.setHeader("ACCOUNT LIST");
@@ -295,7 +312,7 @@ public class C206_CaseStudy {
 		output += retrieveAllCategory(categoryList);
 		System.out.println(output);
 	}
-	
+
 	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName) {
 		boolean isFound = false;
 		for(int i = 0; i < categoryList.size(); i++) {
@@ -489,6 +506,52 @@ public class C206_CaseStudy {
 			System.out.println("Bids not found!");
 		}
 	}
+	public static void InputDeal(ArrayList<Deal> DealList) { 
+		System.out.println(""); 
+		System.out.println("ADD DEAL"); 
+		String BuyerEmail = Helper.readString("Enter your email > "); 
+		double newBidPrice = Helper.readDouble("Enter your deal Price >"); 
+		int DealId = Helper.readInt("Enter the bid ID of the item you want to bid > "); 
+		for (int i = 0; i < DealList.size(); i++) { 
+			if (DealId == DealList.get(i).getdealId()) { 
+
+				System.out.println("You have successfully added the deal"); 
+				DealList.get(i).setBuyerEmail(BuyerEmail); 
+				DealList.get(i).setTransactionPrice(newBidPrice); 
+			} 
+
+			else { 
+				System.out.println("Deal ID does not exist"); 
+			} 
+		} 
+	}
+
+	public static void ViewAllDeal(ArrayList<Deal> DealList) { 
+
+		String output = ""; 
+		output += String.format("%-40s %-39s %-20s %30s %40s %25s\n", "Deal ID", "Item Name", "Description", 
+				"Seller Email", "Transaction price($)", "Ending Date"); 
+		for (int x = 0; x < DealList.size(); x++) { 
+			output += String.format("%-40s %-39s %-20s %30s %40s %30s %25s\n", DealList.get(x).getdealId(), 
+					DealList.get(x).getName(), DealList.get(x).getSellerEmail(), DealList.get(x).getBuyerEmail(), 
+					DealList.get(x).getTransactionPrice(), DealList.get(x).getCloseDate()); 
+		} 
+
+		System.out.println(output); 
+	}
+
+	public static void DeleteDeal(ArrayList<Deal> DealList) { 
+		System.out.println(""); 
+		int RemoveDeal = Helper.readInt("Enter the Deal ID to delete > "); 
+		for (int i = 0; i < DealList.size(); i++) { 
+			if (RemoveDeal == DealList.get(i).getdealId()) { 
+				DealList.remove(i); 
+				System.out.println("Deal successfully removed"); 
+			} else { 
+				System.out.println("Deal ID does not exist"); 
+			} 
+		} 
+	} 
 
 
 }//class
