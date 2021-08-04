@@ -39,14 +39,14 @@ public class C206_CaseStudyTest {
 	//Issue 1
 	//Test by Jia Wen
 	@Test
-	public void addBuyerTest() {
+	public void addAccountTest() {
 
 		// Account list is not null, so that can add a new account - boundary
 		assertNotNull("Test if there is valid Account arraylist to retrieve item", accList);
 
 		C206_CaseStudy.addAccount(accList,a1);
 
-		//Given an empty list, after adding 1 buyer, the size of the list is 1 - normal
+		//Given an empty list, after adding 1 Account, the size of the list is 1 - normal
 		//The Account just added is as same as the first item of the list
 		assertEquals("Check that account arraylist size is 1", 1, accList.size());
 		assertSame("Check that buyer account is added", a1, accList.get(0));
@@ -210,7 +210,7 @@ public class C206_CaseStudyTest {
 
 		//error condition , if account does not exist cannot delete 
 		boolean delete = C206_CaseStudy.doDeleteAcc(accList, "jojo@gmail.com");
-		assertFalse("Test that non-esiting item is NOT ok to delete", delete);
+		assertFalse("Test that non-existing item is NOT ok to delete", delete);
 	}
 
 
