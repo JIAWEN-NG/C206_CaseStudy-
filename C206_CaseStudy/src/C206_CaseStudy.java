@@ -52,109 +52,111 @@ public class C206_CaseStudy {
 					accOption = Helper.readInt("Enter option to select service > ");
 
 
-				if (accOption == 1) {
-					Account acc = inputAccount();
-					C206_CaseStudy.addAccount(accList,acc);
-
-					optionTypeMenu();
-					accType = Helper.readInt("Enter user type > ");
 					if (accOption == 1) {
+						Account acc = inputAccount();
+						C206_CaseStudy.addAccount(accList,acc);
+
+						optionTypeMenu();
+						accType = Helper.readInt("Enter user type > ");
+						if (accOption == 1) {
 
 
-						if (accType == 1) {
+							if (accType == 1) {
+								
+
+							}
+							else if (accType == 2) {
+								C206_CaseStudy.viewAllAccount(accList);
+
+							}
+							else if (accType == 3) {
+								C206_CaseStudy.deleteAcc(accList);
+
+							}
+							else {
+								System.out.println("Invalid option"); // account service
+							}
 
 
+						} else  if (accOption == 2) {
+							if (accType == 1) {
+
+
+							}
+							else if (accType == 2) {
+
+							}
+							else if (accType == 3) {
+
+							}
+							else {
+								System.out.println("Invalid option"); // category service
+							}
 						}
-						else if (accType == 2) {
+						else if(accOption == 3) {
+							if (accType == 1) {
 
+							}
+							else if (accType == 2) {
+
+							}
+							else if (accType == 3) {
+
+							}
+							else {
+								System.out.println("Invalid option"); // item service
+							}
 						}
-						else if (accType == 3) {
+						else if (accOption == 4 ) {
+							if (accType == 1) {
 
+
+							}
+							else if (accType == 2) {
+
+							}
+							else if (accType == 3) {
+
+							}
+							else {
+								System.out.println("Invalid option"); // bids service
+							}
+						}
+						else if (accOption == 5) {
+							if (accType == 1) {
+
+							}
+							else if (accType == 2) {
+
+							}
+							else if (accType == 3) {
+
+							}
+							else {
+								System.out.println("Invalid option"); // deal service
+							}
+						}
+						else if (accOption == OPTION_QUIT) {
+							System.out.println("Bye Bye!");
 						}
 						else {
-							System.out.println("Invalid option"); // account service
+							System.out.println("Invalid option entered!");
 						}
 
 
-					} else  if (accOption == 2) {
-						if (accType == 1) {
-
-
-						}
-						else if (accType == 2) {
-
-						}
-						else if (accType == 3) {
-
-						}
-						else {
-							System.out.println("Invalid option"); // category service
-						}
+					} 
+					else if (accOption == 2) {
+						
 					}
 					else if(accOption == 3) {
-						if (accType == 1) {
+						
 
-						}
-						else if (accType == 2) {
-
-						}
-						else if (accType == 3) {
-
-						}
-						else {
-							System.out.println("Invalid option"); // item service
-						}
-					}
-					else if (accOption == 4 ) {
-						if (accType == 1) {
-
-
-						}
-						else if (accType == 2) {
-
-						}
-						else if (accType == 3) {
-
-						}
-						else {
-							System.out.println("Invalid option"); // bids service
-						}
-					}
-					else if (accOption == 5) {
-						if (accType == 1) {
-
-						}
-						else if (accType == 2) {
-
-						}
-						else if (accType == 3) {
-
-						}
-						else {
-							System.out.println("Invalid option"); // deal service
-						}
-					}
-					else if (accOption == OPTION_QUIT) {
-						System.out.println("Bye Bye!");
 					}
 					else {
 						System.out.println("Invalid option entered!");
+
 					}
-
-
-				} 
-				else if (accOption == 2) {
-					C206_CaseStudy.viewAllAccount(accList);
 				}
-				else if(accOption == 3) {
-					C206_CaseStudy.deleteAcc(accList);
-
-				}
-				else {
-					System.out.println("Invalid option entered!");
-
-				}
-			}
 
 				//			} else if (login == 2) {//student
 				//				C206_CaseStudy.setHeader("STUDENT");
@@ -251,8 +253,8 @@ public class C206_CaseStudy {
 				//		}
 			}
 		}
-	
-		}
+
+	}
 
 
 	//main
@@ -432,10 +434,10 @@ public class C206_CaseStudy {
 
 	public static void deleteAcc(ArrayList<Account> accList) {
 		C206_CaseStudy.viewAllAccount(accList);
-		
+
 		String email = Helper.readString("Enter email > ");
 		boolean vEmail = C206_CaseStudy.validEmail(email);
-		
+
 		while (vEmail == false ) {
 			System.out.println("Invalid Email");
 			email = Helper.readString("Enter email > ");
@@ -459,7 +461,11 @@ public class C206_CaseStudy {
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
 		String name = Helper.readString("Enter category name > ");
-		boolean validName = C206_CaseStudy.isValidName
+		boolean validName = C206_CaseStudy.isValidName(name);
+		while (validName == false) {
+			System.out.println("Please enter cetegory name less than 20 character");
+			name = Helper.readString("Enter Category name > ");
+		}
 
 		Category category1 = new Category(name);
 
@@ -479,7 +485,7 @@ public class C206_CaseStudy {
 			return false;
 		}		
 	}
-	
+
 	public static String retrieveAllCategory(ArrayList<Category> categoryList) {
 		String output = "";
 		for (int i = 0; i < categoryList.size(); i++) {
@@ -498,19 +504,19 @@ public class C206_CaseStudy {
 		boolean isFound = false;
 		for(int i = 0; i < categoryList.size(); i++) {
 
-//			for (int x = 0; x < itemList.size(); x++) {
-				String categoryName = categoryList.get(i).getName();
-//				String cateName = categoryList.get(i).getName();
-//				String itemCateName = itemList.get(x).getCateName();
-//				if(cateName.equalsIgnoreCase(itemCateName) && itemList.size() == 0) {
-//					if(deleteName.equalsIgnoreCase(categoryName)) {
-						categoryList.remove(i);
-						isFound = true;
+			//			for (int x = 0; x < itemList.size(); x++) {
+			String categoryName = categoryList.get(i).getName();
+			//				String cateName = categoryList.get(i).getName();
+			//				String itemCateName = itemList.get(x).getCateName();
+			//				if(cateName.equalsIgnoreCase(itemCateName) && itemList.size() == 0) {
+			//					if(deleteName.equalsIgnoreCase(categoryName)) {
+			categoryList.remove(i);
+			isFound = true;
 
-					}
-				}
-//			}
-//		}
+		}
+
+		//			}
+		//		}
 		return isFound;
 	}
 
@@ -599,9 +605,10 @@ public class C206_CaseStudy {
 		}
 
 	}
+	
 	//OPTION 4: Bid Services, Done By Chu En and Jia Wen 
 
-	//Done by chu en 
+	//Done by Chu En 
 	public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
 		boolean isValid = false;
 
@@ -611,297 +618,189 @@ public class C206_CaseStudy {
 			}
 			else {
 				for (int i = 0; i < bidsList.size(); i++) {
+
 					if (price >= bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
 						isValid = true;
->>>>>>> branch 'master' of https://github.com/20011454-Siet-Chu-En/C206_CaseStudy-.git
 					}
 				}
+
 			}
 		}
-			return isFound;
+		return isValid;
+	}
+	//Done by Chu En 
+	public static Bid inputBid(ArrayList<Bid> bidsList,ArrayList<Item> itemList) {
+		int ID = Helper.readInt("Enter Bids ID > ");
+		String name = Helper.readString("Enter Item Name > ");
+		String buyerEmail = Helper.readString("Enter Buyer email > ");
+		String sellerEmail = Helper.readString("Enter seller email > ");
+		double price = Helper.readDouble("Enter Bids price >$");
+		boolean isValid = isValidBid(bidsList,price,itemList);
+
+		if (isValid == true) {
+			Bid bids1 = new Bid(ID, name, buyerEmail, sellerEmail,price);
+			return bids1;
+		}
+		else {
+			return null;
 		}
 
-		public static void deleteCategory(ArrayList<Category> categoryList, ArrayList<Item> itemList) {
-			C206_CaseStudy.viewAllCategory(categoryList);
-			String deleteCategory = Helper.readString("Enter the category name to delete > ");
-			boolean isFound = doDeleteCategory(categoryList, deleteCategory, itemList);
-			if(isFound == true ) {
-				char toDelete = Helper.readChar("Are you sure you want to delete this category? (Y/N) > ");
-				if (toDelete == 'Y' | toDelete == 'y') {
-					System.out.println("Category deleted");
-				}
+	}
+	//Done by Chu En 
+	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
+		if (bids1 == null ) {
+			System.out.println("Invalid bid");
+		}
+		else {
+			bidsList.add(bids1);
+			System.out.println("Bids Added");
+		}
+	}
+	//Done by Jia Wen 
+	public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
+		Collections.sort(bidsList,new Comparator<Bid>() {
+			public int compare(Bid b1, Bid b2) {
 
-				else {
-					System.out.println("Category not deleted!");
-				}
-			}else {
-				System.out.println("Category not found!");
+				return Double.compare(b2.getPrice(), b1.getPrice());	
 			}
+		});
+	}
+	//Done by Jia Wen 
+	public static String retrieveAllBids(ArrayList<Bid> bidsList) {
 
+		String output = "";
+		for (int i = 0; i < bidsList.size(); i++) {
+			output += String.format("%-69s \n", bidsList.get(i).toString());
 		}
+		return output;
+	}
+	//Done by Chu En 
+	public static void viewAllBids(ArrayList<Bid> bidsList) {
+		C206_CaseStudy.setHeader("BIDS LIST");
 
-		//OPTION 3: Item Services, done by Rachel  
-		public static Item inputItem() {
-			DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			String cateName = Helper.readString("Enter Category name >");
-			String name = Helper.readString("Enter item name > ");
-			String description = Helper.readString("Enter description > ");
-			double minPrice = Helper.readInt("Enter minimum bid price >$ ");
-			String startDate = Helper.readString("Enter acution start date > ");
-			String endDate = Helper.readString("Enter acution end date > ");
-			double increment = Helper.readDouble("Enter bid increment amount > $");
-
-			LocalDate start = LocalDate.parse(startDate, formatter2);
-			LocalDate end = LocalDate.parse(endDate, formatter2);
-
-			Item item1= new Item(cateName, name,description,minPrice,start,end,increment);
-
-			return item1;
-
+		if (bidsList.isEmpty()) {
+			System.out.println("There are no existing bids\n");
 		}
-		public static void addItem(ArrayList<Item> itemList, Item item1) {
-			itemList.add(item1);
-			System.out.println("Item added");
-		}
-		public static String retrieveAllItem(ArrayList<Item> itemList) {
-			String output = "";
-			for(int i = 0; i < itemList.size(); i++) {
-				output += String.format("%-90s \n", itemList.get(i).toString());
-			}
-			return output;
-		}
-		public static void viewAllItem(ArrayList<Item> itemList) {
-			C206_CaseStudy.setHeader("ITEM LIST");
-			String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", "MIN BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
-			output += retrieveAllItem(itemList);
+		else {
+			String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", 
+					"BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
+			output += retrieveAllBids(bidsList);
 			System.out.println(output);
 		}
-
-		public static boolean doDeleteItem(ArrayList<Item> itemList, String deleteName) {
-			boolean isFound = false;
-			for(int i = 0; i < itemList.size(); i++) {
-				String itemName = itemList.get(i).getItemName();
-				if(itemName.equalsIgnoreCase(deleteName)) {
-					itemList.remove(i);
-					isFound = true;
-				}
+	}
+	//Done by Jia Wen 
+	public static boolean doDeleteBids(ArrayList<Bid> bidsList, int deleteID) {
+		boolean isFound = false;
+		for(int i = 0; i < bidsList.size(); i++) {
+			int bidsID = bidsList.get(i).getId();
+			if(bidsID == deleteID) {
+				bidsList.remove(i);
+				isFound = true;
 			}
-			return isFound;
 		}
-
-		public static void deleteItem(ArrayList<Item> itemList) {
-			C206_CaseStudy.viewAllItem(itemList);
-			String deleteItem = Helper.readString("Enter the item name to delete > ");
-			boolean isFound = doDeleteItem(itemList, deleteItem);
-			if(isFound == true ) {
-				char toDelete = Helper.readChar("Are you sure you want to delete this item? (Y/N) > ");
-				if (toDelete == 'Y' | toDelete == 'y') {
-					System.out.println("Item deleted");
-				}
-
-				else {
-					System.out.println("Item not deleted!");
-				}
-			}else {
-				System.out.println("Item not found!");
+		return isFound;
+	}
+	//Done by Jia Wen 
+	public static void deleteBids(ArrayList<Bid> bidsList) {
+		C206_CaseStudy.viewAllBids(bidsList);
+		int deleteID = Helper.readInt("Enter the bids ID to delete > ");
+		boolean isFound = doDeleteBids(bidsList, deleteID);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this bids? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Bids deleted");
 			}
 
-		}
-		//OPTION 4: Bid Services, Done By Chu En and Jia Wen 
-
-		//Done by Chu En 
-		public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
-			boolean isValid = false;
-
-			for (int x = 0; x < itemList.size(); x++) {
-				if (bidsList.isEmpty() && price >= itemList.get(x).getMinBid()) {
-					isValid = true;
-				}
-				else {
-					for (int i = 0; i < bidsList.size(); i++) {
-
-						if (price >= bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
-							isValid = true;
-						}
-					}
-
-				}
-			}
-			return isValid;
-		}
-		//Done by Chu En 
-		public static Bid inputBid(ArrayList<Bid> bidsList,ArrayList<Item> itemList) {
-			int ID = Helper.readInt("Enter Bids ID > ");
-			String name = Helper.readString("Enter Item Name > ");
-			String buyerEmail = Helper.readString("Enter Buyer email > ");
-			String sellerEmail = Helper.readString("Enter seller email > ");
-			double price = Helper.readDouble("Enter Bids price >$");
-			boolean isValid = isValidBid(bidsList,price,itemList);
-
-			if (isValid == true) {
-				Bid bids1 = new Bid(ID, name, buyerEmail, sellerEmail,price);
-				return bids1;
-			}
 			else {
-				return null;
+				System.out.println("Bids not deleted!");
 			}
-
+		}else {
+			System.out.println("Bids not found!");
 		}
-		//Done by Chu En 
-		public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
-			if (bids1 == null ) {
-				System.out.println("Invalid bid");
-			}
-			else {
-				bidsList.add(bids1);
-				System.out.println("Bids Added");
-			}
+	}
+	//OPTION 5: Deal Services , done by Izhar
+	public static Deal InputDeal(ArrayList<Deal> DealList) { 
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		System.out.println(""); 
+		System.out.println("ADD DEAL"); 
+		int DealId = Helper.readInt("Enter deal ID > "); 
+		String itemName = Helper.readString("Enter Item Name > ");
+		String sellerEmail = Helper.readString("Enter Seller Email");
+		String BuyerEmail = Helper.readString("Enter your email > "); 
+		double transactionPrice = Helper.readDouble("Enter your deal Price > $");
+		String closeDate = Helper.readString("Enter closing date > ");
+
+		LocalDate closing = LocalDate.parse(closeDate, formatter2);
+
+		Deal deal1 = new Deal(DealId,itemName,sellerEmail,BuyerEmail,transactionPrice,closing);
+
+		return deal1;
+
+	}
+	public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
+		dealList.add(deal1);
+		System.out.println("Deal added");
+	}
+
+	public static String retrieveAllDeal(ArrayList<Deal> dealList) {
+		String output = "";
+		for(int i = 0; i < dealList.size(); i++) {
+			output += String.format("%-80s \n", dealList.get(i).toString());
 		}
-		//Done by Jia Wen 
-		public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
-			Collections.sort(bidsList,new Comparator<Bid>() {
-				public int compare(Bid b1, Bid b2) {
+		return output;
+	}
 
-					return Double.compare(b2.getPrice(), b1.getPrice());	
-				}
-			});
-		}
-		//Done by Jia Wen 
-		public static String retrieveAllBids(ArrayList<Bid> bidsList) {
+	public static void ViewAllDeal(ArrayList<Deal> dealList) { 
 
-			String output = "";
-			for (int i = 0; i < bidsList.size(); i++) {
-				output += String.format("%-69s \n", bidsList.get(i).toString());
-			}
-			return output;
-		}
-		//Done by Chu En 
-		public static void viewAllBids(ArrayList<Bid> bidsList) {
-			C206_CaseStudy.setHeader("BIDS LIST");
+		String output = ""; 
+		output = String.format("%-10s %-10s %-15s %-20s %-10s %-10s\n", "Deal ID", "Item Name", "Description", 
+				"Seller Email", "Transaction price($)", "Ending Date"); 
+		output += retrieveAllDeal(dealList);
 
-			if (bidsList.isEmpty()) {
-				System.out.println("There are no existing bids\n");
-			}
-			else {
-				String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", 
-						"BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
-				output += retrieveAllBids(bidsList);
-				System.out.println(output);
-			}
-		}
-		//Done by Jia Wen 
-		public static boolean doDeleteBids(ArrayList<Bid> bidsList, int deleteID) {
-			boolean isFound = false;
-			for(int i = 0; i < bidsList.size(); i++) {
-				int bidsID = bidsList.get(i).getId();
-				if(bidsID == deleteID) {
-					bidsList.remove(i);
-					isFound = true;
-				}
-			}
-			return isFound;
-		}
-		//Done by Jia Wen 
-		public static void deleteBids(ArrayList<Bid> bidsList) {
-			C206_CaseStudy.viewAllBids(bidsList);
-			int deleteID = Helper.readInt("Enter the bids ID to delete > ");
-			boolean isFound = doDeleteBids(bidsList, deleteID);
-			if(isFound == true ) {
-				char toDelete = Helper.readChar("Are you sure you want to delete this bids? (Y/N) > ");
-				if (toDelete == 'Y' | toDelete == 'y') {
-					System.out.println("Bids deleted");
-				}
+		System.out.println(output); 
+	}
 
-				else {
-					System.out.println("Bids not deleted!");
-				}
-			}else {
-				System.out.println("Bids not found!");
-			}
-		}
-		//OPTION 5: Deal Services , done by Izhar
-		public static Deal InputDeal(ArrayList<Deal> DealList) { 
-			DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			System.out.println(""); 
-			System.out.println("ADD DEAL"); 
-			int DealId = Helper.readInt("Enter deal ID > "); 
-			String itemName = Helper.readString("Enter Item Name > ");
-			String sellerEmail = Helper.readString("Enter Seller Email");
-			String BuyerEmail = Helper.readString("Enter your email > "); 
-			double transactionPrice = Helper.readDouble("Enter your deal Price > $");
-			String closeDate = Helper.readString("Enter closing date > ");
-
-			LocalDate closing = LocalDate.parse(closeDate, formatter2);
-
-			Deal deal1 = new Deal(DealId,itemName,sellerEmail,BuyerEmail,transactionPrice,closing);
-
-			return deal1;
-
-		}
-		public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
-			dealList.add(deal1);
-			System.out.println("Deal added");
-		}
-
-		public static String retrieveAllDeal(ArrayList<Deal> dealList) {
-			String output = "";
-			for(int i = 0; i < dealList.size(); i++) {
-				output += String.format("%-80s \n", dealList.get(i).toString());
-			}
-			return output;
-		}
-
-		public static void ViewAllDeal(ArrayList<Deal> dealList) { 
-
-			String output = ""; 
-			output = String.format("%-10s %-10s %-15s %-20s %-10s %-10s\n", "Deal ID", "Item Name", "Description", 
-					"Seller Email", "Transaction price($)", "Ending Date"); 
-			output += retrieveAllDeal(dealList);
-
-			System.out.println(output); 
-		}
-
-		public static void DeleteDeal(ArrayList<Deal> dealList) { 
-			System.out.println(""); 
-			int RemoveDeal = Helper.readInt("Enter the Deal ID to delete > "); 
-			for (int i = 0; i < dealList.size(); i++) { 
-				if (RemoveDeal == dealList.get(i).getdealId()) { 
-					dealList.remove(i); 
-					System.out.println("Deal successfully removed"); 
-				} else { 
-					System.out.println("Deal ID does not exist"); 
-				} 
+	public static void DeleteDeal(ArrayList<Deal> dealList) { 
+		System.out.println(""); 
+		int RemoveDeal = Helper.readInt("Enter the Deal ID to delete > "); 
+		for (int i = 0; i < dealList.size(); i++) { 
+			if (RemoveDeal == dealList.get(i).getdealId()) { 
+				dealList.remove(i); 
+				System.out.println("Deal successfully removed"); 
+			} else { 
+				System.out.println("Deal ID does not exist"); 
 			} 
 		} 
-		public static boolean doDeleteDeal(ArrayList<Deal> dealList, int deleteID) {
-			boolean isFound = false;
-			for(int i = 0; i < dealList.size(); i++) {
-				int dealID = dealList.get(i).getdealId();
-				if(dealID == deleteID) {
-					dealList.remove(i);
-					isFound = true;
-				}
-			}
-			return isFound;
-		}
-
-		public static void deleteDeal(ArrayList<Deal> dealList) {
-			C206_CaseStudy.ViewAllDeal(dealList);
-			int deleteID = Helper.readInt("Enter the deal ID to delete > ");
-			boolean isFound = doDeleteDeal(dealList, deleteID);
-			if(isFound == true ) {
-				char toDelete = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
-				if (toDelete == 'Y' | toDelete == 'y') {
-					System.out.println("Deal deleted");
-				}
-
-				else {
-					System.out.println("Deal not deleted!");
-				}
-			}else {
-				System.out.println("Deal not found!");
+	} 
+	public static boolean doDeleteDeal(ArrayList<Deal> dealList, int deleteID) {
+		boolean isFound = false;
+		for(int i = 0; i < dealList.size(); i++) {
+			int dealID = dealList.get(i).getdealId();
+			if(dealID == deleteID) {
+				dealList.remove(i);
+				isFound = true;
 			}
 		}
+		return isFound;
+	}
+
+	public static void deleteDeal(ArrayList<Deal> dealList) {
+		C206_CaseStudy.ViewAllDeal(dealList);
+		int deleteID = Helper.readInt("Enter the deal ID to delete > ");
+		boolean isFound = doDeleteDeal(dealList, deleteID);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Deal deleted");
+			}
+
+			else {
+				System.out.println("Deal not deleted!");
+			}
+		}else {
+			System.out.println("Deal not found!");
+		}
+	}
 
 
-	}//class
+}//class
