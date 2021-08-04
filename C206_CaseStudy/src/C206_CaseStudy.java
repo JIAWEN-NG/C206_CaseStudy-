@@ -63,6 +63,24 @@ public class C206_CaseStudy {
 
 				}
 				else if (adminOption == 2) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Category cate = inputCategory();
+						C206_CaseStudy.addCategory(categoryList, cate);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllAccount(categoryList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteCategory(categoryList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+
+				}
 
 
 				} 
