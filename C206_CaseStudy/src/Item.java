@@ -14,7 +14,6 @@ import java.util.Date;
 
 public class Item {
 	
-	private String cateName;
 	private String itemName;
 	private String description; 
 	private double minBid;
@@ -22,14 +21,14 @@ public class Item {
 	private LocalDate endDate;
 	private double increment;
 	
-	public Item(String cateName, String itemName, String description, double minBid, LocalDate startDate, LocalDate endDate, double increment) {
+	public Item( String itemName, String description, double minBid, LocalDate startDate, LocalDate endDate, double increment) {
 		this.itemName = itemName;
 		this.description = description;
 		this.minBid = minBid;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.increment = increment;
-		this.cateName = cateName;
+		
 	}
 
 	public String getItemName() {
@@ -82,17 +81,10 @@ public class Item {
 		this.increment = increment;
 	}
 	
-	public String getCateName() {
-		return cateName;
-	}
-
-	public void setCateName(String cateName) {
-		this.cateName = cateName;
-	}
 	
 	public String toString() {
-		String itemInfo = String.format("%-10s %-10s %-10s %-20s %-10.2f %-15s %-15s %-10.2f", 
-				cateName, itemName, description, minBid, startDate, endDate, increment);
+		String itemInfo = String.format("%-10s %-10s %-20s %-10.2f %-15s %-15s %-10.2f", 
+				itemName, description, minBid, startDate, endDate, increment);
 		
 		return itemInfo;
 	}

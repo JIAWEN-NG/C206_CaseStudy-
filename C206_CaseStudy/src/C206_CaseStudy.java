@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.regex.Pattern;
 
 
 public class C206_CaseStudy {
@@ -50,6 +51,10 @@ public class C206_CaseStudy {
 				while (accOption != OPTION_QUIT) {
 					accOption = Helper.readInt("Enter option to select service > ");
 
+
+				if (accOption == 1) {
+					Account acc = inputAccount();
+					C206_CaseStudy.addAccount(accList,acc);
 
 					optionTypeMenu();
 					accType = Helper.readInt("Enter user type > ");
@@ -135,10 +140,21 @@ public class C206_CaseStudy {
 					else {
 						System.out.println("Invalid option entered!");
 					}
+
+
+				} 
+				else if (accOption == 2) {
+					C206_CaseStudy.viewAllAccount(accList);
 				}
+				else if(accOption == 3) {
+					C206_CaseStudy.deleteAcc(accList);
 
+				}
+				else {
+					System.out.println("Invalid option entered!");
 
-
+				}
+			}
 
 				//			} else if (login == 2) {//student
 				//				C206_CaseStudy.setHeader("STUDENT");
@@ -235,7 +251,8 @@ public class C206_CaseStudy {
 				//		}
 			}
 		}
-	}
+	
+		}
 
 
 	//main
@@ -271,55 +288,135 @@ public class C206_CaseStudy {
 		System.out.println("3. DELETE");
 	}
 
+
 	public static void accType() {
 		System.out.println("Buyer");
 		System.out.println("Seller");
 	}
 
+	//OPTION 1: Account Services, done by Jia Wen 
 
-	public static Buyer inputBuyer() {
+	public static Account inputAccount() {
+
 		String name = Helper.readString("Enter name > ");
+		boolean vName = C206_CaseStudy.validName(name);
+		while (vName == false ) {
+			System.out.println("Invalid name");
+			name = Helper.readString("Enter name > ");
+		}
 		String role = Helper.readString("Enter role > ");
+		boolean vRole = C206_CaseStudy.validRole(role);
+		while (vRole == false ) {
+			System.out.println("Invalid Role");
+			role = Helper.readString("Enter role > ");
+		}
 		String email = Helper.readString("Enter email > ");
+		boolean vEmail = C206_CaseStudy.validEmail(email);
+		while (vEmail == false ) {
+			System.out.println("Invalid Email");
+			email = Helper.readString("Enter email > ");
+		}
 		int password = Helper.readInt("Enter password > ");
-
-		Buyer userB = new Buyer(name,role,email,password);
-		return userB;
+		boolean vPw = C206_CaseStudy.validPassword(password);
+		while (vEmail == false ) {
+			System.out.println("Invalid Password...Please enter a 7 digit number");
+			password = Helper.readInt("Enter password > ");
+		}
+		boolean isEmpty = C206_CaseStudy.notEmptyAcc(name, role, email, password);
+		if (isEmpty == false) {
+			System.out.println("Please fill in all the details");
+		}
+		if (vName == true && vRole == true && vEmail == true && vPw == true && isEmpty == true) {
+			Account user = new Account(name,role,email,password);
+			return user;
+		}
+		else {
+			return null;
+		}
 	}
-	public static Seller inputSeller() {
-		String name = Helper.readString("Enter name > ");
-		String role = Helper.readString("Enter role > ");
-		String email = Helper.readString("Enter email > ");
-		int password = Helper.readInt("Enter password > ");
+	//By Jia Wen
+	public static boolean validEmail(String email) {
+		String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+		boolean isValid = Pattern.matches(emailPattern, email);
 
-		Seller userS = new Seller(name,role,email,password);
-		return userS;
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	//By Jia Wen
+	public static boolean validPassword(int password) {
+		int len = String.valueOf(password).length();
+		if (len == 7) {
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
+	public static boolean validRole (String role) {
+
+		if(role.equalsIgnoreCase("Seller") || role.equalsIgnoreCase("Buyer") || role.equalsIgnoreCase("Admin")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public static boolean validName (String name) {
+		String namePattern = "[a-zA-Z]{2,15}";
+		boolean isValid = Pattern.matches(namePattern, name);
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public static boolean notEmptyAcc(String name,String role,String email,int password) {
+		String patternEmpty = "\\s*";
+
+		if (Pattern.matches(patternEmpty,name) || Pattern.matches(patternEmpty,role) || Pattern.matches(patternEmpty,email)
+				|| String.valueOf(password).length() == 7) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public static void addAccount(ArrayList<Account> accList, Account user) {
+
+		if (user == null ) {
+			System.out.println("User Account not added");
+		}
+		else {
+			accList.add(user);
+			System.out.println("User Account added");
+		}
 	}
 
-	public static void addBuyer(ArrayList<Account> accList, Buyer userB) {
-		accList.add(userB);
-		System.out.println("User Account added !");
-	}
-
-	public static void addSeller(ArrayList<Account> accList, Seller userS) {
-		accList.add(userS);
-		System.out.println("User Account added !");
-	}
 	public static String retrieveAllUser(ArrayList<Account> accList) {
 
 		String output = "";
 		for (int i = 0; i < accList.size(); i++) {
 			output += String.format("%-48s \n", accList.get(i).toString());
 		}
-
 		return output;
-
 	}
 	public static void viewAllAccount(ArrayList<Account> accList) {
 		C206_CaseStudy.setHeader("ACCOUNT LIST");
-		String output = String.format("%-10s %-10s %-15s %-10s \n", "NAME","ROLE","EMAIL","PASSWORD");
-		output += retrieveAllUser(accList);
-		System.out.println(output);
+
+		if (accList.isEmpty()) {
+			System.out.println("There are no user accounts");
+		}
+		else {
+			String output = String.format("%-10s %-10s %-15s %-10s \n", "NAME","ROLE","EMAIL","PASSWORD");
+			output += retrieveAllUser(accList);
+			System.out.println(output);
+		}
 	}
 	public static boolean doDeleteAcc(ArrayList<Account> accList, String deleteEmail) {
 		boolean isFound = false;
@@ -335,8 +432,15 @@ public class C206_CaseStudy {
 
 	public static void deleteAcc(ArrayList<Account> accList) {
 		C206_CaseStudy.viewAllAccount(accList);
-		String deleteEmail = Helper.readString("Enter the user email to delete > ");
-		boolean isFound = doDeleteAcc(accList, deleteEmail);
+		
+		String email = Helper.readString("Enter email > ");
+		boolean vEmail = C206_CaseStudy.validEmail(email);
+		
+		while (vEmail == false ) {
+			System.out.println("Invalid Email");
+			email = Helper.readString("Enter email > ");
+		}
+		boolean isFound = doDeleteAcc(accList, email);
 		if(isFound == true ) {
 			char toDelete = Helper.readChar("Are you sure you want to delete this user account? (Y/N) > ");
 			if (toDelete == 'Y' | toDelete == 'y') {
@@ -352,10 +456,10 @@ public class C206_CaseStudy {
 
 	}
 
-
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
 		String name = Helper.readString("Enter category name > ");
+		boolean validName = C206_CaseStudy.isValidName
 
 		Category category1 = new Category(name);
 
@@ -365,6 +469,17 @@ public class C206_CaseStudy {
 		categoryList.add(category1);
 		System.out.println("Category added");
 	}
+	public static boolean isValidName(String name) {
+		String namePattern = "[a-zA-Z]{2,15}";
+		boolean isValid = Pattern.matches(namePattern, name);
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}		
+	}
+	
 	public static String retrieveAllCategory(ArrayList<Category> categoryList) {
 		String output = "";
 		for (int i = 0; i < categoryList.size(); i++) {
@@ -379,17 +494,126 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName, ArrayList<Item> itemList ) {
+	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName) {
 		boolean isFound = false;
 		for(int i = 0; i < categoryList.size(); i++) {
-			for (int x = 0; x < itemList.size(); x++) {
+
+//			for (int x = 0; x < itemList.size(); x++) {
 				String categoryName = categoryList.get(i).getName();
-				String cateName = categoryList.get(i).getName();
-				String itemCateName = itemList.get(x).getCateName();
-				if(cateName.equalsIgnoreCase(itemCateName) && itemList.size() == 0) {
-					if(deleteName.equalsIgnoreCase(categoryName)) {
+//				String cateName = categoryList.get(i).getName();
+//				String itemCateName = itemList.get(x).getCateName();
+//				if(cateName.equalsIgnoreCase(itemCateName) && itemList.size() == 0) {
+//					if(deleteName.equalsIgnoreCase(categoryName)) {
 						categoryList.remove(i);
 						isFound = true;
+
+					}
+				}
+//			}
+//		}
+		return isFound;
+	}
+
+	public static void deleteCategory(ArrayList<Category> categoryList) {
+		C206_CaseStudy.viewAllCategory(categoryList);
+		String deleteCategory = Helper.readString("Enter the item name to delete > ");
+		boolean isFound = doDeleteCategory(categoryList, deleteCategory);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this category? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Category deleted");
+			}
+
+			else {
+				System.out.println("Category not deleted!");
+			}
+		}else {
+			System.out.println("Category not found!");
+		}
+
+	}
+
+	//OPTION 3: Item Services, done by Rachel  
+	public static Item inputItem() {
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String name = Helper.readString("Enter item name > ");
+		String description = Helper.readString("Enter description > ");
+		double minPrice = Helper.readInt("Enter minimum bid price >$ ");
+		String startDate = Helper.readString("Enter acution start date > ");
+		String endDate = Helper.readString("Enter acution end date > ");
+		double increment = Helper.readDouble("Enter bid increment amount > $");
+
+		LocalDate start = LocalDate.parse(startDate, formatter2);
+		LocalDate end = LocalDate.parse(endDate, formatter2);
+
+		Item item1= new Item(name,description,minPrice,start,end,increment);
+
+		return item1;
+
+	}
+	public static void addItem(ArrayList<Item> itemList, Item item1) {
+		itemList.add(item1);
+		System.out.println("Item added");
+	}
+	public static String retrieveAllItem(ArrayList<Item> itemList) {
+		String output = "";
+		for(int i = 0; i < itemList.size(); i++) {
+			output += String.format("%-80s \n", itemList.get(i).toString());
+		}
+		return output;
+	}
+	public static void viewAllItem(ArrayList<Item> itemList) {
+		C206_CaseStudy.setHeader("ITEM LIST");
+		String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", "MIN BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
+		output += retrieveAllItem(itemList);
+		System.out.println(output);
+	}
+
+	public static boolean doDeleteItem(ArrayList<Item> itemList, String deleteName) {
+		boolean isFound = false;
+		for(int i = 0; i < itemList.size(); i++) {
+			String itemName = itemList.get(i).getItemName();
+			if(itemName.equalsIgnoreCase(deleteName)) {
+				itemList.remove(i);
+				isFound = true;
+			}
+		}
+		return isFound;
+	}
+
+	public static void deleteItem(ArrayList<Item> itemList) {
+		C206_CaseStudy.viewAllItem(itemList);
+		String deleteItem = Helper.readString("Enter the item name to delete > ");
+		boolean isFound = doDeleteItem(itemList, deleteItem);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this item? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Item deleted");
+			}
+
+			else {
+				System.out.println("Item not deleted!");
+			}
+		}else {
+			System.out.println("Item not found!");
+		}
+
+	}
+	//OPTION 4: Bid Services, Done By Chu En and Jia Wen 
+
+	//Done by chu en 
+	public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
+		boolean isValid = false;
+
+		for (int x = 0; x < itemList.size(); x++) {
+			if (bidsList.isEmpty() && price >= itemList.get(x).getMinBid()) {
+				isValid = true;
+			}
+			else {
+				for (int i = 0; i < bidsList.size(); i++) {
+					if (price >= bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
+						isValid = true;
+>>>>>>> branch 'master' of https://github.com/20011454-Siet-Chu-En/C206_CaseStudy-.git
 					}
 				}
 			}
