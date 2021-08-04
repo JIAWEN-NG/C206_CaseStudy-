@@ -24,7 +24,8 @@ public class C206_CaseStudy {
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
+		itemList.add(new Item("DOG", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
+				LocalDate.parse("01/01/2010", formatter2), 5.00));
 		//Main program codes done by Jia Wen and Chu En 
 		//OPTION 1: Done by Jia Wen
 		//OPTION 2: Done by Chu En 
@@ -39,7 +40,7 @@ public class C206_CaseStudy {
 
 			menu();
 			option = Helper.readInt("Enter an option > ");
-			
+
 			//OPTION 1: Done by Jia Wen
 			if (option == 1) {
 				C206_CaseStudy.setHeader("ACCOUNT SERVICES");
@@ -77,7 +78,7 @@ public class C206_CaseStudy {
 
 				}
 			}
-			
+
 			//OPTION 2: Done by Chu En 
 			else if (option == 2) {
 				C206_CaseStudy.setHeader("CATEGORY SERVICES");
@@ -205,7 +206,7 @@ public class C206_CaseStudy {
 		System.out.println("2. VIEW ALL");
 		System.out.println("3. DELETE");
 	}
-	
+
 	//OPTION 1: Account Services, done by Jia Wen 
 	public static void userTypeMenu() {
 		C206_CaseStudy.setHeader("USER TYPE");
@@ -378,7 +379,7 @@ public class C206_CaseStudy {
 	}
 	public static void viewAllItem(ArrayList<Item> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
-		String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", "BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
+		String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", "MIN BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
 		output += retrieveAllItem(itemList);
 		System.out.println(output);
 	}
@@ -414,16 +415,23 @@ public class C206_CaseStudy {
 
 	}
 	//OPTION 4: Bid Services, Done By Chu En and Jia Wen 
-	
+
 	//Done by chu en 
 	public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
 		boolean isValid = false;
 
 		for (int x = 0; x < itemList.size(); x++) {
-			for (int i = 0; i < bidsList.size(); i++) {
-				if (price > bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
-					isValid = true;
+			if (bidsList.isEmpty() && price >= itemList.get(x).getMinBid()) {
+				isValid = true;
+			}
+			else {
+				for (int i = 0; i < bidsList.size(); i++) {
+
+					if (price >= bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
+						isValid = true;
+					}
 				}
+
 			}
 		}
 		return isValid;
@@ -477,10 +485,16 @@ public class C206_CaseStudy {
 	//Done by Chu En 
 	public static void viewAllBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.setHeader("BIDS LIST");
-		String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", 
-				"BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
-		output += retrieveAllBids(bidsList);
-		System.out.println(output);
+
+		if (bidsList.isEmpty()) {
+			System.out.println("There are no existing bids\n");
+		}
+		else {
+			String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", 
+					"BUYER EMAIL", "SELLER EMAIL", "BIDS PRICE");
+			output += retrieveAllBids(bidsList);
+			System.out.println(output);
+		}
 	}
 	//Done by Jia Wen 
 	public static boolean doDeleteBids(ArrayList<Bid> bidsList, int deleteID) {
@@ -523,34 +537,34 @@ public class C206_CaseStudy {
 		String BuyerEmail = Helper.readString("Enter your email > "); 
 		double transactionPrice = Helper.readDouble("Enter your deal Price > $");
 		String closeDate = Helper.readString("Enter closing date > ");
-		
+
 		LocalDate closing = LocalDate.parse(closeDate, formatter2);
-	
-			Deal deal1 = new Deal(DealId,itemName,sellerEmail,BuyerEmail,transactionPrice,closing);
 
-			return deal1;
+		Deal deal1 = new Deal(DealId,itemName,sellerEmail,BuyerEmail,transactionPrice,closing);
 
+		return deal1;
+
+	}
+	public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
+		dealList.add(deal1);
+		System.out.println("Deal added");
+	}
+
+	public static String retrieveAllDeal(ArrayList<Deal> dealList) {
+		String output = "";
+		for(int i = 0; i < dealList.size(); i++) {
+			output += String.format("%-80s \n", dealList.get(i).toString());
 		}
-		public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
-			dealList.add(deal1);
-			System.out.println("Deal added");
-		}
-		
-		public static String retrieveAllDeal(ArrayList<Deal> dealList) {
-			String output = "";
-			for(int i = 0; i < dealList.size(); i++) {
-				output += String.format("%-80s \n", dealList.get(i).toString());
-			}
-			return output;
-		}
-	
+		return output;
+	}
+
 	public static void ViewAllDeal(ArrayList<Deal> dealList) { 
 
 		String output = ""; 
 		output = String.format("%-10s %-10s %-15s %-20s %-10s %-10s\n", "Deal ID", "Item Name", "Description", 
 				"Seller Email", "Transaction price($)", "Ending Date"); 
 		output += retrieveAllDeal(dealList);
-		
+
 		System.out.println(output); 
 	}
 
