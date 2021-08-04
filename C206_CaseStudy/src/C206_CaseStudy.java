@@ -283,7 +283,7 @@ public class C206_CaseStudy {
 		String patternEmpty = "\\s*";
 
 		if (Pattern.matches(patternEmpty,name) || Pattern.matches(patternEmpty,role) || Pattern.matches(patternEmpty,email)
-				|| String.valueOf(password).length() == 7) {
+				|| String.valueOf(password).length() == 0) {
 			return true;
 		}
 		else {
