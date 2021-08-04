@@ -36,127 +36,135 @@ public class C206_CaseStudy {
 		//OPTION 5: Done by Izhar
 
 
-		int login = 0;
-		int accOption = 0;
+		//		int login = 0;
+		//		int accOption = 0;
 		int accType = 0;
-		login();
-		login = Helper.readInt("Enter an option to login > ");
-		while (login != 3) {
-
-			//OPTION 1: Done by Jia Wen
-			if (login == 1) {// admin
-				C206_CaseStudy.setHeader("ADMINSTRATOR");
-
-				menu();
-				while (accOption != OPTION_QUIT) {
-					accOption = Helper.readInt("Enter option to select service > ");
-
-
-					if (accOption == 1) {
-						Account acc = inputAccount();
-						C206_CaseStudy.addAccount(accList,acc);
-
-						optionTypeMenu();
-						accType = Helper.readInt("Enter user type > ");
-						if (accOption == 1) {
+		//		login();
+		//		login = Helper.readInt("Enter an option to login > ");
+		//		while (login != 3) {
+		//
+		//			//OPTION 1: Done by Jia Wen
+		//			if (login != 3) {// admin
+		//				C206_CaseStudy.setHeader("ADMINSTRATOR");
+		//
+		//
+		//				while (accOption != OPTION_QUIT) {
+		//					menu();
+		//					accOption = Helper.readInt("Enter option to select service > ");
+		//
+		
+		//					if (accOption == 1) {
+		while (accType != 4) {
+			optionTypeMenu();
+			accType = Helper.readInt("Enter user type > ");
 
 
-							if (accType == 1) {
-								
-
-							}
-							else if (accType == 2) {
-								C206_CaseStudy.viewAllAccount(accList);
-
-							}
-							else if (accType == 3) {
-								C206_CaseStudy.deleteAcc(accList);
-
-							}
-							else {
-								System.out.println("Invalid option"); // account service
-							}
 
 
-						} else  if (accOption == 2) {
-							if (accType == 1) {
+			//
+			//						if (accOption == 1) {
+			//
+			//
+			//							if (accType == 1) {
+			//								Account acc = inputAccount();
+			//								C206_CaseStudy.addAccount(accList,acc);
+			//							}
+			//							else if (accType == 2) {
+			//								C206_CaseStudy.viewAllAccount(accList);
+			//
+			//							}
+			//							else if (accType == 3) {
+			//								C206_CaseStudy.deleteAcc(accList);
+			//
+			//							}
+			//							else {
+			//								System.out.println("Invalid option"); // account service
+			//							}
+			//
+			//
+			//						} else  if (accOption == 2) {
 
+			if (accType == 1) {
+				Category category1 = inputCategory();
+				C206_CaseStudy.addCategory(categoryList, category1);
 
-							}
-							else if (accType == 2) {
+			}
+			else if (accType == 2) {
+				C206_CaseStudy.viewAllCategory(categoryList);
 
-							}
-							else if (accType == 3) {
-
-							}
-							else {
-								System.out.println("Invalid option"); // category service
-							}
-						}
-						else if(accOption == 3) {
-							if (accType == 1) {
-
-							}
-							else if (accType == 2) {
-
-							}
-							else if (accType == 3) {
-
-							}
-							else {
-								System.out.println("Invalid option"); // item service
-							}
-						}
-						else if (accOption == 4 ) {
-							if (accType == 1) {
-
-
-							}
-							else if (accType == 2) {
-
-							}
-							else if (accType == 3) {
-
-							}
-							else {
-								System.out.println("Invalid option"); // bids service
-							}
-						}
-						else if (accOption == 5) {
-							if (accType == 1) {
-
-							}
-							else if (accType == 2) {
-
-							}
-							else if (accType == 3) {
-
-							}
-							else {
-								System.out.println("Invalid option"); // deal service
-							}
-						}
-						else if (accOption == OPTION_QUIT) {
-							System.out.println("Bye Bye!");
-						}
-						else {
-							System.out.println("Invalid option entered!");
-						}
-
-
-					} 
-					else if (accOption == 2) {
-						
-					}
-					else if(accOption == 3) {
-						
-
-					}
-					else {
-						System.out.println("Invalid option entered!");
-
-					}
-				}
+			}
+			else if (accType == 3) {
+				C206_CaseStudy.deleteCategory(categoryList);
+				//
+				//							}
+				//							else {
+				//								System.out.println("Invalid option"); // category service
+				//							}
+				//						}
+				//						else if(accOption == 3) {
+				//							if (accType == 1) {
+				//
+				//							}
+				//							else if (accType == 2) {
+				//
+				//							}
+				//							else if (accType == 3) {
+				//
+				//							}
+				//							else {
+				//								System.out.println("Invalid option"); // item service
+				//							}
+				//						}
+				//						else if (accOption == 4 ) {
+				//							if (accType == 1) {
+				//
+				//
+				//							}
+				//							else if (accType == 2) {
+				//
+				//							}
+				//							else if (accType == 3) {
+				//
+				//							}
+				//							else {
+				//								System.out.println("Invalid option"); // bids service
+				//							}
+				//						}
+				//						else if (accOption == 5) {
+				//							if (accType == 1) {
+				//
+				//							}
+				//							else if (accType == 2) {
+				//
+				//							}
+				//							else if (accType == 3) {
+				//
+				//							}
+				//							else {
+				//								System.out.println("Invalid option"); // deal service
+				//							}
+				//						}
+				//						else if (accOption == OPTION_QUIT) {
+				//							System.out.println("Bye Bye!");
+				//						}
+				//						else {
+				//							System.out.println("Invalid option entered!");
+				//						}
+				//
+				//
+				//					} 
+				//					else if (accOption == 2) {
+				//
+				//					}
+				//					else if(accOption == 3) {
+				//
+				//
+				//					}
+				//					else {
+				//						System.out.println("Invalid option entered!");
+				//
+				//					}
+				//				}
 
 				//			} else if (login == 2) {//student
 				//				C206_CaseStudy.setHeader("STUDENT");
@@ -460,21 +468,32 @@ public class C206_CaseStudy {
 
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
-		String name = Helper.readString("Enter category name > ");
+		String name = Helper.readString("Enter name > ");
 		boolean validName = C206_CaseStudy.isValidName(name);
-		while (validName == false) {
+		while (validName == false ) {
 			System.out.println("Please enter cetegory name less than 20 character");
 			name = Helper.readString("Enter Category name > ");
 		}
 
-		Category category1 = new Category(name);
+		if(validName == true) {
+			Category category1 = new Category(name);
+			return category1;
+		}
+		else {
+			return null;
+		}
 
-		return category1;
 	}	
 	public static void addCategory(ArrayList<Category> categoryList, Category category1) {
-		categoryList.add(category1);
-		System.out.println("Category added");
+		if (category1 == null) {
+			System.out.println("Category not added");
+		}
+		else {
+			categoryList.add(category1);
+			System.out.println("Category added");
+		}
 	}
+
 	public static boolean isValidName(String name) {
 		String namePattern = "[a-zA-Z]{2,15}";
 		boolean isValid = Pattern.matches(namePattern, name);
@@ -485,6 +504,17 @@ public class C206_CaseStudy {
 			return false;
 		}		
 	}
+	public static boolean notEmptyCate(String name) {
+		String patternEmpty = "\\s*";
+
+		if (Pattern.matches(patternEmpty,name)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 
 	public static String retrieveAllCategory(ArrayList<Category> categoryList) {
 		String output = "";
@@ -503,20 +533,12 @@ public class C206_CaseStudy {
 	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName) {
 		boolean isFound = false;
 		for(int i = 0; i < categoryList.size(); i++) {
-
-			//			for (int x = 0; x < itemList.size(); x++) {
 			String categoryName = categoryList.get(i).getName();
-			//				String cateName = categoryList.get(i).getName();
-			//				String itemCateName = itemList.get(x).getCateName();
-			//				if(cateName.equalsIgnoreCase(itemCateName) && itemList.size() == 0) {
-			//					if(deleteName.equalsIgnoreCase(categoryName)) {
-			categoryList.remove(i);
-			isFound = true;
-
+			if(categoryName.equalsIgnoreCase(categoryName)) {
+				categoryList.remove(i);
+				isFound = true;
+			}
 		}
-
-		//			}
-		//		}
 		return isFound;
 	}
 
@@ -605,7 +627,7 @@ public class C206_CaseStudy {
 		}
 
 	}
-	
+
 	//OPTION 4: Bid Services, Done By Chu En and Jia Wen 
 
 	//Done by Chu En 
@@ -631,8 +653,14 @@ public class C206_CaseStudy {
 	//Done by Chu En 
 	public static Bid inputBid(ArrayList<Bid> bidsList,ArrayList<Item> itemList) {
 		int ID = Helper.readInt("Enter Bids ID > ");
-		String name = Helper.readString("Enter Item Name > ");
+		String name = Helper.readString("Enter name > ");
+		boolean validName = C206_CaseStudy.isValidName(name);
+		while (validName == false ) {
+			System.out.println("Please enter cetegory name less than 20 character");
+			name = Helper.readString("Enter Category name > ");
+		}
 		String buyerEmail = Helper.readString("Enter Buyer email > ");
+		boolean validEmail = C206_CaseStudy.isValidName(name);
 		String sellerEmail = Helper.readString("Enter seller email > ");
 		double price = Helper.readDouble("Enter Bids price >$");
 		boolean isValid = isValidBid(bidsList,price,itemList);
@@ -656,6 +684,18 @@ public class C206_CaseStudy {
 			System.out.println("Bids Added");
 		}
 	}
+	public static boolean isValidEmail(String email) {
+		String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+		boolean isValid = Pattern.matches(emailPattern, email);
+
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	//Done by Jia Wen 
 	public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
 		Collections.sort(bidsList,new Comparator<Bid>() {
