@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.regex.Pattern;
 
 
 public class C206_CaseStudy {
@@ -26,6 +27,7 @@ public class C206_CaseStudy {
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		itemList.add(new Item("DOG", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
 				LocalDate.parse("01/01/2010", formatter2), 5.00));
+
 		//Main program codes done by Jia Wen and Chu En 
 		//OPTION 1: Done by Jia Wen
 		//OPTION 2: Done by Chu En 
@@ -49,21 +51,9 @@ public class C206_CaseStudy {
 				int accOption = Helper.readInt("Enter option to select service type > ");
 
 				if (accOption == 1) {
+					Account acc = inputAccount();
+					C206_CaseStudy.addAccount(accList,acc);
 
-					userTypeMenu();
-					int accType = Helper.readInt("Enter user type > ");
-
-					if (accType == 1) {
-						Buyer b1 = inputBuyer();
-						C206_CaseStudy.addBuyer(accList,b1);
-					}
-					else if (accType == 2) {
-						Seller s1 = inputSeller();
-						C206_CaseStudy.addSeller(accList,s1);
-					}
-					else {
-						System.out.println("Invalid option");
-					}
 
 				} 
 				else if (accOption == 2) {
@@ -208,56 +198,128 @@ public class C206_CaseStudy {
 	}
 
 	//OPTION 1: Account Services, done by Jia Wen 
-	public static void userTypeMenu() {
-		C206_CaseStudy.setHeader("USER TYPE");
-		System.out.println("1. Buyer");
-		System.out.println("2. Seller");
 
-	}
+	public static Account inputAccount() {
 
-	public static Buyer inputBuyer() {
 		String name = Helper.readString("Enter name > ");
+		boolean vName = C206_CaseStudy.validName(name);
+		while (vName == false ) {
+			System.out.println("Invalid name");
+			name = Helper.readString("Enter name > ");
+		}
 		String role = Helper.readString("Enter role > ");
+		boolean vRole = C206_CaseStudy.validRole(role);
+		while (vRole == false ) {
+			System.out.println("Invalid Role");
+			role = Helper.readString("Enter role > ");
+		}
 		String email = Helper.readString("Enter email > ");
+		boolean vEmail = C206_CaseStudy.validEmail(email);
+		while (vEmail == false ) {
+			System.out.println("Invalid Email");
+			email = Helper.readString("Enter email > ");
+		}
 		int password = Helper.readInt("Enter password > ");
-
-		Buyer userB = new Buyer(name,role,email,password);
-		return userB;
+		boolean vPw = C206_CaseStudy.validPassword(password);
+		while (vEmail == false ) {
+			System.out.println("Invalid Password...Please enter a 7 digit number");
+			password = Helper.readInt("Enter password > ");
+		}
+		boolean isEmpty = C206_CaseStudy.notEmptyAcc(name, role, email, password);
+		if (isEmpty == false) {
+			System.out.println("Please fill in all the details");
+		}
+		if (vName == true && vRole == true && vEmail == true && vPw == true && isEmpty == true) {
+			Account user = new Account(name,role,email,password);
+			return user;
+		}
+		else {
+			return null;
+		}
 	}
-	public static Seller inputSeller() {
-		String name = Helper.readString("Enter name > ");
-		String role = Helper.readString("Enter role > ");
-		String email = Helper.readString("Enter email > ");
-		int password = Helper.readInt("Enter password > ");
+	//By Jia Wen
+	public static boolean validEmail(String email) {
+		String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+		boolean isValid = Pattern.matches(emailPattern, email);
 
-		Seller userS = new Seller(name,role,email,password);
-		return userS;
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	//By Jia Wen
+	public static boolean validPassword(int password) {
+		int len = String.valueOf(password).length();
+		if (len == 7) {
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
+	public static boolean validRole (String role) {
+
+		if(role.equalsIgnoreCase("Seller") || role.equalsIgnoreCase("Buyer") || role.equalsIgnoreCase("Admin")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public static boolean validName (String name) {
+		String namePattern = "[a-zA-Z]{2,15}";
+		boolean isValid = Pattern.matches(namePattern, name);
+		if (isValid) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public static boolean notEmptyAcc(String name,String role,String email,int password) {
+		String patternEmpty = "\\s*";
+
+		if (Pattern.matches(patternEmpty,name) || Pattern.matches(patternEmpty,role) || Pattern.matches(patternEmpty,email)
+				|| String.valueOf(password).length() == 7) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public static void addAccount(ArrayList<Account> accList, Account user) {
+
+		if (user == null ) {
+			System.out.println("User Account not added");
+		}
+		else {
+			accList.add(user);
+			System.out.println("User Account added");
+		}
 	}
 
-	public static void addBuyer(ArrayList<Account> accList, Buyer userB) {
-		accList.add(userB);
-		System.out.println("User Account added !");
-	}
-
-	public static void addSeller(ArrayList<Account> accList, Seller userS) {
-		accList.add(userS);
-		System.out.println("User Account added !");
-	}
 	public static String retrieveAllUser(ArrayList<Account> accList) {
 
 		String output = "";
 		for (int i = 0; i < accList.size(); i++) {
 			output += String.format("%-48s \n", accList.get(i).toString());
 		}
-
 		return output;
-
 	}
 	public static void viewAllAccount(ArrayList<Account> accList) {
 		C206_CaseStudy.setHeader("ACCOUNT LIST");
-		String output = String.format("%-10s %-10s %-15s %-10s \n", "NAME","ROLE","EMAIL","PASSWORD");
-		output += retrieveAllUser(accList);
-		System.out.println(output);
+
+		if (accList.isEmpty()) {
+			System.out.println("There are no user accounts");
+		}
+		else {
+			String output = String.format("%-10s %-10s %-15s %-10s \n", "NAME","ROLE","EMAIL","PASSWORD");
+			output += retrieveAllUser(accList);
+			System.out.println(output);
+		}
 	}
 	public static boolean doDeleteAcc(ArrayList<Account> accList, String deleteEmail) {
 		boolean isFound = false;
@@ -273,8 +335,15 @@ public class C206_CaseStudy {
 
 	public static void deleteAcc(ArrayList<Account> accList) {
 		C206_CaseStudy.viewAllAccount(accList);
-		String deleteEmail = Helper.readString("Enter the user email to delete > ");
-		boolean isFound = doDeleteAcc(accList, deleteEmail);
+		
+		String email = Helper.readString("Enter email > ");
+		boolean vEmail = C206_CaseStudy.validEmail(email);
+		
+		while (vEmail == false ) {
+			System.out.println("Invalid Email");
+			email = Helper.readString("Enter email > ");
+		}
+		boolean isFound = doDeleteAcc(accList, email);
 		if(isFound == true ) {
 			char toDelete = Helper.readChar("Are you sure you want to delete this user account? (Y/N) > ");
 			if (toDelete == 'Y' | toDelete == 'y') {
@@ -289,7 +358,6 @@ public class C206_CaseStudy {
 		}
 
 	}
-
 
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
@@ -426,12 +494,10 @@ public class C206_CaseStudy {
 			}
 			else {
 				for (int i = 0; i < bidsList.size(); i++) {
-
 					if (price >= bidsList.get(i).getPrice() + itemList.get(x).getIncrement() && price > itemList.get(x).getMinBid()) {
 						isValid = true;
 					}
 				}
-
 			}
 		}
 		return isValid;
