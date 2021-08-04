@@ -258,6 +258,28 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllCategory list", testOutput, allCat);
 	}
+		@Test
+		public void isValidCateNameTest() {
+			
+			String validName = "Same";
+			String invalidName = "S";
+			String invalidName1 = "SSSSSSSSSSSSSSSSSSSSS";
+			
+			//boundary condition -check that Name is not null 
+			assertNotNull(validName);
+			
+			// normal condition - test that an valid name (2-20 character) will return true 
+			boolean isValid = C206_CaseStudy.isValidCateName(validName);
+			assertTrue(isValid);
+			
+			// error condition - test that an invalid name ( character < 2 )will return false 
+			boolean notValid = C206_CaseStudy.isValidCateName(invalidName);
+			assertFalse(notValid);
+			
+			// error condition - test that an invalid name (characters > 20) will return false 
+			boolean notValid1 = C206_CaseStudy.isValidCateName(invalidName1);
+			assertFalse(notValid1);
+	}
 	//Test by Chu En
 	@Test
 	public void doDeleteCategoryTest() {
@@ -393,6 +415,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllBids list", testOutput, allBids);
 
 	}
+	
+	
 	//Test by Jia Wen and Chu En
 	@Test
 	public void doDeleteBidsTest() {

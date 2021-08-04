@@ -243,7 +243,7 @@ public class C206_CaseStudy {
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
 		String name = Helper.readString("Enter name > ");
-		boolean validName = C206_CaseStudy.isValidName(name);
+		boolean validName = C206_CaseStudy.isValidCateName(name);
 		while (validName == false ) {
 			System.out.println("Please enter cetegory name less than 20 character");
 			name = Helper.readString("Enter Category name > ");
@@ -268,7 +268,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static boolean isValidName(String name) {
+	public static boolean isValidCateName(String name) {
 		String namePattern = "[a-zA-Z]{2,15}";
 		boolean isValid = Pattern.matches(namePattern, name);
 		if (isValid) {
