@@ -502,7 +502,7 @@ public class C206_CaseStudyTest {
 		assertFalse(notValid1);
 	}
 
-<<<<<<< HEAD
+
 	//Issue 5
 		@Test
 		public void addDealTest() {
@@ -520,10 +520,8 @@ public class C206_CaseStudyTest {
 		@Test
 		public void retrieveAllDealsTest() {
 			assertNotNull("Test if there is valid deal arraylist to retrieve item", dealList);
-=======
-	//Issue 
 
->>>>>>> branch 'master' of https://github.com/20011454-Siet-Chu-En/C206_CaseStudy-.git
+	//Issue 
 
 			String allDeal = C206_CaseStudy.retrieveAllDeals(dealList);
 			String testOutput = "";

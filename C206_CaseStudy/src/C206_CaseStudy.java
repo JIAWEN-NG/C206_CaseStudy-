@@ -456,8 +456,8 @@ public class C206_CaseStudy {
 
 		return item1;
 
-
 	}
+	
 	public static boolean validItemName (String itemName) {
 		String namePattern = "[a-zA-Z]{2,30}";
 		boolean isValid = Pattern.matches(namePattern, itemName);
@@ -481,7 +481,8 @@ public class C206_CaseStudy {
 	}
 	public static void viewAllItem(ArrayList<Item> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
-		String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", "MIN BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
+		String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", 
+				"MIN BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
 		output += retrieveAllItem(itemList);
 		System.out.println(output);
 	}
