@@ -276,7 +276,7 @@ public class C206_CaseStudy {
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
 		String name = Helper.readString("Enter name > ");
-		boolean validName = C206_CaseStudy.isValidName(name);
+		boolean validName = C206_CaseStudy.isValidCateName(name);
 		while (validName == false ) {
 			System.out.println("Please enter cetegory name less than 20 character");
 			name = Helper.readString("Enter Category name > ");
@@ -301,8 +301,8 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static boolean isValidName(String name) {
-		String namePattern = "[a-zA-Z]{2,15}";
+	public static boolean isValidCateName(String name) {
+		String namePattern = "[a-zA-Z]{2,20}";
 		boolean isValid = Pattern.matches(namePattern, name);
 		if (isValid) {
 			return true;
@@ -507,7 +507,7 @@ public class C206_CaseStudy {
 		}
 	}
 	public static boolean isValidBidName (String name) {
-		String namePattern = "[a-zA-Z]{2,30}";
+		String namePattern = "[a-zA-Z]{2,20}";
 		boolean isValid = Pattern.matches(namePattern, name);
 		if (isValid) {
 			return true;
@@ -515,13 +515,10 @@ public class C206_CaseStudy {
 		else {
 			return false;
 		}
-	}
-
-	//Done by Jia Wen 
+	}//done by Jia Wen 
 	public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
 		Collections.sort(bidsList,new Comparator<Bid>() {
 			public int compare(Bid b1, Bid b2) {
-
 				return Double.compare(b2.getPrice(), b1.getPrice());	
 			}
 		});

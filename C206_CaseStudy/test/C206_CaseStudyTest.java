@@ -260,6 +260,29 @@ public class C206_CaseStudyTest {
 	}
 	//Test by Chu En
 	@Test
+	public void isValidCateNameTest() {
+
+		String validName = "Same";
+		String invalidName = "S";
+		String invalidName1 = "SSSSSSSSSSSSSSSSSSSSS";
+		
+		//boundary condition -check that Name is not null 
+		assertNotNull(validName);
+		
+		// normal condition - test that an valid name (2-20 character) will return true 
+		boolean isValid = C206_CaseStudy.isValidCateName(validName);
+		assertTrue(isValid);
+		
+		// error condition - test that an invalid name ( character < 2 )will return false 
+		boolean notValid = C206_CaseStudy.isValidCateName(invalidName);
+		assertFalse(notValid);
+		
+		// error condition - test that an invalid name (characters > 20) will return false 
+		boolean notValid1 = C206_CaseStudy.isValidCateName(invalidName1);
+		assertFalse(notValid1);
+	}
+	//Test by Chu En
+	@Test
 	public void doDeleteCategoryTest() {
 		// Test if category list is not null but empty -boundary
 		assertNotNull("Test if there is valid Category arraylist to retrieve item", categoryList);
@@ -393,6 +416,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllBids list", testOutput, allBids);
 
 	}
+
 	//Test by Jia Wen 
 	@Test
 	public void doDeleteBidsTest() {
@@ -418,7 +442,7 @@ public class C206_CaseStudyTest {
 		boolean delete = C206_CaseStudy.doDeleteBids(bidsList,4);
 		assertFalse("Test that non-esiting bid is NOT ok to delete",delete);
 	}
-	//by Jia Wen
+	//Test by Jia Wen
 	@Test
 	public void isValidBidTest() {
 
@@ -437,6 +461,29 @@ public class C206_CaseStudyTest {
 		boolean notValid = C206_CaseStudy.isValidBid(bidsList, bid2, itemList);
 		assertFalse(notValid);
 
+	}
+	//Test by Chu En
+	@Test
+	public void isValidBidNameTest() {
+		
+		String validName = "Aame";
+		String invalidName = "A";
+		String invalidName1 = "AAAAAAAAAAAAAAAAAAAAA";
+		
+		//boundary condition -check that Name is not null 
+		assertNotNull(validName);
+		
+		// normal condition - test that an valid name (2-20 character) will return true 
+		boolean isValid = C206_CaseStudy.isValidBidName(validName);
+		assertTrue(isValid);
+		
+		// error condition - test that an invalid name ( character < 2 )will return false 
+		boolean notValid = C206_CaseStudy.isValidBidName(invalidName);
+		assertFalse(notValid);
+		
+		// error condition - test that an invalid name (characters > 20) will return false 
+		boolean notValid1 = C206_CaseStudy.isValidBidName(invalidName1);
+		assertFalse(notValid1);
 	}
 
 	//Issue 
