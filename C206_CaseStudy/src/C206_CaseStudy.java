@@ -16,8 +16,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
-		ArrayList<Seller> sellerList = new ArrayList<Seller>();
+		
 		ArrayList<Account> accList = new ArrayList<Account>();
 		ArrayList<Category> categoryList = new ArrayList<Category>();
 		ArrayList<Item> itemList = new ArrayList<Item>();
@@ -71,7 +70,7 @@ public class C206_CaseStudy {
 					C206_CaseStudy.viewAllAccount(accList);
 				}
 				else if(accOption == 3) {
-					C206_CaseStudy.deleteCategory(categoryList);
+					C206_CaseStudy.deleteAcc(accList);
 
 				}
 				else {
@@ -185,13 +184,14 @@ public class C206_CaseStudy {
 		System.out.println("2. VIEW ALL");
 		System.out.println("3. DELETE");
 	}
-	//User 
+	//OPTION 1: User 
 	public static void userTypeMenu() {
 		C206_CaseStudy.setHeader("USER TYPE");
 		System.out.println("1. Buyer");
 		System.out.println("2. Seller");
 
 	}
+
 	public static Buyer inputBuyer() {
 		String name = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role > ");
@@ -215,12 +215,12 @@ public class C206_CaseStudy {
 
 	public static void addBuyer(ArrayList<Account> accList, Buyer userB) {
 		accList.add(userB);
-		System.out.println("User added !");
+		System.out.println("User Account added !");
 	}
 
 	public static void addSeller(ArrayList<Account> accList, Seller userS) {
 		accList.add(userS);
-		System.out.println("User added !");
+		System.out.println("User Account added !");
 	}
 	public static String retrieveAllUser(ArrayList<Account> accList) {
 		
@@ -238,6 +238,36 @@ public class C206_CaseStudy {
 		output += retrieveAllUser(accList);
 		System.out.println(output);
 	}
+	public static boolean doDeleteAcc(ArrayList<Account> accList, String deleteEmail) {
+		boolean isFound = false;
+		for(int i = 0; i < accList.size(); i++) {
+			String accEmail = accList.get(i).getEmail();
+			if(accEmail.equalsIgnoreCase(deleteEmail)) {
+				accList.remove(i);
+				isFound = true;
+			}
+		}
+		return isFound;
+	}
+
+	public static void deleteAcc(ArrayList<Account> accList) {
+		C206_CaseStudy.viewAllAccount(accList);
+		String deleteEmail = Helper.readString("Enter the user email to delete > ");
+		boolean isFound = doDeleteAcc(accList, deleteEmail);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this user account? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("User Account deleted");
+			}
+
+			else {
+				System.out.println("User Account not deleted!");
+			}
+		}else {
+			System.out.println("User Account not found!");
+		}
+
+	}
 
 
 	//Category
@@ -247,7 +277,7 @@ public class C206_CaseStudy {
 		Category category1 = new Category(name);
 
 		return category1;
-	}
+	}	
 	public static void addCategory(ArrayList<Category> categoryList, Category category1) {
 		categoryList.add(category1);
 		System.out.println("Category added");
@@ -265,11 +295,12 @@ public class C206_CaseStudy {
 		output += retrieveAllCategory(categoryList);
 		System.out.println(output);
 	}
+	
 	public static boolean doDeleteCategory(ArrayList<Category> categoryList, String deleteName) {
 		boolean isFound = false;
 		for(int i = 0; i < categoryList.size(); i++) {
 			String categoryName = categoryList.get(i).getName();
-			if(categoryName.equalsIgnoreCase(deleteName)) {
+			if(deleteName.equalsIgnoreCase(categoryName)) {
 				categoryList.remove(i);
 				isFound = true;
 			}
