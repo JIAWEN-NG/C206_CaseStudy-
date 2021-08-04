@@ -25,16 +25,6 @@ public class C206_CaseStudy {
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		itemList.add(new Item("DOG", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
-				LocalDate.parse("01/01/2010", formatter2), 5.00));
-		itemList.add(new Item("CAT", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
-				LocalDate.parse("01/01/2010", formatter2), 5.00));
-		bidsList.add(new Bid(11, "DOG", "qqq@gmail.com", "aaa@gmail.com", 50.00));
-		bidsList.add(new Bid(12, "CAT", "kkq@gmail.com", "ooa@gmail.com", 60.00));
-		bidsList.add(new Bid(13, "ToT", "kkq@gmail.com", "ooa@gmail.com", 30.00));
-		categoryList.add(new Category("PETS"));
-		categoryList.add(new Category("STATIONARY"));
-
 
 		int option = 0;
 
@@ -179,7 +169,7 @@ public class C206_CaseStudy {
 
 	}//main
 
-
+	// done by Jia wen 
 	public static void menu() {
 		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
 		System.out.println("1. Account Services");
@@ -191,19 +181,21 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 
 	}
-
+	// done by Chu En 
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
+	//done by chu en 
 	public static void optionTypeMenu() {
 		C206_CaseStudy.setHeader("SERVICE OPTIONS");
 		System.out.println("1. ADD");
 		System.out.println("2. VIEW ALL");
 		System.out.println("3. DELETE");
 	}
-	//OPTION 1: User 
+	
+	//OPTION 1: Account Services, done by Jia Wen 
 	public static void userTypeMenu() {
 		C206_CaseStudy.setHeader("USER TYPE");
 		System.out.println("1. Buyer");
@@ -287,7 +279,7 @@ public class C206_CaseStudy {
 	}
 
 
-	//Category
+	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
 		String name = Helper.readString("Enter category name > ");
 
@@ -344,7 +336,7 @@ public class C206_CaseStudy {
 
 	}
 
-	//Item
+	//OPTION 3: Item Services, done by Rachel  
 	public static Item inputItem() {
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String name = Helper.readString("Enter item name > ");
@@ -410,7 +402,9 @@ public class C206_CaseStudy {
 		}
 
 	}
-	//Bid
+	//OPTION 4: Bid Services, Done By Chu En and Jia Wen 
+	
+	//Done by chu en 
 	public static boolean isValidBid (ArrayList<Bid> bidsList,double price,ArrayList<Item> itemList) {
 		boolean isValid = false;
 
@@ -423,7 +417,7 @@ public class C206_CaseStudy {
 		}
 		return isValid;
 	}
-
+	//Done by chu en 
 	public static Bid inputBid(ArrayList<Bid> bidsList,ArrayList<Item> itemList) {
 		int ID = Helper.readInt("Enter Bids ID > ");
 		String name = Helper.readString("Enter Item Name > ");
@@ -441,7 +435,7 @@ public class C206_CaseStudy {
 		}
 
 	}
-
+	//Done by chu en 
 	public static void addBid(ArrayList<Bid> bidsList, Bid bids1) {	
 		if (bids1 == null ) {
 			System.out.println("Invalid bid");
@@ -451,7 +445,7 @@ public class C206_CaseStudy {
 			System.out.println("Bids Added");
 		}
 	}
-
+	//Done by Jia Wen 
 	public static void retrieveSortedBids(ArrayList<Bid> bidsList) {
 		Collections.sort(bidsList,new Comparator<Bid>() {
 			public int compare(Bid b1, Bid b2) {
@@ -460,7 +454,7 @@ public class C206_CaseStudy {
 			}
 		});
 	}
-
+	//Done by Jia Wen 
 	public static String retrieveAllBids(ArrayList<Bid> bidsList) {
 
 		String output = "";
@@ -469,6 +463,7 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
+	//Done by Chu En 
 	public static void viewAllBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.setHeader("BIDS LIST");
 		String output = String.format("%-10s %-10s %-15s %-20s %-10s \n", "ID", "NAME", 
@@ -476,7 +471,7 @@ public class C206_CaseStudy {
 		output += retrieveAllBids(bidsList);
 		System.out.println(output);
 	}
-
+	//Done by Jia Wen 
 	public static boolean doDeleteBids(ArrayList<Bid> bidsList, int deleteID) {
 		boolean isFound = false;
 		for(int i = 0; i < bidsList.size(); i++) {
@@ -488,7 +483,7 @@ public class C206_CaseStudy {
 		}
 		return isFound;
 	}
-
+	//Done by Jia Wen 
 	public static void deleteBids(ArrayList<Bid> bidsList) {
 		C206_CaseStudy.viewAllBids(bidsList);
 		int deleteID = Helper.readInt("Enter the bids ID to delete > ");
@@ -506,6 +501,7 @@ public class C206_CaseStudy {
 			System.out.println("Bids not found!");
 		}
 	}
+	//OPTION 5: Deal Services , done by Izhar
 	public static Deal InputDeal(ArrayList<Deal> DealList) { 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		System.out.println(""); 
