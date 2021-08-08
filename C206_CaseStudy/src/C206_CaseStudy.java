@@ -25,9 +25,13 @@ public class C206_CaseStudy {
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
 
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		itemList.add(new Item("DOG", "my pet", 50.00, LocalDate.parse("10/01/1980", formatter2),
-				LocalDate.parse("01/01/2010", formatter2), 5.00));
-
+		accList.add(new Account("Jay","Buyer","Jay@gmail.com",1234567));
+		accList.add(new Account("Jenny","Seller","Jenny@gmail.com",7897890));
+		categoryList.add(new Category("STATIONERY"));
+		itemList.add(new Item("Pen", "blue ink pen ", 50.00, LocalDate.parse("01/01/2010", formatter2),LocalDate.parse("01/01/2010", formatter2), 5.00));
+		bidsList.add(new Bid(1, "Pen", "happy@gmail.com", "sam@gmail.com", 50.00));
+		dealList.add(new Deal(2, "Pen", "eenny@gmail.com", "Feb@gmail.com", 55.00, LocalDate.parse("01/01/2010", formatter2)));
+		
 		//Main program codes done by Jia Wen and Chu En 
 		//OPTION 1: Done by Jia Wen
 		//OPTION 2: Done by Chu En 
@@ -37,6 +41,7 @@ public class C206_CaseStudy {
 
 		login();
 		int login = Helper.readInt("Enter login option > ");
+		int Student_QUIT = 4;
 		if(login == 1) {
 			int adminOption = 0;
 			while(adminOption != OPTION_QUIT) {
@@ -104,7 +109,7 @@ public class C206_CaseStudy {
 
 				} 
 				//OPTION 4: Done by Jia Wen and Chu En 
-				else if (adminOption == 4) {
+				else if (adminOption == Student_QUIT) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
 
@@ -147,53 +152,13 @@ public class C206_CaseStudy {
 			}
 		}
 		if(login == 2) {
-			int adminOption = 0;
-			while(adminOption != OPTION_QUIT) {
-				menu();
-				adminOption = Helper.readInt("Enter option to select service type > ");
-				
-				//OPTION 1: Done by jia wen 
-				if (adminOption == 1) {
-					optionTypeMenu();
-					int optionType = Helper.readInt("Enter service type > ");
-
-					if (optionType == 1) {
-						Account acc = inputAccount();
-						C206_CaseStudy.addAccount(accList,acc);
-
-					}else if (optionType == 2) {
-						C206_CaseStudy.viewAllAccount(accList);
-
-					}else if (optionType == 3) {
-						C206_CaseStudy.deleteAcc(accList);
-
-					}else {
-						System.out.println("Invalid option!");
-					}
-
-				}
-				//OPTION 2: Done by Chu En 
-				else if (adminOption == 2) {
-					optionTypeMenu();
-					int optionType = Helper.readInt("Enter service type > ");
-
-					if (optionType == 1) {
-						Category cate = inputCategory();
-						C206_CaseStudy.addCategory(categoryList, cate);
-
-					}else if (optionType == 2) {
-						C206_CaseStudy.viewAllCategory(categoryList);
-
-					}else if (optionType == 3) {
-						C206_CaseStudy.deleteCategory(categoryList);
-
-					}else {
-						System.out.println("Invalid option!");
-					}
-
-				}
+			int StudOption = 0;
+			while(StudOption != Student_QUIT) {
+				StuMenu();
+				StudOption = Helper.readInt("Enter option to select service type > ");
+	
 				//OPTION 3: Done by Rachel
-				else if (adminOption == 3) {
+				if (StudOption == 1) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
 
@@ -213,7 +178,7 @@ public class C206_CaseStudy {
 
 				} 
 				//OPTION 4: Done by Jia Wen and Chu En 
-				else if (adminOption == 4) {
+				else if (StudOption == 2) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
 
@@ -232,7 +197,7 @@ public class C206_CaseStudy {
 					}
 				}
 				//OPTION 5: Done by Izhar
-				else if (adminOption == 5) {
+				else if (StudOption == 3) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
 
@@ -249,7 +214,7 @@ public class C206_CaseStudy {
 					}else {
 						System.out.println("Invalid option!");
 					}
-				}else if (adminOption == 6) {
+				}else if (StudOption == Student_QUIT) {
 					System.out.println("Bye Bye");
 				}else {
 					System.out.println("Invalid option!");
@@ -277,6 +242,14 @@ public class C206_CaseStudy {
 		System.out.println("6. Quit Services");
 		Helper.line(80, "-");
 
+	}
+	public static void StuMenu() {
+		C206_CaseStudy.setHeader("Campus Online Auction Shop (COAS)");
+		System.out.println("1. Item Services");
+		System.out.println("2. Bids Services");
+		System.out.println("3. Deals Services");
+		System.out.println("4. Quit Services");
+		Helper.line(80, "-");
 	}
 	// done by Chu En 
 	public static void setHeader(String header) {
