@@ -128,7 +128,7 @@ public class C206_CaseStudyTest {
 
 	}
 	@Test
-	public void notEmptyAccTest() {
+	public void isEmptyAccTest() {
 
 		String n1 = "Joe";
 		String r1 = "Seller";
@@ -137,15 +137,15 @@ public class C206_CaseStudyTest {
 
 		String n2 = "Sam";
 		String r2 = "Seller";
-		String e2 = "";
+		String e2 = " ";
 		int p2 = 7654321;
 
 		// error condition - test that one input is empty will return false 
-		boolean isEmpty = C206_CaseStudy.notEmptyAcc(n2,r2,e2,p2);
+		boolean isEmpty= C206_CaseStudy.isEmptyAcc(n2,r2,e2,p2);
 		assertTrue(isEmpty);
 
 		// normal condition - test that if all user input is filled and is valid, will return true 
-		boolean notEmpty = C206_CaseStudy.notEmptyAcc(n1,r1,e1,p1);
+		boolean notEmpty = C206_CaseStudy.isEmptyAcc(n1,r1,e1,p1);
 		assertFalse(notEmpty);
 	}
 

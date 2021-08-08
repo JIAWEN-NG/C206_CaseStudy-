@@ -280,30 +280,35 @@ public class C206_CaseStudy {
 		while (vName == false ) {
 			System.out.println("Invalid name");
 			name = Helper.readString("Enter name > ");
+			vName = C206_CaseStudy.validName(name);
 		}
 		String role = Helper.readString("Enter role > ");
 		boolean vRole = C206_CaseStudy.validRole(role);
 		while (vRole == false ) {
 			System.out.println("Invalid Role");
 			role = Helper.readString("Enter role > ");
+			vRole = C206_CaseStudy.validRole(role);
 		}
 		String email = Helper.readString("Enter email > ");
 		boolean vEmail = C206_CaseStudy.validEmail(email);
 		while (vEmail == false ) {
 			System.out.println("Invalid Email");
 			email = Helper.readString("Enter email > ");
+			vEmail = C206_CaseStudy.validEmail(email);
 		}
 		int password = Helper.readInt("Enter password > ");
 		boolean vPw = C206_CaseStudy.validPassword(password);
-		while (vEmail == false ) {
+		while (vPw == false ) {
 			System.out.println("Invalid Password...Please enter a 7 digit number");
 			password = Helper.readInt("Enter password > ");
+			vPw = C206_CaseStudy.validPassword(password);
 		}
-		boolean isEmpty = C206_CaseStudy.notEmptyAcc(name, role, email, password);
-		if (isEmpty == false) {
+		
+		boolean isEmpty = C206_CaseStudy.isEmptyAcc(name, role, email, password);
+		if (isEmpty == true) {
 			System.out.println("Please fill in all the details");
 		}
-		if (vName == true && vRole == true && vEmail == true && vPw == true && isEmpty == true) {
+		if (vName == true && vRole == true && vEmail == true && vPw == true && isEmpty == false) {
 			Account user = new Account(name,role,email,password);
 			return user;
 		}
@@ -353,11 +358,11 @@ public class C206_CaseStudy {
 			return false;
 		}
 	}
-	public static boolean notEmptyAcc(String name,String role,String email,int password) {
+	public static boolean isEmptyAcc(String name,String role,String email,int password) {
 		String patternEmpty = "\\s*";
 
 		if (Pattern.matches(patternEmpty,name) || Pattern.matches(patternEmpty,role) || Pattern.matches(patternEmpty,email)
-				|| String.valueOf(password).length() == 0) {
+				|| Pattern.matches(patternEmpty,String.valueOf(password))) {
 			return true;
 		}
 		else {
