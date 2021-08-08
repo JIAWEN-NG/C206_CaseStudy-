@@ -35,13 +35,14 @@ public class C206_CaseStudy {
 		//OPTION 4: Done by Jia Wen and Chu En 
 		//OPTION 5: Done by Izhar
 
-
+		login();
 		int login = Helper.readInt("Enter login option > ");
-
 		if(login == 1) {
-			int adminOption = Helper.readInt("Enter option to select service type > ");
+			int adminOption = 0;
 			while(adminOption != OPTION_QUIT) {
-
+				menu();
+				adminOption = Helper.readInt("Enter option to select service type > ");
+				
 				//OPTION 1: Done by jia wen 
 				if (adminOption == 1) {
 					optionTypeMenu();
@@ -62,6 +63,7 @@ public class C206_CaseStudy {
 					}
 
 				}
+				//OPTION 2: Done by Chu En 
 				else if (adminOption == 2) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
@@ -81,6 +83,7 @@ public class C206_CaseStudy {
 					}
 
 				}
+				//OPTION 3: Done by Rachel
 				else if (adminOption == 3) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
@@ -100,6 +103,7 @@ public class C206_CaseStudy {
 					}
 
 				} 
+				//OPTION 4: Done by Jia Wen and Chu En 
 				else if (adminOption == 4) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
@@ -118,6 +122,116 @@ public class C206_CaseStudy {
 						System.out.println("Invalid option!");
 					}
 				}
+				//OPTION 5: Done by Izhar
+				else if (adminOption == 5) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+					if (optionType == 1) {
+						Deal deal = inputDeal(dealList, itemList);
+						C206_CaseStudy.addDeal(dealList, deal);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllDeals(dealList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteDeal(dealList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+				}else if (adminOption == 6) {
+					System.out.println("Bye Bye");
+				}else {
+					System.out.println("Invalid option!");
+				}
+			}
+		}
+		if(login == 2) {
+			int adminOption = 0;
+			while(adminOption != OPTION_QUIT) {
+				menu();
+				adminOption = Helper.readInt("Enter option to select service type > ");
+				
+				//OPTION 1: Done by jia wen 
+				if (adminOption == 1) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Account acc = inputAccount();
+						C206_CaseStudy.addAccount(accList,acc);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllAccount(accList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteAcc(accList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+
+				}
+				//OPTION 2: Done by Chu En 
+				else if (adminOption == 2) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Category cate = inputCategory();
+						C206_CaseStudy.addCategory(categoryList, cate);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllCategory(categoryList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteCategory(categoryList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+
+				}
+				//OPTION 3: Done by Rachel
+				else if (adminOption == 3) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Item item = inputItem();
+						C206_CaseStudy.addItem(itemList, item);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllItem(itemList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteItem(itemList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+
+				} 
+				//OPTION 4: Done by Jia Wen and Chu En 
+				else if (adminOption == 4) {
+					optionTypeMenu();
+					int optionType = Helper.readInt("Enter service type > ");
+
+					if (optionType == 1) {
+						Bid bids = inputBid(bidsList, itemList);
+						C206_CaseStudy.addBid(bidsList, bids);
+
+					}else if (optionType == 2) {
+						C206_CaseStudy.viewAllBids(bidsList);
+
+					}else if (optionType == 3) {
+						C206_CaseStudy.deleteBids(bidsList);
+
+					}else {
+						System.out.println("Invalid option!");
+					}
+				}
+				//OPTION 5: Done by Izhar
 				else if (adminOption == 5) {
 					optionTypeMenu();
 					int optionType = Helper.readInt("Enter service type > ");
@@ -143,11 +257,9 @@ public class C206_CaseStudy {
 			}
 		}
 		
-
 	}//main
 
-
-
+	//Done by Chu En 
 	public static void login() {
 		C206_CaseStudy.setHeader("Login system");
 		System.out.println("1. Login as Adminstrator");
@@ -475,13 +587,13 @@ public class C206_CaseStudy {
 	public static String retrieveAllItem(ArrayList<Item> itemList) {
 		String output = "";
 		for(int i = 0; i < itemList.size(); i++) {
-			output += String.format("%-80s \n", itemList.get(i).toString());
+			output += String.format("%-85s \n", itemList.get(i).toString());
 		}
 		return output;
 	}
 	public static void viewAllItem(ArrayList<Item> itemList) {
 		C206_CaseStudy.setHeader("ITEM LIST");
-		String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s\n", "NAME", "DESCRIPTION", 
+		String output = String.format("%-10s %-20s %-10s %-15s %-15s %-10s \n", "NAME", "DESCRIPTION", 
 				"MIN BID PRICE", "START DATE", "END DATE", "INCREMENT AMOUNT");
 		output += retrieveAllItem(itemList);
 		System.out.println(output);
@@ -691,7 +803,7 @@ public class C206_CaseStudy {
 
 		    for (Deal d : dealList) {
 
-		      output += String.format("\n%-10d %-25s %-30s %-30s %-9.2f %11s", d.getdealId(), d.getName(),
+		      output += String.format("%-10d %-25s %-30s %-30s %-9.2f %11s \n", d.getdealId(), d.getName(),
 		          d.getSellerEmail(), d.getBuyerEmail(), d.getTransactionPrice(), d.getCloseDate());
 		    }
 		    return output;
@@ -706,34 +818,34 @@ public class C206_CaseStudy {
 
 		  }
 		
-		public static boolean doDeleteDeal(ArrayList<Deal> dealList, int dealID, char cfm) {
+		public static boolean doDeleteDeal(ArrayList<Deal> dealList, int ID) {
+			boolean isFound = false;
+			for(int i = 0; i < dealList.size(); i++) {
+				int dealID = dealList.get(i).getdealId();
+				if(dealID == ID) {
+					dealList.remove(i);
+					isFound = true;
+				}
+			}
+			return isFound;
+		}
 
-		    boolean isDeleted = false;
-
-		    for (Deal d : dealList) {
-		      if (dealID == d.getdealId() && (cfm == 'Y' || cfm == 'y')) {
-		        dealList.remove(d);
-		        isDeleted = true;
-		        break;
-		      }
-		    }
-
-		    return isDeleted;
-		  }
-		
 		public static void deleteDeal(ArrayList<Deal> dealList) {
-			C206_CaseStudy.setHeader("Delete deal");
-		    C206_CaseStudy.viewAllDeals(dealList);
-		    int dealID = Helper.readInt("Enter deal ID you want to delete > ");
-		    char cfm = Helper.readChar("Are you sure you want to delete this deal? (Y/N) > ");
-		    boolean isDeleted = doDeleteDeal(dealList, dealID, cfm);
+			C206_CaseStudy.viewAllDeals(dealList);
+			int deleteID = Helper.readInt("Enter the deal ID to delete > ");
+			boolean isFound = doDeleteDeal(dealList, deleteID);
+			if(isFound == true ) {
+				char toDelete = Helper.readChar("Are you sure you want to delete this ID? (Y/N) > ");
+				if (toDelete == 'Y' | toDelete == 'y') {
+					System.out.println("Item deleted");
+				}
 
-		    if (isDeleted == false) {
-		      System.out.println("Delete was unsuccessful. Please enter a valid deal ID.");
-		    } else {
-		      System.out.println("Deal ID " + dealID + " successfully deleted!");
-		    }
-		  }
-
+				else {
+					System.out.println("Item not deleted!");
+				}
+			}else {
+				System.out.println("Item not found!");
+			}
+		}
 
 }//class

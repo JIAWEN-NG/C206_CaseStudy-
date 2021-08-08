@@ -81,7 +81,7 @@ public class Item {
 	
 	
 	public String toString() {
-		String itemInfo = String.format("%-10s %-10s %-20s %-10.2f %-15s %-15s %-10.2f", 
+		String itemInfo = String.format("%-10s %-20s %-10.2f %-15s %-15s %-10.2f", 
 				itemName, description, minBid, startDate, endDate, increment);
 		
 		return itemInfo;

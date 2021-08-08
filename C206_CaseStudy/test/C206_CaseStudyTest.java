@@ -10,8 +10,6 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 
-
-
 	private Account a1;
 	private Account a2;
 	private Category cate1;
@@ -20,21 +18,20 @@ public class C206_CaseStudyTest {
 	private Item item2;
 	private Bid b1;
 	private Bid b2;
-
-
-
-
+	private Deal d1;
+	private Deal d2;
+	
 	ArrayList<Account> accList = new ArrayList<Account>();
 	ArrayList<Category> categoryList = new ArrayList<Category>();
 	ArrayList<Item> itemList = new ArrayList<Item>();
 	ArrayList<Bid> bidsList = new ArrayList<Bid>();
+	ArrayList<Deal> dealList = new ArrayList<Deal>();
 
 	DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public C206_CaseStudyTest() {
 		super();
 	}
-
 
 	//Issue 1
 	//Test by Jia Wen
@@ -60,7 +57,6 @@ public class C206_CaseStudyTest {
 	//Test by Jia Wen
 	@Test
 	public void validEmailTest() {
-
 
 		String validEmail = "Joe123@gmail.com";
 		String invalidEmail = "Joe123";
@@ -151,7 +147,6 @@ public class C206_CaseStudyTest {
 		// normal condition - test that if all user input is filled and is valid, will return true 
 		boolean notEmpty = C206_CaseStudy.notEmptyAcc(n1,r1,e1,p1);
 		assertFalse(notEmpty);
-
 	}
 
 	//Test by Jia Wen
@@ -210,7 +205,6 @@ public class C206_CaseStudyTest {
 		boolean delete = C206_CaseStudy.doDeleteAcc(accList, "jojo@gmail.com");
 		assertFalse("Test that non-existing item is NOT ok to delete", delete);
 	}
-
 
 	//Issue 2
 	//Test by Chu En
@@ -314,18 +308,18 @@ public class C206_CaseStudyTest {
 	@Test
 	public void validItemNameTest() {
 		
-		String validItemName = "Portable Speaker";
+		String validItemName = "PortableSpeaker";
 		String invalidItemName = "P";
 		
 		//boundary condition -check that Name is not null 
 		assertNotNull(validItemName);
 		
 		// normal condition - test for valid item name (2-20 character) returns true 
-		boolean isValid = C206_CaseStudy. validItemName( validItemName);
+		boolean isValid = C206_CaseStudy.validItemName(validItemName);
 		assertTrue(isValid);
 		
 		// error condition - test for invalid item name ( character < 2 ,characters > 30) returns false 
-		boolean notValid = C206_CaseStudy. validItemName( invalidItemName);
+		boolean notValid = C206_CaseStudy.validItemName( invalidItemName);
 		assertFalse(notValid);
 		
 	}
@@ -502,11 +496,10 @@ public class C206_CaseStudyTest {
 		assertFalse(notValid1);
 	}
 
-
 	//Issue 5
 		@Test
 		public void addDealTest() {
-			assertNotNull("Test if there is valid Deal arraylist to retrieve item", dealList);
+			assertNotNull("Test if there is valid Deal arraylist to retrieve deal", dealList);
 			
 			C206_CaseStudy.addDeal(dealList, d1);
 			assertEquals("Check that deal arraylist size is 1", 1, dealList.size());
@@ -521,8 +514,6 @@ public class C206_CaseStudyTest {
 		public void retrieveAllDealsTest() {
 			assertNotNull("Test if there is valid deal arraylist to retrieve item", dealList);
 
-	//Issue 
-
 			String allDeal = C206_CaseStudy.retrieveAllDeals(dealList);
 			String testOutput = "";
 			assertEquals("Check that ViewAllDeals list", testOutput, allDeal);
@@ -533,8 +524,8 @@ public class C206_CaseStudyTest {
 	 	
 			allDeal = C206_CaseStudy.retrieveAllDeals(dealList);
 
-			testOutput = String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 1, "Dog", "happy@gmail.com", "sam@gmail.com", 50.00);
-			testOutput += String.format("%-10d %-10s %-15s %-20s %-10.2f \n", 2, "Cat", "kkq@gmail.com", "sammy@gmail.com", 60.00);
+			testOutput = String.format("%-10d %-25s %-30s %-30s %-9.2f %11s \n", 1, "DOG", "Jenny@gmail.com", "Jan@gmail.com", 45.00, LocalDate.parse("01/01/2010", formatter2));
+			testOutput += String.format("%-10d %-25s %-30s %-30s %-9.2f %11s \n",2, "CAT", "eenny@gmail.com", "Feb@gmail.com", 55.00, LocalDate.parse("01/01/2010", formatter2));
 
 			assertEquals("Test that ViewAllBids list", testOutput, allDeal);
 		}
@@ -572,9 +563,11 @@ public class C206_CaseStudyTest {
 		a1 = new Account("Jay","Buyer","Jay@gmail.com",1234567);
 		a2 = new Account("Jenny","Seller","Jenny@gmail.com",7897890);
 
-
 		cate1 = new Category("PETS");
 		cate2 = new Category("FRUITS");
+		
+		d1 = new Deal(1, "DOG", "Jenny@gmail.com", "Jan@gmail.com", 45.00, LocalDate.parse("01/01/2010", formatter2));
+		d2 = new Deal(2, "CAT", "eenny@gmail.com", "Feb@gmail.com", 55.00, LocalDate.parse("01/01/2010", formatter2));
 	}
 
 	@After
@@ -585,7 +578,8 @@ public class C206_CaseStudyTest {
 		a2 = null;
 		cate1 = null;
 		cate2 = null;
-
+		d1 = null;
+		d2 = null;
 
 	}
 
