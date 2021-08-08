@@ -31,7 +31,7 @@ public class C206_CaseStudy {
 		itemList.add(new Item("Pen", "blue ink pen ", 50.00, LocalDate.parse("01/01/2010", formatter2),LocalDate.parse("01/01/2010", formatter2), 5.00));
 		bidsList.add(new Bid(1, "Pen", "happy@gmail.com", "sam@gmail.com", 50.00));
 		dealList.add(new Deal(2, "Pen", "eenny@gmail.com", "Feb@gmail.com", 55.00, LocalDate.parse("01/01/2010", formatter2)));
-		
+
 		//Main program codes done by Jia Wen and Chu En 
 		//OPTION 1: Done by Jia Wen
 		//OPTION 2: Done by Chu En 
@@ -47,7 +47,7 @@ public class C206_CaseStudy {
 			while(adminOption != OPTION_QUIT) {
 				menu();
 				adminOption = Helper.readInt("Enter option to select service type > ");
-				
+
 				//OPTION 1: Done by jia wen 
 				if (adminOption == 1) {
 					optionTypeMenu();
@@ -156,7 +156,7 @@ public class C206_CaseStudy {
 			while(StudOption != Student_QUIT) {
 				StuMenu();
 				StudOption = Helper.readInt("Enter option to select service type > ");
-	
+
 				//OPTION 3: Done by Rachel
 				if (StudOption == 1) {
 					optionTypeMenu();
@@ -221,7 +221,7 @@ public class C206_CaseStudy {
 				}
 			}
 		}
-		
+
 	}//main
 
 	//Done by Chu En 
@@ -440,13 +440,13 @@ public class C206_CaseStudy {
 
 	//Option 2: Category Services , done by Chu En 
 	public static Category inputCategory() {
-		String name = Helper.readString("Enter name > ");
+		String name = Helper.readString("Enter Category name > ");
 		boolean validName = C206_CaseStudy.isValidCateName(name);
-		while (validName == false ) {
+		while (validName == false) {
 			System.out.println("Please enter cetegory name less than 20 character");
 			name = Helper.readString("Enter Category name > ");
+			validName = C206_CaseStudy.isValidCateName(name);
 		}
-
 		if(validName == true) {
 			Category category1 = new Category(name);
 			return category1;
@@ -454,7 +454,6 @@ public class C206_CaseStudy {
 		else {
 			return null;
 		}
-
 	}	
 	public static void addCategory(ArrayList<Category> categoryList, Category category1) {
 		if (category1 == null) {
@@ -530,7 +529,7 @@ public class C206_CaseStudy {
 		while (vIName == false ) {
 			System.out.println("Invalid Item Name");
 			name = Helper.readString("Enter item name > ");
-
+			C206_CaseStudy.validItemName(name);
 		}
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String description = Helper.readString("Enter description > ");
@@ -541,13 +540,15 @@ public class C206_CaseStudy {
 
 		LocalDate start = LocalDate.parse(startDate, formatter2);
 		LocalDate end = LocalDate.parse(endDate, formatter2);
-
-		Item item1= new Item(name,description,minPrice,start,end,increment);
-
-		return item1;
-
+		if(vIName == true) {
+			Item item1= new Item(name,description,minPrice,start,end,increment);
+			return item1;
+			
+		}else {
+			return null;
+		}
 	}
-	
+
 	public static boolean validItemName (String itemName) {
 		String namePattern = "[a-zA-Z]{2,30}";
 		boolean isValid = Pattern.matches(namePattern, itemName);
@@ -638,18 +639,21 @@ public class C206_CaseStudy {
 		while (validName == false ) {
 			System.out.println("Please enter cetegory name less than 20 character");
 			name = Helper.readString("Enter Category name > ");
+			C206_CaseStudy.isValidBidName(name);
 		}
 		String buyerEmail = Helper.readString("Enter Buyer email > ");
 		boolean validBuyerEmail = C206_CaseStudy.validEmail(buyerEmail);
 		while (validBuyerEmail ==  false) {
 			System.out.println("Invalid Email");
 			name = Helper.readString("Enter Buyer Email > ");
+			C206_CaseStudy.validEmail(buyerEmail);
 		}
 		String sellerEmail = Helper.readString("Enter seller email > ");
 		boolean validSellerEmail = C206_CaseStudy.validEmail(sellerEmail);
 		while (validSellerEmail ==  false) {
 			System.out.println("Invalid Email");
 			name = Helper.readString("Enter Seller Email > ");
+			C206_CaseStudy.validEmail(sellerEmail);
 		}
 		double price = Helper.readDouble("Enter Bids price >$");
 		boolean isValid = isValidBid(bidsList,price,itemList);
@@ -744,86 +748,86 @@ public class C206_CaseStudy {
 	}
 	//OPTION 5: 
 	//Deal Services , done by Izhar
-	
-		public static Deal inputDeal(ArrayList<Deal> bidsList,ArrayList<Item> itemList) { 
-			DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			C206_CaseStudy.setHeader("ADD NEW DEAL"); 
-			  
-			  int dealId = Helper.readInt("Enter deal ID > ");
-			  String itemName = Helper.readString("Enter item name > ");
-			  String sellerEmail = Helper.readString("Enter seller's email > ");
-	          String buyerEmail = Helper.readString("Enter buyer's email > ");
-			  double transactionPrice = Helper.readDouble("Enter transaction price > ");
-		      String closeDate = Helper.readString("Enter close deal (DD/MM/YYYY) > "); 
-		      
-		      LocalDate closing = LocalDate.parse(closeDate, formatter2);
-		      
-		      Deal deal1 = new Deal(dealId, itemName, sellerEmail, buyerEmail, transactionPrice, closing);
-		      return deal1;
-			 
-			     
-			   }
-		
-		public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
 
-		    if (deal1.getName().isEmpty() || deal1.getSellerEmail().isEmpty() || deal1.getBuyerEmail().isEmpty()
-		        || deal1.getCloseDate() == null) {
-		      System.out.println("Please fill in all mandatory fields!");
-		    } else {
-		      dealList.add(deal1);
-		      System.out.println("Successfully added new deal!");
-		    }
+	public static Deal inputDeal(ArrayList<Deal> bidsList,ArrayList<Item> itemList) { 
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		C206_CaseStudy.setHeader("ADD NEW DEAL"); 
 
-		  }
-		
-		public static String retrieveAllDeals(ArrayList<Deal> dealList) {
-		    String output = "";
+		int dealId = Helper.readInt("Enter deal ID > ");
+		String itemName = Helper.readString("Enter item name > ");
+		String sellerEmail = Helper.readString("Enter seller's email > ");
+		String buyerEmail = Helper.readString("Enter buyer's email > ");
+		double transactionPrice = Helper.readDouble("Enter transaction price > ");
+		String closeDate = Helper.readString("Enter close deal (DD/MM/YYYY) > "); 
 
-		    for (Deal d : dealList) {
+		LocalDate closing = LocalDate.parse(closeDate, formatter2);
 
-		      output += String.format("%-10d %-25s %-30s %-30s %-9.2f %11s \n", d.getdealId(), d.getName(),
-		          d.getSellerEmail(), d.getBuyerEmail(), d.getTransactionPrice(), d.getCloseDate());
-		    }
-		    return output;
-		  }
-		
-		public static void viewAllDeals(ArrayList<Deal> dealList) {
+		Deal deal1 = new Deal(dealId, itemName, sellerEmail, buyerEmail, transactionPrice, closing);
+		return deal1;
 
-		    String output = String.format("%-10s %-25s %-30s %-30s %-9s %11s", "DEAL ID", "ITEM NAME", "SELLER EMAIL",
-		        "BUYER EMAIL", "TRANSACTION PRICE", "CLOSE DATE");
-		    output += retrieveAllDeals(dealList);
-		    System.out.println(output);
 
-		  }
-		
-		public static boolean doDeleteDeal(ArrayList<Deal> dealList, int ID) {
-			boolean isFound = false;
-			for(int i = 0; i < dealList.size(); i++) {
-				int dealID = dealList.get(i).getdealId();
-				if(dealID == ID) {
-					dealList.remove(i);
-					isFound = true;
-				}
-			}
-			return isFound;
+	}
+
+	public static void addDeal(ArrayList<Deal> dealList, Deal deal1) {
+
+		if (deal1.getName().isEmpty() || deal1.getSellerEmail().isEmpty() || deal1.getBuyerEmail().isEmpty()
+				|| deal1.getCloseDate() == null) {
+			System.out.println("Please fill in all mandatory fields!");
+		} else {
+			dealList.add(deal1);
+			System.out.println("Successfully added new deal!");
 		}
 
-		public static void deleteDeal(ArrayList<Deal> dealList) {
-			C206_CaseStudy.viewAllDeals(dealList);
-			int deleteID = Helper.readInt("Enter the deal ID to delete > ");
-			boolean isFound = doDeleteDeal(dealList, deleteID);
-			if(isFound == true ) {
-				char toDelete = Helper.readChar("Are you sure you want to delete this ID? (Y/N) > ");
-				if (toDelete == 'Y' | toDelete == 'y') {
-					System.out.println("Item deleted");
-				}
+	}
 
-				else {
-					System.out.println("Item not deleted!");
-				}
-			}else {
-				System.out.println("Item not found!");
+	public static String retrieveAllDeals(ArrayList<Deal> dealList) {
+		String output = "";
+
+		for (Deal d : dealList) {
+
+			output += String.format("%-10d %-25s %-30s %-30s %-9.2f %11s \n", d.getdealId(), d.getName(),
+					d.getSellerEmail(), d.getBuyerEmail(), d.getTransactionPrice(), d.getCloseDate());
+		}
+		return output;
+	}
+
+	public static void viewAllDeals(ArrayList<Deal> dealList) {
+
+		String output = String.format("%-10s %-25s %-30s %-30s %-9s %11s", "DEAL ID", "ITEM NAME", "SELLER EMAIL",
+				"BUYER EMAIL", "TRANSACTION PRICE", "CLOSE DATE");
+		output += retrieveAllDeals(dealList);
+		System.out.println(output);
+
+	}
+
+	public static boolean doDeleteDeal(ArrayList<Deal> dealList, int ID) {
+		boolean isFound = false;
+		for(int i = 0; i < dealList.size(); i++) {
+			int dealID = dealList.get(i).getdealId();
+			if(dealID == ID) {
+				dealList.remove(i);
+				isFound = true;
 			}
 		}
+		return isFound;
+	}
+
+	public static void deleteDeal(ArrayList<Deal> dealList) {
+		C206_CaseStudy.viewAllDeals(dealList);
+		int deleteID = Helper.readInt("Enter the deal ID to delete > ");
+		boolean isFound = doDeleteDeal(dealList, deleteID);
+		if(isFound == true ) {
+			char toDelete = Helper.readChar("Are you sure you want to delete this ID? (Y/N) > ");
+			if (toDelete == 'Y' | toDelete == 'y') {
+				System.out.println("Item deleted");
+			}
+
+			else {
+				System.out.println("Item not deleted!");
+			}
+		}else {
+			System.out.println("Item not found!");
+		}
+	}
 
 }
